@@ -1,5 +1,5 @@
 {
-  "name": "@tetra/app",
+  "name": "@tetrajs/app",
   "version": "0.0.1",
   "description": "",
   "keywords": [],
@@ -15,6 +15,6 @@
     "node" : ">=8.16.0"
   },
   "dependencies": {
-    "@tetra/cli": "~0.1.0"
+    "@tetrajs/cli": "~0.1.0"
   }
 }
