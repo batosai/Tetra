@@ -1,15 +1,12 @@
 {
   "name": "@tetra/cli",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "description": "",
   "keywords": [],
   "license": "MIT",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "bin": {
-    "tetra": "./bin/cli.js"
   },
   "engines" : {
     "node" : ">=8.16.0"
