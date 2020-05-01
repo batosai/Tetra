@@ -1,0 +1,28 @@
+{
+  "name": "@tetrajs/create",
+  "version": "0.0.6",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "create": "./index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tetrajs/tetra",
+    "directory": "packages/create"
+  },
+  "engines": {
+    "node": ">=8.16.0"
+  },
+  "dependencies": {
+    "chalk": "^4.0.0",
+    "commander": "^5.1.0",
+    "cross-spawn": "^7.0.2",
+    "envinfo": "^7.5.1",
+    "os": "^0.1.1"
+  },
+  "license": "MIT"
+}

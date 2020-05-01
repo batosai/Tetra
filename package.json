@@ -1,0 +1,23 @@
+{
+  "name": "tetrajs",
+  "version": "0.0.2",
+  "description": "",
+  "main": "index.js",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tetrajs/tetra.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tetrajs/tetra/issues"
+  },
+  "homepage": "https://github.com/tetrajs/tetra#readme"
+}
