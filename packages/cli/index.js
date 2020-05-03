@@ -7,7 +7,9 @@ const chalk = require('chalk')
 
 const packageJson = require('./package.json')
 
-let cmdValue, optionsValue
+let cmdValue, optionsValue, env
+
+env = 'development'
 
 const program = new Command('npx tetrajs')
   .version(packageJson.version, '-v, --version', 'output the current version')
@@ -18,6 +20,7 @@ const program = new Command('npx tetrajs')
     optionsValue = opt
   })
   .option('-i, --info', 'print environment debug info')
+  .option('-e, --env <env>', 'set environment. Default "development"')
   .allowUnknownOption()
   .on('--help', () => {
     console.log('')
@@ -38,10 +41,14 @@ if (program.info) {
   process.exit()
 }
 
+if (program.env) {
+  env = program.env
+}
+
 switch (cmdValue) {
   case 'i':
   case 'install':
-    require('./cmd/install')
+    require('./cmd/install')(env)
     break
   case 'db:reset':
   case 'database:reset':

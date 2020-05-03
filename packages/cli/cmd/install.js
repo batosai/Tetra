@@ -7,7 +7,7 @@ const prompts = require('prompts')
 const chalk = require('chalk')
 
 const files = {
-  config: path.join('./config', 'database.json')
+  config: null
 }
 
 const questions = [
@@ -42,12 +42,13 @@ const questions = [
   },
 ]
 
-async function run() {
+async function run(config) {
   console.log(chalk.green('Database connexion'))
   const response = await prompts(questions)
-  const config = {
+  config.database = {
     type: 'mongodb',
-    ...response
+    ...response,
+    uri: `mongodb://${response.host}:${response.port}/${response.name}`
   }
 
   fs.writeFileSync(
@@ -56,11 +57,14 @@ async function run() {
   )
 }
 
-fs.exists(files.config, exists => {
-  if (exists) {
+module.exports = function(env) {
+  files.config = path.join('./config/environments', `${env}.json`)
+  const config = JSON.parse(fs.readFileSync(files.config).toString())
+
+  if (config['database']) {
     console.error(chalk.red('App is already installed'))
   }
   else {
-    run()
+    run(config)
   }
-});
+}
