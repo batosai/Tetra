@@ -1,6 +1,6 @@
 {
   "name": "@tetrajs/cli",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "",
   "keywords": [],
   "main": "index.js",
@@ -12,11 +12,14 @@
     "url": "https://github.com/tetrajs/tetra",
     "directory": "packages/cli"
   },
-  "engines" : {
-    "node" : ">=8.16.0"
+  "engines": {
+    "node": ">=8.16.0"
   },
   "dependencies": {
-    "commander": "^5.1.0"
+    "chalk": "^4.0.0",
+    "commander": "^5.1.0",
+    "prompts": "^2.3.2",
+    "os": "^0.1.1"
   },
   "license": "MIT"
 }

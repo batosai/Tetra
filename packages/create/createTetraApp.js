@@ -1,7 +1,7 @@
 'use strict'
 
 const chalk = require('chalk')
-const commander = require('commander')
+const { Command } = require('commander')
 const spawn = require('cross-spawn')
 const envinfo = require('envinfo')
 const fs = require('fs')
@@ -15,13 +15,21 @@ const useYarn = shouldUseYarn()
 
 let projectName
 
-const program = new commander.Command(packageJson.name)
-  .version(packageJson.version)
+const pkgi = pkg => {
+  console.log(`Installing ${chalk.cyan(pkg)}`)
+  console.log()
+
+  install(projectName, [pkg], { useYarn })
+  console.log()
+}
+
+const program = new Command(packageJson.name)
+  .version(packageJson.version, '-v, --version', 'output the current version')
   .arguments('<project-directory>')
-  .usage(`${chalk.green('<project-directory>')} [options]`)
+  .usage(`${chalk.green('<project-directory>')}`)
   .action(name => { projectName = name })
-  .option('--verbose', 'print additional logs')
-  .option('--info', 'print environment debug info')
+  .option('--skip-admin', 'skip administration install')
+  .option('-i, --info', 'print environment debug info')
   .allowUnknownOption()
   .on('--help', () => {
     console.log(`  Only ${chalk.green('<project-directory>')} is required.`)
@@ -75,9 +83,9 @@ else {
     JSON.stringify(packageJson, null, 2) + os.EOL
   )
 
-  console.log(`Installing ${chalk.cyan('@tetrajs/app')}`)
-  console.log()
+  pkgi('@tetrajs/app')
 
-  install(projectName, ['@tetrajs/app'], { useYarn })
-  console.log()
+  // if (!program.skipAdmin) {
+  //   pkgi('@tetrajs/admin')
+  // }
 }
