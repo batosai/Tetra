@@ -3,8 +3,7 @@
 const path = require('path')
 const fs = require('fs')
 const os = require('os')
-const prompts = require('prompts')
-const chalk = require('chalk')
+const { prompts, chalk } = require('../lib')
 
 const files = {
   config: null
@@ -47,8 +46,7 @@ async function run(config) {
   const response = await prompts(questions)
   config.database = {
     type: 'mongodb',
-    ...response,
-    uri: `mongodb://${response.host}:${response.port}/${response.name}`
+    ...response
   }
 
   fs.writeFileSync(
@@ -57,14 +55,18 @@ async function run(config) {
   )
 }
 
-module.exports = function(env) {
-  files.config = path.join('./config/environments', `${env}.json`)
-  const config = JSON.parse(fs.readFileSync(files.config).toString())
+module.exports = {
+  name: 'install',
+  alias: 'i',
+  action: ({ env }) => {
+    files.config = path.join('./config/environments', `${env}.json`)
+    const config = JSON.parse(fs.readFileSync(files.config).toString())
 
-  if (config['database']) {
-    console.error(chalk.red('App is already installed'))
-  }
-  else {
-    run(config)
+    if (config['database']) {
+      console.error(chalk.red('App is already installed'))
+    }
+    else {
+      run(config)
+    }
   }
 }

@@ -2,66 +2,37 @@
 
 'use strict'
 
-const { Command } = require('commander')
-const chalk = require('chalk')
+const { program, chalk } = require('./lib')
 
-const packageJson = require('./package.json')
+const modules = [
+  './commands/install',
+  './commands/module',
+  './commands/db/model',
+  './commands/db/reset',
+  './commands/db/seed',
+]
+const defaultOptions = [
+  ['-e, --env <env>', 'set environment', 'development']
+]
 
-let cmdValue, optionsValue, env
+program
+  .option(defaultOptions[0][0], defaultOptions[0][1], defaultOptions[0][2] || null)
 
-env = 'development'
+modules.map(module => {
+  const m = require(module)
+  if (!m.name || !m.action) return
 
-const program = new Command('npx tetrajs')
-  .version(packageJson.version, '-v, --version', 'output the current version')
-  .arguments('<command> [options]')
-  .usage(`${chalk.green('<command>')} [options]`)
-  .action((cmd, opt) => {
-    cmdValue = cmd
-    optionsValue = opt
+  const p = program
+    .command(m.name)
+    .description(m.description || null)
+    .alias(m.alias || null)
+    .action(m.action)
+    .addHelpCommand(`${chalk.green(m.name)}`, m.description || null);
+
+  const options = m.options ? [ ...defaultOptions, ...m.options ] : [ ...defaultOptions ]
+  options.map(opt => {
+    p.option(opt[0], opt[1], opt[2] || null)
   })
-  .option('-i, --info', 'print environment debug info')
-  .option('-e, --env <env>', 'set environment. Default "development"')
-  .allowUnknownOption()
-  .on('--help', () => {
-    console.log('')
-    console.log('Commands:')
-    console.log('  i, install     first install app')
-    console.log('  db:reset, database:reset   reset database')
-    console.log('  db:seed, database:seed     action in database')
-    console.log('  db:model, database:model   action in database')
-  })
-  .parse(process.argv)
+})
 
-if (program.info) {
-  console.log(chalk.bold('\nEnvironment Info:'))
-  console.log(
-    `\n  current version of ${packageJson.name}: ${packageJson.version}`
-  )
-  console.log(`  running from ${__dirname}`)
-  process.exit()
-}
-
-if (program.env) {
-  env = program.env
-}
-
-switch (cmdValue) {
-  case 'i':
-  case 'install':
-    require('./cmd/install')(env)
-    break
-  case 'db:reset':
-  case 'database:reset':
-    require('./cmd/db/reset')
-    break
-  case 'db:seed':
-  case 'database:seed':
-    require('./cmd/db/seed')
-    break
-  case 'db:model':
-  case 'database:model':
-    require('./cmd/db/model')
-    break
-  default:
-    program.help();
-}
+program.parse(process.argv)
