@@ -6,7 +6,7 @@ const { program, chalk } = require('./lib')
 
 const modules = [
   './commands/install',
-  './commands/module',
+  './commands/db/setup',
   './commands/db/model',
   './commands/db/reset',
   './commands/db/seed',
