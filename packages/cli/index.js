@@ -13,13 +13,10 @@ const modules = [
   './commands/db/seed',
 ]
 
-modules.map(module => {
+modules.map((module) => {
   const klass = require(module)
   const cmd = new klass(commander, prompts, chalk)
   program.addCommand(cmd.configure())
 })
 
-program
-  .version(pkg.version)
-  .description(pkg.description)
-  .parse(process.argv);
+program.version(pkg.version).description(pkg.description).parse(process.argv)

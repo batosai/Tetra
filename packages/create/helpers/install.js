@@ -3,8 +3,8 @@ const spawn = require('cross-spawn')
 
 module.exports = function install(
   root,
-  dependencies=null,
-  { useYarn, isOnline }
+  dependencies = null,
+  { useYarn, isOnline },
 ) {
   return new Promise((resolve, reject) => {
     let command
@@ -27,7 +27,7 @@ module.exports = function install(
       }
     } else {
       command = 'npm'
-      args = ([
+      args = [
         'install',
         '--prefix',
         root,
@@ -35,14 +35,14 @@ module.exports = function install(
         dependencies && '--save-exact',
         '--loglevel',
         'error',
-      ]).concat(dependencies || [])
+      ].concat(dependencies || [])
     }
 
     const child = spawn(command, args, {
       stdio: 'inherit',
       env: { ...process.env, ADBLOCK: '1', DISABLE_OPENCOLLECTIVE: '1' },
     })
-    child.on('close', code => {
+    child.on('close', (code) => {
       if (code !== 0) {
         reject({ command: `${command} ${args.join(' ')}` })
         return

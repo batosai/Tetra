@@ -8,7 +8,7 @@
     "packages/*"
   ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "prettify": "prettier --write './packages/**/*.js'"
   },
   "repository": {
     "type": "git",
@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/tetrajs/tetra/issues"
   },
-  "homepage": "https://github.com/tetrajs/tetra#readme"
+  "homepage": "https://github.com/tetrajs/tetra#readme",
+  "dependencies": {
+    "prettier": "^2.0.5"
+  }
 }

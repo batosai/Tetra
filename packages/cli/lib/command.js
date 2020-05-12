@@ -23,7 +23,7 @@ module.exports = class Command {
       // .addHelpCommand(`${this.chalk.green(this.name)}`, this.description || null)
       .action(this.execute)
       .option('-e, --env <env>', 'set environment', 'development')
-      // .parse(process.argv)
+    // .parse(process.argv)
     return program
   }
 

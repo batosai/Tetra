@@ -5,29 +5,36 @@ const logger = require('morgan')
 const compression = require('compression')
 const helmet = require('helmet')
 const session = require('express-session')
-const MongoStore = require('connect-mongo')(session);
+const MongoStore = require('connect-mongo')(session)
 // const favicon = require('serve-favicon')
 
 const appPath = process.cwd()
 
-const config = require(`${appPath}/config`)
-global.config = config
+// const config = require(`${appPath}/config`)
+// global.config = config
 
 // const tetra = require('@tetrajs/launcher')
-const { express, mongoose, passport } = require('@tetrajs/core')
+const { express, mongoose, passport, dotenv } = require('@tetrajs/core')
 
 // const theme = require('./themes/test')
 const app = express()
 
+dotenv.config()
+
 // TODO refacto mongo in module database
 mongoose.set('useUnifiedTopology', true)
 mongoose.Promise = global.Promise
-mongoose.connect(config.database.uri, {
-  useCreateIndex: true,
-  useNewUrlParser: true,
-}).then(() => {
-  console.log('Database connected')
-})
+mongoose
+  .connect(
+    `mongodb://${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`,
+    {
+      useCreateIndex: true,
+      useNewUrlParser: true,
+    },
+  )
+  .then(() => {
+    console.log('Database connected')
+  })
 
 // tetra.configure({
 //   ...config,

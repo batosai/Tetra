@@ -8,7 +8,8 @@ module.exports = class Config extends Command {
   constructor(program, prompts, chalk) {
     super(program, prompts, chalk)
 
-    this.questions = [{
+    this.questions = [
+      {
         type: 'text',
         name: 'host',
         message: 'Database host:',
@@ -19,7 +20,6 @@ module.exports = class Config extends Command {
         name: 'port',
         message: 'Database port:',
         initial: 27017,
-
       },
       {
         type: 'text',
@@ -36,7 +36,8 @@ module.exports = class Config extends Command {
         name: 'name',
         message: 'Database name(tetra):',
         initial: 'tetra',
-    }]
+      },
+    ]
   }
 
   configure() {
@@ -52,19 +53,15 @@ module.exports = class Config extends Command {
 
     if (config['database']) {
       console.error(this.chalk.red('App is already installed'))
-    }
-    else {
+    } else {
       console.log(this.chalk.green('Database connexion'))
       const response = await this.prompts(this.questions)
       config.database = {
         type: 'mongodb',
-        ...response
+        ...response,
       }
 
-      fs.writeFileSync(
-        envFilePath,
-        JSON.stringify(config, null, 2) + os.EOL
-      )
+      fs.writeFileSync(envFilePath, JSON.stringify(config, null, 2) + os.EOL)
     }
   }
 }
