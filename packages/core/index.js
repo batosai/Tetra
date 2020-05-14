@@ -1,7 +1,7 @@
 module.exports.express = require('express')
 module.exports.imageSize = require('image-size')
 module.exports.dotenv = require('dotenv')
+module.exports.session = require('express-session')
 
-// TODO refacto database
-module.exports.mongoose = require('mongoose')
+module.exports.database = require('./modules/database')
 module.exports.passport = require('./modules/passport')

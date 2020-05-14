@@ -4,8 +4,6 @@ const cookieParser = require('cookie-parser')
 const logger = require('morgan')
 const compression = require('compression')
 const helmet = require('helmet')
-const session = require('express-session')
-const MongoStore = require('connect-mongo')(session)
 // const favicon = require('serve-favicon')
 
 const appPath = process.cwd()
@@ -14,7 +12,9 @@ const appPath = process.cwd()
 // global.config = config
 
 // const tetra = require('@tetrajs/launcher')
-const { express, mongoose, passport, dotenv } = require('@tetrajs/core')
+const { express, database, session, passport, dotenv } = require('@tetrajs/core')
+
+const MongoStore = database.mongodb.connectMongo(session)
 
 // const theme = require('./themes/test')
 const app = express()
@@ -22,19 +22,19 @@ const app = express()
 dotenv.config()
 
 // TODO refacto mongo in module database
-mongoose.set('useUnifiedTopology', true)
-mongoose.Promise = global.Promise
-mongoose
-  .connect(
-    `mongodb://${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`,
-    {
-      useCreateIndex: true,
-      useNewUrlParser: true,
-    },
-  )
-  .then(() => {
-    console.log('Database connected')
-  })
+// mongoose.set('useUnifiedTopology', true)
+// mongoose.Promise = global.Promise
+// mongoose
+//   .connect(
+//     `mongodb://${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`,
+//     {
+//       useCreateIndex: true,
+//       useNewUrlParser: true,
+//     },
+//   )
+//   .then(() => {
+//     console.log('Database connected')
+//   })
 
 // tetra.configure({
 //   ...config,
@@ -53,12 +53,18 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser())
 
+let store
+if (process.env.DB_TYPE === database.MONGO_DB) {
+  database.mongodb.connexion()
+  store = new MongoStore({ mongooseConnection: database.mongoose.connection })
+}
+
 // app.use(
 //   session({
 //     secret: config.session.secret,
 //     resave: true,
 //     saveUninitialized: true,
-//     store: new MongoStore({ mongooseConnection: mongoose.connection })
+//     store
 //   })
 // )
 

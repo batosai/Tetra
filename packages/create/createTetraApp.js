@@ -1,5 +1,6 @@
 'use strict'
 
+const crypto = require('crypto')
 const chalk = require('chalk')
 const { Command } = require('commander')
 const spawn = require('cross-spawn')
@@ -92,6 +93,23 @@ if (typeof projectName === 'undefined') {
   fs.writeFileSync(
     path.join(projectName, 'package.json'),
     JSON.stringify(packageJson, null, 2) + os.EOL,
+  )
+
+  const buf = crypto.randomBytes(64);
+  fs.writeFileSync(
+    path.join(projectName, '.env'),
+    `NODE_ENV=development
+
+DB_TYPE=mongodb
+DB_HOST=127.0.0.1
+DB_PORT=27017
+DB_USER=
+DB_PASS=
+DB_NAME=tetra
+
+SESSION_TYPE=db
+SESSION_SECRET=${buf.toString('hex')}
+    ` + os.EOL,
   )
 
   pkgi('@tetrajs/app')

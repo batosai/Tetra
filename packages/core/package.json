@@ -1,6 +1,6 @@
 {
   "name": "@tetrajs/core",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -17,8 +17,10 @@
   "dependencies": {
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "express-session": "^1.17.1",
     "image-size": "^0.8.3",
     "mongoose": "^5.9.11",
+    "connect-mongo": "^3.2.0",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0"
   },

@@ -1,9 +1,5 @@
 #!/usr/bin/env node
 
-// const { prompts, chalk } = require('./')
-// const commander = require('commander')
-// const program = require('commander')
-
 module.exports = class Command {
   constructor(commander, prompts, chalk) {
     this.commander = commander

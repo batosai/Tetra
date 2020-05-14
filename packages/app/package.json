@@ -1,6 +1,6 @@
 {
   "name": "@tetrajs/app",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "",
   "keywords": [],
   "main": "index.js",
@@ -22,10 +22,8 @@
     "@tetrajs/cli": "~0.0.2",
     "@tetrajs/core": "~0.0.1",
     "compression": "^1.7.4",
-    "connect-mongo": "^3.2.0",
     "cookie-parser": "^1.4.5",
     "debug": "~4.1.1",
-    "express-session": "^1.17.1",
     "helmet": "^3.22.0",
     "morgan": "^1.10.0"
   },
