@@ -12,6 +12,9 @@ const modules = [
   './commands/db/reset',
   './commands/db/seed',
 ]
+// TODO
+// get module by core
+// core -> module default + module registry
 
 modules.map((module) => {
   const klass = require(module)

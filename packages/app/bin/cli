@@ -2,8 +2,8 @@
 
 const args = process.argv.slice(2)
 
-if (args[0] === 'start') {
-  require('./start')
+if (args[0] === 'serve' || args[0] === 's') {
+  require('./serve')
 } else {
   require('@tetrajs/cli')
 }
