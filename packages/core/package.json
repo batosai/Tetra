@@ -1,6 +1,6 @@
 {
   "name": "@tetrajs/core",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -22,7 +22,8 @@
     "mongoose": "^5.9.11",
     "connect-mongo": "^3.2.0",
     "passport": "^0.4.1",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "pug": "^2.0.4"
   },
   "license": "MIT"
 }
