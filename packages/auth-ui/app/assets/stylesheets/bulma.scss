@@ -1,0 +1,27 @@
+@charset "utf-8";
+
+/* Customization */
+
+@import "../../../node_modules/bulma/sass/utilities/initial-variables";
+
+$body-background-color: $white-bis;
+$footer-background-color: $white-ter;
+
+$menu-item-color: $white-ter;
+$menu-item-radius: 4px;
+$menu-item-active-color: $black-bis;
+$menu-item-active-background-color: $yellow;
+
+$input-shadow: 0;
+
+$input-disabled-background-color: $grey-lighter;
+$input-disabled-border-color: $grey-lighter;
+
+$primary: $cyan !default
+
+/* Bulma extension */
+.control-tags {
+  padding-bottom: 10px;
+}
+
+@import "../../../node_modules/bulma/bulma";

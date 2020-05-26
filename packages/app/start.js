@@ -8,39 +8,13 @@ const helmet = require('helmet')
 
 const appPath = process.cwd()
 
-// const config = require(`${appPath}/config`)
-// global.config = config
-
-// const tetra = require('@tetrajs/launcher')
-const { express, database, session, passport, dotenv } = require('@tetrajs/core')
+const { express, database, session, auth, dotenv, i18n } = require('@tetrajs/core')
 
 const MongoStore = database.mongodb.connectMongo(session)
-
-// const theme = require('./themes/test')
 const app = express()
+app.set('appPath', appPath)
 
 dotenv.config()
-
-// TODO refacto mongo in module database
-// mongoose.set('useUnifiedTopology', true)
-// mongoose.Promise = global.Promise
-// mongoose
-//   .connect(
-//     `mongodb://${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`,
-//     {
-//       useCreateIndex: true,
-//       useNewUrlParser: true,
-//     },
-//   )
-//   .then(() => {
-//     console.log('Database connected')
-//   })
-
-// tetra.configure({
-//   ...config,
-//   path: __dirname,
-//   publicPath: path.join(__dirname, 'public/')
-// })
 
 // create a write stream (in append mode)
 const accessLogStream = fs.createWriteStream(
@@ -61,7 +35,6 @@ if (process.env.DB_TYPE === database.MONGO_DB) {
 
 app.use(
   session({
-    // secret: config.session.secret,
     secret: process.env.SESSION_SECRET,
     resave: true,
     saveUninitialized: true,
@@ -73,11 +46,14 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.use(compression())
 app.use(helmet())
 
-app.use(passport.initialize())
-app.use(passport.session())
-// app.use(tetra)
+app.use(auth.passport.initialize())
+app.use(auth.passport.session())
 
-// app.use('/', theme)
-app.use('/', require(`${appPath}/app`))
+app.use(i18n)
+
+const modules = require(`${appPath}`)
+for (const key in modules) {
+  app.use(key, modules[key])
+}
 
 module.exports = app

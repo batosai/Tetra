@@ -1,0 +1,10 @@
+{
+  "user": {
+    "username": "Nom d'utilisateur",
+    "password": "Mot de passe",
+    "login": "Connexion",
+    "signup": "Inscription",
+    "forgotPassword": "Mot de passe oublié ?"
+  },
+  "Missing username or password.": "Nom d'utilisateur ou mot de passe manquant."
+}

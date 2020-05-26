@@ -1,0 +1,37 @@
+extends ../../layout
+
+block content
+  //- include /components/message
+
+  section.hero.is-warning.is-fullheight
+    .hero-body
+      .container.has-text-centered
+        .column.is-4.is-offset-4
+          h1.title.has-text-grey-dark
+            span.icon.is-medium
+              i.fa.fa-anchor.has-text-primary.is-size-5(data-fa-transform="rotate-45")
+            | Tetra
+          .box
+            if messages.length
+              //- +message()(class='is-danger')
+              each message in messages
+                .error #{__(message)}
+
+            form(action="/users/sign_in" method="post")
+              .field
+                .control.has-icons-left
+                  input.input.is-medium(name="username" placeholder=__('user.username') autofocus="")
+                  span.icon.is-small.is-left
+                    i.fas.fa-envelope.fa-xs
+              .field
+                .control.has-icons-left
+                  input.input.is-medium(type="password" name="password" placeholder=__('user.password'))
+                  span.icon.is-small.is-left
+                    i.fas.fa-lock.fa-xs
+              .field
+                input(type="hidden" name="_csrf" value=csrfToken)
+              button.button.is-rounded.is-primary.is-medium.is-fullwidth= __('user.login')
+          p.has-text-grey-dark
+            a(href="../")= __('user.signup')
+            |   · 
+            a(href="../")= __('user.forgotPassword')
