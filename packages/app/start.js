@@ -28,8 +28,8 @@ app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser())
 
 let store
-if (process.env.DB_TYPE === database.MONGO_DB) {
-  database.mongodb.connexion()
+if (process.env.DATABASE_TYPE === database.MONGO_DB) {
+  database.mongodb.connection()
   store = new MongoStore({ mongooseConnection: database.mongoose.connection })
 }
 

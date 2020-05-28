@@ -1,0 +1,6 @@
+module.exports.Page = require('./page')
+module.exports.Site = require('./site')
+module.exports.User = require('./user')
+module.exports.Attachment = require('./attachment')
+module.exports.Module = require('./module')
+module.exports.plugins = require('./plugins')

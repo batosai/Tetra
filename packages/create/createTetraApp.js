@@ -100,12 +100,12 @@ if (typeof projectName === 'undefined') {
     path.join(projectName, '.env'),
     `NODE_ENV=development
 
-DB_TYPE=mongodb
-DB_HOST=127.0.0.1
-DB_PORT=27017
-DB_USER=
-DB_PASS=
-DB_NAME=tetra
+DATABASE_TYPE=mongodb
+DATABASE_HOST=127.0.0.1
+DATABASE_PORT=27017
+DATABASE_USER=
+DATABASE_PASSWORD=
+DATABASE_NAME=tetra
 
 SESSION_TYPE=db
 SESSION_SECRET=${buf.toString('hex')}
@@ -113,6 +113,7 @@ SESSION_SECRET=${buf.toString('hex')}
   )
 
   pkgi('@tetrajs/app')
+  pkgi('@tetrajs/auth-ui')
 
   // if (!program.skipAdmin) {
   //   pkgi('@tetrajs/admin')
