@@ -1,11 +1,10 @@
 const { database } = require('@tetrajs/core')
-const Command = require('../../lib/command')
+const { Command } = require('../../')
 const { ModuleService } = require('../../services')
 
 module.exports = class Unlink extends Command {
   configure() {
-    this.name = 'module:unlink'
-    this.alias = 'm:ul'
+    this.name = 'unlink'
 
     return super.configure()
   }

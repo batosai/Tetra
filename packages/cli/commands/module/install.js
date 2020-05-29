@@ -1,11 +1,11 @@
 const { database } = require('@tetrajs/core')
-const { Command, pkgi } = require('../../lib')
+const { Command, pkgi } = require('../../')
 const { ModuleService } = require('../../services')
 
 module.exports = class Install extends Command {
   configure() {
-    this.name = 'module:install'
-    this.alias = 'm:i'
+    this.name = 'install'
+    this.alias = 'i'
 
     return super.configure()
   }

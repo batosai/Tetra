@@ -1,15 +1,12 @@
 'use strict'
 
-const crypto = require('crypto')
 const chalk = require('chalk')
 const { Command } = require('commander')
 const spawn = require('cross-spawn')
-const envinfo = require('envinfo')
-const fs = require('fs')
 const path = require('path')
-const os = require('os')
-const install = require('./helpers/install')
-const shouldUseYarn = require('./helpers/shouldUseYarn')
+const install = require('./lib/install')
+const shouldUseYarn = require('./lib/shouldUseYarn')
+const { envGenerator, packageGenerator } = require('./lib/generators')
 
 const packageJson = require('./package.json')
 const useYarn = shouldUseYarn()
@@ -32,49 +29,10 @@ const program = new Command(packageJson.name)
     projectName = name
   })
   .option('--skip-admin', 'skip administration install')
-  .option('-i, --info', 'print environment debug info')
   .allowUnknownOption()
-  .on('--help', () => {
-    console.log(`  Only ${chalk.green('<project-directory>')} is required.`)
-  })
   .parse(process.argv)
 
-if (program.info) {
-  console.log(chalk.bold('\nEnvironment Info:'))
-  console.log(
-    `\n  current version of ${packageJson.name}: ${packageJson.version}`,
-  )
-  console.log(`  running from ${__dirname}`)
-  return envinfo
-    .run(
-      {
-        System: ['OS', 'CPU'],
-        Binaries: ['Node', 'npm', 'Yarn'],
-        Browsers: ['Chrome', 'Edge', 'Internet Explorer', 'Firefox', 'Safari'],
-        npmPackages: ['@tetrajs/app'],
-      },
-      {
-        duplicates: true,
-        showNotFound: true,
-      },
-    )
-    .then(console.log)
-}
-
-if (typeof projectName === 'undefined') {
-  console.error('Please specify the project directory:')
-  console.log(
-    `  ${chalk.cyan(program.name())} ${chalk.green('<project-directory>')}`,
-  )
-  console.log()
-  console.log('For example:')
-  console.log(`  ${chalk.cyan(program.name())} ${chalk.green('my-tetra-app')}`)
-  console.log()
-  console.log(
-    `Run ${chalk.cyan(`${program.name()} --help`)} to see all options.`,
-  )
-  process.exit(1)
-} else {
+if (typeof projectName === 'string') {
   console.log(`Creating a new Tetra app in ${chalk.green(projectName)}.`)
   console.log()
 
@@ -84,35 +42,12 @@ if (typeof projectName === 'undefined') {
     { stdio: 'inherit' },
   )
 
-  const packageJson = {
-    name: projectName,
-    version: '1.0.0',
-    private: true,
-    scripts: { start: 'tetra start' },
-  }
-  fs.writeFileSync(
-    path.join(projectName, 'package.json'),
-    JSON.stringify(packageJson, null, 2) + os.EOL,
-  )
-
-  const buf = crypto.randomBytes(64);
-  fs.writeFileSync(
-    path.join(projectName, '.env'),
-    `NODE_ENV=development
-
-DATABASE_TYPE=mongodb
-DATABASE_HOST=127.0.0.1
-DATABASE_PORT=27017
-DATABASE_USER=
-DATABASE_PASSWORD=
-DATABASE_NAME=tetra
-
-SESSION_TYPE=db
-SESSION_SECRET=${buf.toString('hex')}
-    ` + os.EOL,
-  )
+  envGenerator(projectName)
+  envGenerator(projectName, 'test', '.env.test')
+  packageGenerator(projectName)
 
   pkgi('@tetrajs/app')
+  pkgi('@tetrajs/cache')
   pkgi('@tetrajs/auth-ui')
 
   // if (!program.skipAdmin) {

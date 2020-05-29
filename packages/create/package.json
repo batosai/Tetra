@@ -1,6 +1,6 @@
 {
   "name": "@tetrajs/create",
-  "version": "0.0.16",
+  "version": "0.0.20",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -21,7 +21,6 @@
     "chalk": "^4.0.0",
     "commander": "^5.1.0",
     "cross-spawn": "^7.0.2",
-    "envinfo": "^7.5.1",
     "os": "^0.1.1"
   },
   "license": "MIT"

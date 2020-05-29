@@ -1,6 +1,6 @@
 {
   "name": "@tetrajs/app",
-  "version": "0.0.13",
+  "version": "0.0.15",
   "description": "",
   "keywords": [],
   "main": "index.js",
@@ -19,6 +19,7 @@
     "node": ">=8.16.0"
   },
   "dependencies": {
+    "@tetrajs/cache": "~0.0.1",
     "@tetrajs/cli": "~0.0.2",
     "@tetrajs/core": "~0.0.1",
     "@tetrajs/router": "~0.0.1",

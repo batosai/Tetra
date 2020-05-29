@@ -2,9 +2,9 @@ const path = require('path')
 const fs = require('fs')
 const os = require('os')
 
-const Command = require('../../lib/command')
+const { Command } = require('..')
 
-module.exports = class Config extends Command {
+module.exports = class Setup extends Command {
   constructor(program, prompts, chalk) {
     super(program, prompts, chalk)
 
@@ -41,10 +41,11 @@ module.exports = class Config extends Command {
   }
 
   configure() {
-    this.name = 'database:config'
-    this.alias = 'db:config'
+    this.name = 'setup'
 
-    return super.configure()
+    const program = super.configure()
+    program.option('-e, --env <env>', 'set environment', 'development')
+    return program
   }
 
   async execute({ env }) {

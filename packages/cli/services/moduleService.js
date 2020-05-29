@@ -19,6 +19,17 @@ module.exports = class ModulesService {
     return promise
   }
 
+  static async fetchModules() {
+    dotenv.config()
+    database.mongodb.connection()
+
+    const { Module } = database.models
+    const promise = Module.find()
+
+    promise.then(() => database.mongoose.connection.close(true))
+    return promise
+  }
+
   static async delete(conditions) {
     dotenv.config()
     database.mongodb.connection()

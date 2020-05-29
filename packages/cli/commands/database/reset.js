@@ -1,4 +1,4 @@
-const Command = require('../../lib/command')
+const { Command } = require('../..')
 
 module.exports = class Reset extends Command {
   configure() {

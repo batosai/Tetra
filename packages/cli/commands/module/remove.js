@@ -1,11 +1,11 @@
 const { database } = require('@tetrajs/core')
-const { Command, pkgrm } = require('../../lib')
+const { Command, pkgrm } = require('../../')
 const { ModuleService } = require('../../services')
 
 module.exports = class Remove extends Command {
   configure() {
-    this.name = 'module:remove'
-    this.alias = 'm:rm'
+    this.name = 'uninstall'
+    this.alias = 'remove'
 
     return super.configure()
   }
