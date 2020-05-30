@@ -1,56 +1,67 @@
 'use strict'
 
-const chalk = require('chalk')
-const { Command } = require('commander')
-const spawn = require('cross-spawn')
 const path = require('path')
+const { spawn } = require('child_process')
+const colors = require('colors')
+var argv = require('minimist')(process.argv.slice(2))
 const install = require('./lib/install')
 const shouldUseYarn = require('./lib/shouldUseYarn')
-const { envGenerator, packageGenerator } = require('./lib/generators')
+const { packageGenerator, envGenerator } = require('./lib/generators')
+const Steps = require('./lib/steps')
 
-const packageJson = require('./package.json')
+const steps = new Steps(4)
+steps.startRecording()
+let oldStep = null
+
 const useYarn = shouldUseYarn()
 
-let projectName
-
-const pkgi = (pkg) => {
-  console.log(`Installing ${chalk.cyan(pkg)}`)
-  console.log()
-
-  install(projectName, [pkg], { useYarn })
-  console.log()
+if (!argv._.length) {
+  console.log(colors.red('Project name is require.'))
+  process.exit()
 }
 
-const program = new Command(packageJson.name)
-  .version(packageJson.version, '-v, --version', 'output the current version')
-  .arguments('<project-directory>')
-  .usage(`${chalk.green('<project-directory>')}`)
-  .action((name) => {
-    projectName = name
-  })
-  .option('--skip-admin', 'skip administration install')
-  .allowUnknownOption()
-  .parse(process.argv)
+const projectName = argv._[0]
 
-if (typeof projectName === 'string') {
-  console.log(`Creating a new Tetra app in ${chalk.green(projectName)}.`)
-  console.log()
+console.log(colors.green('Creating a new Tetra app in projectName.'))
+console.log()
 
-  spawn.sync(
+async function main() {
+
+  oldStep = steps.advance('Create project').start()
+  await spawn(
     'cp',
     ['-r', path.join(__dirname, 'templates', 'default'), projectName],
     { stdio: 'inherit' },
   )
+  await packageGenerator(projectName)
+  await envGenerator(projectName)
+  await envGenerator(projectName, {
+    env: 'test',
+    filename: '.env.test'
+  })
+  oldStep.success('Create project', '✓')
 
-  envGenerator(projectName)
-  envGenerator(projectName, 'test', '.env.test')
-  packageGenerator(projectName)
+  oldStep = steps.advance('Installing dependencies').start()
+    await install(projectName, ['@tetrajs/app', '@tetrajs/auth-ui'], { useYarn })
+  oldStep.success('Dependencies installed', '✓')
 
-  pkgi('@tetrajs/app')
-  pkgi('@tetrajs/cache')
-  pkgi('@tetrajs/auth-ui')
+  process.chdir(projectName)
 
-  // if (!program.skipAdmin) {
-  //   pkgi('@tetrajs/admin')
-  // }
+  oldStep = steps.advance('Linking dependencies').start()
+    const args = [ 'tetra', 'link']
+      .concat(['@tetrajs/auth-ui'])
+
+    await spawn(`npx`, args)
+  oldStep.success('Dependencies linked', '✓')
+
+  const nanoSecs = steps.stopRecording()
+  console.log('')
+  console.log(`  ${colors.green('success')} Success`)
+  console.log(`  ✨  Done in ${Math.round(nanoSecs / (1e9))}s.`)
 }
+main()
+
+
+// if (!argv['skip-admin']) {
+//   pkgi('@tetrajs/admin')
+// }

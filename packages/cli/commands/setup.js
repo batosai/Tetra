@@ -34,7 +34,7 @@ module.exports = class Setup extends Command {
       {
         type: 'text',
         name: 'name',
-        message: 'Database name(tetra):',
+        message: 'Database name:',
         initial: 'tetra',
       },
     ]

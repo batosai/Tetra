@@ -3,17 +3,20 @@ const path = require('path')
 const crypto = require('crypto')
 const os = require('os')
 
-module.exports = (app, env='development', fileName='.env') => {
-  const buf = crypto.randomBytes(64);
+module.exports = (app, opt={}) => {
+  const buf = crypto.randomBytes(64)
+  const env = opt.env || 'development'
+  const filename = opt.filename || '.env'
+  const type = opt.type || 'mongodb'
   fs.writeFileSync(
-    path.join(app, fileName),
+    path.join(app, filename),
     `NODE_ENV=${env}
 
-DATABASE_TYPE=mongodb
-DATABASE_HOST=127.0.0.1
-DATABASE_PORT=27017
-DATABASE_USER=
-DATABASE_PASSWORD=
+DATABASE_TYPE=${type}
+DATABASE_HOST=${opt.host || '127.0.0.1'}
+DATABASE_PORT=${opt.port || '27017'}
+DATABASE_USER=${opt.username || ''}
+DATABASE_PASSWORD=${opt.password || ''}
 DATABASE_NAME=tetra_${env}
 
 SESSION_TYPE=database

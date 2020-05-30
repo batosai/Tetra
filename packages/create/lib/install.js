@@ -1,5 +1,6 @@
-const chalk = require('chalk')
-const spawn = require('cross-spawn')
+const colors = require('colors')
+// const spawn = require('cross-spawn')
+const { spawn } = require('child_process')
 
 module.exports = function install(
   root,
@@ -21,8 +22,8 @@ module.exports = function install(
       args.push('--cwd', root)
 
       if (!isOnline) {
-        console.log(chalk.yellow('You appear to be offline.'))
-        console.log(chalk.yellow('Falling back to the local Yarn cache.'))
+        console.log(colors.yellow('You appear to be offline.'))
+        console.log(colors.yellow('Falling back to the local Yarn cache.'))
         console.log()
       }
     } else {
@@ -33,20 +34,19 @@ module.exports = function install(
         root,
         dependencies && '--save',
         dependencies && '--save-exact',
-        '--loglevel',
-        'error',
+        '--no-progress',
+        '--loglevel', 'error',
       ].concat(dependencies || [])
+      //.concat(['&>', '/dev/null'])
     }
 
-    const child = spawn(command, args, {
-      stdio: 'inherit',
-      env: { ...process.env, ADBLOCK: '1', DISABLE_OPENCOLLECTIVE: '1' },
-    })
+    const child = spawn(command, args)
     child.on('close', (code) => {
-      if (code !== 0) {
-        reject({ command: `${command} ${args.join(' ')}` })
-        return
-      }
+      // if (code !== 0) {
+      //   console.log(`${command} ${args.join(' ')} ${code}`)
+      //   reject({ command: `${command} ${args.join(' ')}` })
+      //   return
+      // }
       resolve()
     })
   })

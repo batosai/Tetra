@@ -4,8 +4,8 @@ const { ModuleService } = require('../../services')
 
 module.exports = class Remove extends Command {
   configure() {
-    this.name = 'uninstall'
-    this.alias = 'remove'
+    this.name = 'remove'
+    this.alias = 'rm'
 
     return super.configure()
   }

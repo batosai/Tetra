@@ -12,8 +12,13 @@ module.exports = name => {
       clear: "tetra cache:clear"
     },
   }
-  fs.writeFileSync(
-    path.join(name, 'package.json'),
-    JSON.stringify(packageJson, null, 2) + os.EOL,
-  )
+  return new Promise(resolve => {
+    setTimeout(() => {
+      fs.writeFileSync(
+        path.join(name, 'package.json'),
+        JSON.stringify(packageJson, null, 2) + os.EOL,
+      )
+      resolve()
+    }, 200)
+  })
 }

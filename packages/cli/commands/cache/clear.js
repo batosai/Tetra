@@ -1,5 +1,5 @@
-const { Command } = require('@tetrajs/cli')
-const cache = require('..')
+const { Command } = require('../..')
+const { cache } = require('@tetrajs/core')
 
 module.exports = class Clear extends Command {
   configure() {

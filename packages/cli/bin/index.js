@@ -8,6 +8,7 @@ const program = new commander.Command()
 let cmds = [
   require('../commands/informations'),
   require('../commands/setup'),
+  require('../commands/cache/clear'),
   require('../commands/module/install'),
   require('../commands/module/remove'),
   require('../commands/module/link'),

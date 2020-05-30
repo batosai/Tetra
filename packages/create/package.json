@@ -1,6 +1,6 @@
 {
   "name": "@tetrajs/create",
-  "version": "0.0.20",
+  "version": "0.0.68",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -18,9 +18,9 @@
     "node": ">=8.16.0"
   },
   "dependencies": {
-    "chalk": "^4.0.0",
-    "commander": "^5.1.0",
-    "cross-spawn": "^7.0.2",
+    "colors": "^1.4.0",
+    "cli-spinner": "^0.2.10",
+    "minimist": "1.2.5",
     "os": "^0.1.1"
   },
   "license": "MIT"

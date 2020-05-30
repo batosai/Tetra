@@ -6,6 +6,7 @@ module.exports.bcrypt = require('bcrypt')
 module.exports.slugify = require('slugify')
 module.exports.uuid = require('uuid')
 
+module.exports.cache = require('./modules/cache')
 module.exports.database = require('./modules/database')
 module.exports.auth = require('./modules/auth')
 module.exports.security = require('./modules/security')
