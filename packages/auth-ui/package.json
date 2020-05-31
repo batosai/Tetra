@@ -9,7 +9,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/tetrajs/tetra",
-    "directory": "packages/auth"
+    "directory": "packages/auth-ui"
   },
   "engines": {
     "node": ">=8.16.0"
