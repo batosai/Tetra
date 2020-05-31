@@ -24,9 +24,9 @@ for (let m in apppkg.dependencies) {
   try {
     const commands = require(`${m}/commands`)
     for (let key in commands) {
-        if (commands.hasOwnProperty(key)) {
-          cmds.push(commands[key])
-        }
+      if (commands.hasOwnProperty(key)) {
+        cmds.push(commands[key])
+      }
     }
   } catch(e) {}
 }

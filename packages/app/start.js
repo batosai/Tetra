@@ -1,14 +1,14 @@
 const path = require('path')
 const fs = require('fs')
+const { spawn } = require('child_process')
 const cookieParser = require('cookie-parser')
 const logger = require('morgan')
 const compression = require('compression')
 const helmet = require('helmet')
 // const favicon = require('serve-favicon')
+const { express, database, session, auth, dotenv, i18n } = require('@tetrajs/core')
 
 const appPath = process.cwd()
-
-const { express, database, session, auth, dotenv, i18n } = require('@tetrajs/core')
 
 const MongoStore = database.mongodb.connectMongo(session)
 const app = express()
@@ -49,11 +49,19 @@ app.use(helmet())
 app.use(auth.passport.initialize())
 app.use(auth.passport.session())
 
+
+// Load tetra modules
 app.use(i18n)
 
+// Load modules installed
 const modules = require(`${appPath}`)
 for (const key in modules) {
   app.use(key, modules[key])
 }
+
+// Link modules installed
+const pkg = require(`${process.cwd()}/package.json`)
+const pkgTetra = Object.keys(pkg.dependencies).filter(module => module !== '@tetrajs/app' && module.includes('@tetrajs/'))
+spawn('npx', ['tetra', 'link', ...pkgTetra])
 
 module.exports = app
