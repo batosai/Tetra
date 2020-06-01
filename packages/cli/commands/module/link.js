@@ -5,12 +5,17 @@ const { ModuleService } = require('../../services')
 module.exports = class Link extends Command {
   configure() {
     this.name = 'link'
+    this.description = 'Link tetra module'
 
     return super.configure()
   }
 
+  syntax() {
+    console.log(this.chalk.green(`tetra <options> ${this.name} [module1 module2]`))
+  }
+
   execute(modules) {
-    modules.args.map(async module => {
+    modules.map(async module => {
       try {
         const pkg = require(`${module}/package.json`)
 

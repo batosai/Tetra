@@ -8,7 +8,6 @@ module.exports = class Model extends Command {
     return super.configure()
   }
 
-  async execute({ env }) {
-    console.log('model ' + env)
+  async execute() {
   }
 }

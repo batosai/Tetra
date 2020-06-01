@@ -8,7 +8,6 @@ module.exports = class Reset extends Command {
     return super.configure()
   }
 
-  async execute({ env }) {
-    console.log(env)
+  async execute() {
   }
 }

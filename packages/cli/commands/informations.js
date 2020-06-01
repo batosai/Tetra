@@ -5,6 +5,7 @@ module.exports = class Informations extends Command {
   configure() {
     this.name = 'informations'
     this.alias = 'info'
+    this.description = 'Show application informations'
 
     return super.configure()
   }

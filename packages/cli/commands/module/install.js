@@ -6,12 +6,17 @@ module.exports = class Install extends Command {
   configure() {
     this.name = 'install'
     this.alias = 'i'
+    this.description = 'Install tetra module'
 
     return super.configure()
   }
 
+  syntax() {
+    console.log(this.chalk.green(`tetra <options> ${this.name} [module1 module2]`))
+  }
+
   execute(modules) {
-    modules.args.map(async module => {
+    modules.map(async module => {
       try {
         await pkgi(module)
 

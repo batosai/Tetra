@@ -3,11 +3,12 @@ const fs = require('fs')
 const crypto = require('crypto')
 const os = require('os')
 
-const { Command } = require('..')
+const { Command } = require('../')
 
 module.exports = class Setup extends Command {
-  constructor(program, prompts, chalk) {
-    super(program, prompts, chalk)
+  configure() {
+    this.name = 'setup'
+    this.description = 'Initialize configuration(database)'
 
     this.questions = [
       {
@@ -49,14 +50,8 @@ module.exports = class Setup extends Command {
         initial: 'tetra',
       },
     ]
-  }
-
-  configure() {
-    this.name = 'setup'
 
     return super.configure()
-    // program.option('-e, --env <env>', 'set environment', 'development')
-    // return program
   }
 
   async execute() {

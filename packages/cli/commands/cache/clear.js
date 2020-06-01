@@ -5,13 +5,14 @@ module.exports = class Clear extends Command {
   configure() {
     this.name = 'cache:clear'
     this.alias = 'ca:c'
+    this.description = 'Clear cache'
 
-    const program = super.configure()
-    program.option('-e, --env <env>', 'set environment', 'development')
-    return program
+    this.addOption('-e, --env <env>', 'Set environment', 'development')
+
+    return super.configure()
   }
 
   execute() {
-    cache.clear()
+    return cache.clear()
   }
 }

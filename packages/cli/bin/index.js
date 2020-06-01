@@ -2,9 +2,9 @@
 
 'use strict'
 
-const { commander, prompts, chalk } = require('../')
-const pkg = require('../package.json')
-const program = new commander.Command()
+const argv = require('minimist')(process.argv.slice(2));
+const { Command, prompts, chalk } = require('../')
+const program = new Command(prompts, chalk)
 let cmds = [
   require('../commands/informations'),
   require('../commands/setup'),
@@ -18,6 +18,7 @@ let cmds = [
   require('../commands/database/seed'),
 ]
 
+// Load commands modules installed
 const apppkg = require(`${process.cwd()}/package.json`)
 
 for (let m in apppkg.dependencies) {
@@ -31,9 +32,17 @@ for (let m in apppkg.dependencies) {
   } catch(e) {}
 }
 
+//
+program.configure()
 cmds.map((klass) => {
-  const cmd = new klass(commander, prompts, chalk)
+  const cmd = new klass(prompts, chalk)
   program.addCommand(cmd.configure())
 })
 
-program.version(pkg.version).description(pkg.description).parse(process.argv)
+if (!argv._.length) {
+  program.render()
+} else {
+  const modules = argv._
+  delete argv._
+  program.execute(modules, argv)
+}
