@@ -3,8 +3,8 @@
 'use strict'
 
 const argv = require('minimist')(process.argv.slice(2));
-const { Command, prompts, kleur } = require('../')
-const program = new Command(prompts, kleur)
+const { Command } = require('../')
+const program = new Command()
 let cmds = [
   require('../commands/informations'),
   require('../commands/setup'),
@@ -13,6 +13,7 @@ let cmds = [
   require('../commands/module/remove'),
   require('../commands/module/link'),
   require('../commands/module/unlink'),
+  require('../commands/module/list'),
   require('../commands/database/model'),
   require('../commands/database/reset'),
   require('../commands/database/seed'),
@@ -35,7 +36,7 @@ for (let m in apppkg.dependencies) {
 //
 program.configure()
 cmds.map((klass) => {
-  const cmd = new klass(prompts, kleur)
+  const cmd = new klass()
   program.addCommand(cmd.configure())
 })
 

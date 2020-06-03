@@ -15,7 +15,7 @@ module.exports = class Informations extends Command {
     console.log(
       `\n  current version of ${packageJson.name}: ${packageJson.version}`,
     )
-    console.log(`  running from ${__dirname}`)
+    console.log(`  running from ${process.cwd()}`)
     return envinfo
       .run(
         {

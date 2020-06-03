@@ -1,5 +1,6 @@
 const prompts = require('prompts')
 const kleur = require('kleur')
+const Table = require('cli-table3')
 const envinfo = require('envinfo')
 
 const Command = require('./lib/command')
@@ -15,4 +16,5 @@ module.exports.Command = Command
 
 module.exports.prompts = prompts
 module.exports.kleur = kleur
+module.exports.Table = Table
 module.exports.envinfo = envinfo
