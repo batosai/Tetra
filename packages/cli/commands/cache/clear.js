@@ -12,7 +12,13 @@ module.exports = class Clear extends Command {
     return super.configure()
   }
 
-  execute() {
+  execute(args) {
+    if (args.length) {
+      for (const name of args) {
+        cache.clear(name)
+      }
+      return
+    }
     return cache.clear()
   }
 }

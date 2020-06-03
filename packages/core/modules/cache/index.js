@@ -8,6 +8,7 @@ const dir = path.join(`${process.cwd()}/var`, 'cache')
 const writeFile = util.promisify(fs.writeFile)
 const exists = util.promisify(fs.exists)
 const mkdir = util.promisify(fs.mkdir)
+const unlink = util.promisify(fs.unlink)
 
 const folder = async function(path) {
   if (!await exists(path)){
@@ -46,7 +47,11 @@ module.exports.set = async function(name, value) {
   )
 }
 
-module.exports.clear = function() {
+module.exports.clear = function(name=null) {
+  if (name) {
+    return unlink(path.join(dir, name))
+  }
+
   return new Promise((resolve, reject) => {
     rimraf(dir, err => {
       if (err) reject(err)
