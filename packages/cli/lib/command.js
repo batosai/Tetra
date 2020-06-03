@@ -1,7 +1,7 @@
 module.exports = class Command {
-  constructor(prompts, chalk) {
+  constructor(prompts, kleur) {
     this.prompts = prompts
-    this.chalk = chalk
+    this.kleur = kleur
 
     this.name = ''
     this.alias = ''
@@ -17,14 +17,14 @@ module.exports = class Command {
     return this
   }
 
-  async execute(modules, options) {
+  async execute(args, options) {
     this.commands.map(async cmd => {
-      if (cmd.name === modules[0] || cmd.alias === modules[0]) {
+      if (cmd.name === args[0] || cmd.alias === args[0]) {
         if (options.h || options.help) {
           cmd.render()
         }
         else {
-          cmd.execute(modules.slice(1) ,options)
+          cmd.execute(args.slice(1) ,options)
         }
       }
     })
@@ -32,9 +32,9 @@ module.exports = class Command {
 
   syntax() {
     if (this.name) {
-      console.log(this.chalk.green(`tetra <options> ${this.name}`))
+      console.log(this.kleur.green(`tetra <options> ${this.name}`))
     } else {
-      console.log(this.chalk.green('tetra <options> [command]'))
+      console.log(this.kleur.green('tetra <options> [command]'))
     }
   }
 
@@ -49,9 +49,9 @@ module.exports = class Command {
     if (!description) {
       separator = ''
     }
-    return this.chalk.dim(
-      `  ${this.chalk.blueBright(name)}` +
-      this.chalk.italic(
+    return this.kleur.dim(
+      `  ${this.kleur.cyan(name)}` +
+      this.kleur.italic(
         ` ${separator} ${description}`
     ))
   }
@@ -60,12 +60,12 @@ module.exports = class Command {
     this.syntax()
 
     if (this.description) {
-      console.log(`${this.chalk.dim(this.description)}`)
+      console.log(`${this.kleur.dim(this.description)}`)
     }
 
     if (this.alias) {
       console.log()
-      console.log(this.chalk.yellow(`Alias: ${this.alias}`))
+      console.log(this.kleur.yellow(`Alias: ${this.alias}`))
     }
 
     if (this.options.length) {

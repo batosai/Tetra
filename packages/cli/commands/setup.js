@@ -58,7 +58,7 @@ module.exports = class Setup extends Command {
     const filename = '.env'
     fs.access(path.join('./', filename), fs.constants.F_OK, async err => {
       if (err) {
-        console.log(this.chalk.green('Configuring environnement'))
+        console.log(this.kleur.green('Configuring environnement'))
         const response = await this.prompts(this.questions)
 
         this.generator('./', response)
@@ -68,7 +68,7 @@ module.exports = class Setup extends Command {
           filename: '.env.test'
         })
       } else (
-        console.error(this.chalk.red('Environnement is already configured'))
+        console.error(this.kleur.red('Environnement is already configured'))
       )
     })
   }

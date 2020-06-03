@@ -1,4 +1,4 @@
-const chalk = require('chalk')
+const kleur = require('kleur')
 const spawn = require('cross-spawn')
 
 const shouldUseYarn = require('./shouldUseYarn')
@@ -25,8 +25,8 @@ function pkg(
       args.push('--cwd', root)
 
       if (!isOnline) {
-        console.log(chalk.yellow('You appear to be offline.'))
-        console.log(chalk.yellow('Falling back to the local Yarn cache.'))
+        console.log(kleur.yellow('You appear to be offline.'))
+        console.log(kleur.yellow('Falling back to the local Yarn cache.'))
         console.log()
       }
     } else {
@@ -76,7 +76,7 @@ function uninstall(root, dependencies = null, options) {
 
 async function pkgi(pkg) {
   const useYarn = shouldUseYarn()
-  console.log(`Installing ${chalk.cyan(pkg)}`)
+  console.log(`Installing ${kleur.cyan(pkg)}`)
   console.log()
 
   return install(process.cwd(), [pkg], { useYarn })
@@ -84,7 +84,7 @@ async function pkgi(pkg) {
 
 async function pkgrm(pkg) {
   const useYarn = shouldUseYarn()
-  console.log(`Remove ${chalk.cyan(pkg)}`)
+  console.log(`Remove ${kleur.cyan(pkg)}`)
   console.log()
 
   return uninstall(process.cwd(), [pkg], { useYarn })

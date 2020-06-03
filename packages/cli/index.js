@@ -1,5 +1,5 @@
 const prompts = require('prompts')
-const chalk = require('chalk')
+const kleur = require('kleur')
 const envinfo = require('envinfo')
 
 const Command = require('./lib/command')
@@ -14,5 +14,5 @@ module.exports.pkgrm = pkgrm
 module.exports.Command = Command
 
 module.exports.prompts = prompts
-module.exports.chalk = chalk
+module.exports.kleur = kleur
 module.exports.envinfo = envinfo

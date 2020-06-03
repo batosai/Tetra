@@ -3,8 +3,8 @@
 'use strict'
 
 const argv = require('minimist')(process.argv.slice(2));
-const { Command, prompts, chalk } = require('../')
-const program = new Command(prompts, chalk)
+const { Command, prompts, kleur } = require('../')
+const program = new Command(prompts, kleur)
 let cmds = [
   require('../commands/informations'),
   require('../commands/setup'),
@@ -35,7 +35,7 @@ for (let m in apppkg.dependencies) {
 //
 program.configure()
 cmds.map((klass) => {
-  const cmd = new klass(prompts, chalk)
+  const cmd = new klass(prompts, kleur)
   program.addCommand(cmd.configure())
 })
 

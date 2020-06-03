@@ -72,6 +72,7 @@ async function main() {
   console.log()
   console.log('To start a server:')
   console.log(`  ${colors.green('npx tetra serve')}`)
+  console.log()
 }
 main()
 

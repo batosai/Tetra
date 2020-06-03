@@ -1,4 +1,4 @@
-const { Command, chalk, envinfo } = require('../')
+const { Command, envinfo } = require('../')
 const packageJson = require(`${process.cwd()}/package.json`)
 
 module.exports = class Informations extends Command {
@@ -11,7 +11,7 @@ module.exports = class Informations extends Command {
   }
 
   execute() {
-    console.log(chalk.bold('\nEnvironment Info:'))
+    console.log(this.kleur.bold('\nEnvironment Info:'))
     console.log(
       `\n  current version of ${packageJson.name}: ${packageJson.version}`,
     )
