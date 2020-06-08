@@ -10,6 +10,23 @@ module.exports = class Setup extends Command {
     this.name = 'setup'
     this.description = 'Initialize configuration(database)'
 
+    this.addOption('--host', 'Set database host', '127.0.0.1')
+    this.addOption('--port', 'Set database port', '27017')
+    this.addOption('--username', 'Set database username')
+    this.addOption('--password', 'Set database password')
+    this.addOption('--name', 'Set database name')
+
+    this.addOption('-e, --env', 'Set environment', 'development')
+
+    this.default = {
+      env: 'development',
+      host: '127.0.0.1',
+      port: 27017,
+      username: '',
+      password:'',
+      name: 'tetra',
+    }
+
     this.questions = [
       {
         type: 'select',
@@ -19,19 +36,19 @@ module.exports = class Setup extends Command {
           { title: 'Production', value: 'production' },
           { title: 'Development', value: 'development' }
         ],
-        initial: 1
+        initial: this.default.env === 'development' ? 1 : 0
       },
       {
         type: 'text',
         name: 'host',
         message: 'Database host:',
-        initial: '127.0.0.1',
+        initial: this.default.host,
       },
       {
         type: 'number',
         name: 'port',
         message: 'Database port:',
-        initial: 27017,
+        initial: this.default.port,
       },
       {
         type: 'text',
@@ -47,23 +64,34 @@ module.exports = class Setup extends Command {
         type: 'text',
         name: 'name',
         message: 'Database name:',
-        initial: 'tetra',
+        initial: this.default.name,
       },
     ]
 
     return super.configure()
   }
 
-  async execute() {
+  async execute(args, options={}) {
+
+    if (Object.keys(options).length) {
+      options.env = options.e ? options.e : null
+    }
+
     const filename = '.env'
     fs.access(path.join('./', filename), fs.constants.F_OK, async err => {
       if (err) {
-        console.log(this.kleur.green('Configuring environnement'))
-        const response = await this.prompts(this.questions)
+        let responses = {}
+        if (!Object.keys(options).length) {
+          console.log(this.kleur.green('Configuring environnement'))
+          responses = await this.prompts(this.questions)
+        }
+        else {
+          responses = { ...this.default, ...options }
+        }
 
-        this.generator('./', response)
+        this.generator('./', responses)
         this.generator('./', {
-          ...response,
+          ...responses,
           env: 'test',
           filename: '.env.test'
         })

@@ -32,6 +32,8 @@ module.exports = class Command {
   }
 
   syntax() {
+    console.log()
+    console.log('Usage:')
     if (this.name) {
       console.log(this.kleur.green(`tetra <options> ${this.name}`))
     } else {
@@ -40,7 +42,7 @@ module.exports = class Command {
   }
 
 
-  formatted(name, description) {
+  formatted(name, description, initial='') {
     let maxLength = 0
     this.commands.map(cmd => {
       maxLength = maxLength > cmd.name.length ? maxLength : cmd.name.length
@@ -53,7 +55,9 @@ module.exports = class Command {
     return this.kleur.dim(
       `  ${this.kleur.cyan(name)}` +
       this.kleur.italic(
-        ` ${separator} ${description}`
+        ` ${separator} ${description}`) +
+      this.kleur.italic(
+        this.kleur.yellow(initial ? `(default: ${initial})` : '')
     ))
   }
 
@@ -73,7 +77,7 @@ module.exports = class Command {
       console.log()
       console.log('Options:')
       this.options.map(opt => {
-        console.log(this.formatted(opt.name, opt.description))
+        console.log(this.formatted(opt.name, opt.description, opt.default))
       })
     }
 
