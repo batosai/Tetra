@@ -26,7 +26,7 @@ if (!argv._.length) {
 
 const projectName = argv._[0]
 
-console.log(colors.green('Creating a new Tetra app in projectName.'))
+console.log(colors.green(`Creating a new Tetra app in ${projectName}.`))
 console.log()
 
 async function main() {
