@@ -6,6 +6,7 @@ const argv = require('minimist')(process.argv.slice(2));
 const { Command } = require('../')
 const program = new Command()
 let cmds = [
+  require('../commands/console'),
   require('../commands/informations'),
   require('../commands/setup'),
   require('../commands/cache/clear'),
@@ -22,9 +23,9 @@ let cmds = [
 // Load commands modules installed
 const apppkg = require(`${process.cwd()}/package.json`)
 
-for (let m in apppkg.dependencies) {
+for (let i in apppkg.dependencies) {
   try {
-    const commands = require(`${m}/commands`)
+    const commands = require(`${apppkg.dependencies[i]}/commands`)
     for (let key in commands) {
       if (commands.hasOwnProperty(key)) {
         cmds.push(commands[key])
