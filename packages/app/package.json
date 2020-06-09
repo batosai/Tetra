@@ -1,6 +1,6 @@
 {
   "name": "@tetrajs/app",
-  "version": "0.0.18",
+  "version": "0.0.22",
   "description": "",
   "keywords": [],
   "main": "index.js",
@@ -26,7 +26,8 @@
     "cookie-parser": "^1.4.5",
     "debug": "~4.1.1",
     "helmet": "^3.22.0",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.4"
   },
   "license": "MIT"
 }

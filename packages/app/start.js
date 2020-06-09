@@ -6,15 +6,13 @@ const logger = require('morgan')
 const compression = require('compression')
 const helmet = require('helmet')
 // const favicon = require('serve-favicon')
-const { express, database, session, auth, dotenv, i18n } = require('@tetrajs/core')
+const { express, database, session, auth, i18n } = require('@tetrajs/core')
 
 const appPath = process.cwd()
 
 const MongoStore = database.mongodb.connectMongo(session)
 const app = express()
 app.set('appPath', appPath)
-
-dotenv.config()
 
 // create a write stream (in append mode)
 const accessLogStream = fs.createWriteStream(

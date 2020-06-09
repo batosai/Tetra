@@ -3,7 +3,46 @@
 const args = process.argv.slice(2)
 
 if (args[0] === 'serve' || args[0] === 's') {
-  require('./serve')
+  const { dotenv } = require('@tetrajs/core')
+  dotenv.config()
+
+  if (process.env.NODE_ENV === 'development') {
+    serveDev()
+  }
+  else {
+    require('./serve')
+  }
 } else {
   require('@tetrajs/cli/bin')
+}
+
+function serveDev() {
+  const nodemon = require('nodemon')
+  const path = require('path')
+  const fs = require('fs')
+
+  nodemon({
+    script: path.join(__dirname, './serve'),
+    ext: 'js json pug',
+    stdout: true
+  })
+
+  nodemon.on('start', function () {
+    console.log(`
+ ___
+  |   _  _|_ __  _
+  |  (/_  |_ |  (_| . JS
+
+ =======================
+`)
+  }).on('quit', function () {
+    console.log('App has quit')
+    process.exit();
+  }).on('restart', function (files) {
+    console.log('App restarted due to: ', files)
+  }).on('readable', function() {
+    const p = path.join(process.cwd(), './var/log')
+    this.stdout.pipe(fs.createWriteStream(`${p}/output.log`))
+    this.stderr.pipe(fs.createWriteStream(`${p}/error.log`))
+  })
 }
