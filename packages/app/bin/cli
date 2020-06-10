@@ -23,7 +23,8 @@ function serveDev() {
 
   nodemon({
     script: path.join(__dirname, './serve'),
-    ext: 'js json pug',
+    ext: 'js json pug css scss less styl',
+    ignore: ['public/*', 'var/*'],
     stdout: true
   })
 

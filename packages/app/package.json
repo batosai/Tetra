@@ -1,6 +1,6 @@
 {
   "name": "@tetrajs/app",
-  "version": "0.0.22",
+  "version": "0.0.24",
   "description": "",
   "keywords": [],
   "main": "index.js",
@@ -22,6 +22,7 @@
     "@tetrajs/cli": "~0.0.2",
     "@tetrajs/core": "~0.0.1",
     "@tetrajs/router": "~0.0.1",
+    "@tetrajs/webpack": "~0.0.1",
     "compression": "^1.7.4",
     "cookie-parser": "^1.4.5",
     "debug": "~4.1.1",

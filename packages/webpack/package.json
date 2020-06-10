@@ -1,0 +1,49 @@
+{
+  "name": "@tetrajs/webpack",
+  "version": "0.0.2",
+  "description": "",
+  "keywords": [],
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tetrajs/tetra",
+    "directory": "packages/webpack"
+  },
+  "engines": {
+    "node": ">=8.16.0"
+  },
+  "dependencies": {
+    "@tetrajs/core": "~0.0.1",
+    "@babel/core": "^7.10.2",
+    "@babel/plugin-syntax-dynamic-import": "^7.8.3",
+    "@babel/preset-env": "^7.10.2",
+    "autoprefixer": "^9.8.0",
+    "eslint": "^7.2.0",
+    "eslint-config-standard": "^14.1.1",
+    "eslint-loader": "^4.0.2",
+    "eslint-plugin-import": "^2.21.2",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "node-sass": "^4.14.1",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11",
+    "webpackbar": "^4.0.0",
+    "compression-webpack-plugin": "^4.0.0",
+    "mini-css-extract-plugin": "^0.9.0",
+    "optimize-css-assets-webpack-plugin": "^5.0.3",
+    "clean-webpack-plugin": "^3.0.0",
+    "webpack-manifest-plugin": "^2.2.0",
+    "file-loader": "^6.0.0",
+    "postcss-loader": "^3.0.0",
+    "sass-loader": "^8.0.2",
+    "xml-loader": "^1.2.1",
+    "babel-loader": "^8.1.0",
+    "css-loader": "^3.5.3",
+    "csv-loader": "^3.0.3"
+  },
+  "license": "MIT"
+}
