@@ -7,6 +7,7 @@ const compression = require('compression')
 const helmet = require('helmet')
 // const favicon = require('serve-favicon')
 const { express, database, session, auth, i18n } = require('@tetrajs/core')
+const { webpack } = require('@tetrajs/webpack')
 
 const appPath = process.cwd()
 
@@ -36,8 +37,8 @@ app.use(
     secret: process.env.SESSION_SECRET,
     resave: true,
     saveUninitialized: true,
-    store
-  })
+    store,
+  }),
 )
 
 app.use(express.static(path.join(__dirname, 'public')))
@@ -46,7 +47,6 @@ app.use(helmet())
 
 app.use(auth.passport.initialize())
 app.use(auth.passport.session())
-
 
 // Load tetra modules
 app.use(i18n)
@@ -58,8 +58,13 @@ for (const key in modules) {
 }
 
 // Link modules installed
-const pkg = require(`${process.cwd()}/package.json`)
-const pkgTetra = Object.keys(pkg.dependencies).filter(module => module !== '@tetrajs/app' && module.includes('@tetrajs/'))
+const pkg = require(`${appPath}/package.json`)
+const pkgTetra = Object.keys(pkg.dependencies).filter(
+  (module) => module !== '@tetrajs/app' && module.includes('@tetrajs/'),
+)
 spawn('npx', ['tetra', 'link', ...pkgTetra])
+
+// run webpack
+webpack.run([require(`${appPath}/app/config/webpack.js`)])
 
 module.exports = app

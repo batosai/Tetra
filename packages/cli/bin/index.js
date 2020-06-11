@@ -2,7 +2,7 @@
 
 'use strict'
 
-const argv = require('minimist')(process.argv.slice(2));
+const argv = require('minimist')(process.argv.slice(2))
 const { Command } = require('../')
 const program = new Command()
 let cmds = [
@@ -31,7 +31,7 @@ for (let i in apppkg.dependencies) {
         cmds.push(commands[key])
       }
     }
-  } catch(e) {}
+  } catch (e) {}
 }
 
 //

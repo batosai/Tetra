@@ -28,7 +28,7 @@ schema.plugin(state)
 schema.plugin(extra, { index: true })
 schema.plugin(mongoosePaginate)
 
-schema.pre('validate', async function(next) {
+schema.pre('validate', async function (next) {
   if (!this.slug && this.title) {
     this.slug = slugify(this.title).toLowerCase()
   } else if (this.slug) {
@@ -37,7 +37,7 @@ schema.pre('validate', async function(next) {
   next()
 })
 
-schema.pre('save', async function(next) {
+schema.pre('save', async function (next) {
   let id = this._id,
     slug = this.slug,
     count = 0,

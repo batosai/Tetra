@@ -1,6 +1,6 @@
 const { Command } = require('../')
 const { database, dotenv } = require('@tetrajs/core')
-const repl = require("repl")
+const repl = require('repl')
 
 module.exports = class Console extends Command {
   configure() {
@@ -15,7 +15,7 @@ module.exports = class Console extends Command {
     dotenv.config()
     database.mongodb.connection()
 
-    const local = repl.start("tetra> ")
+    const local = repl.start('tetra> ')
     local.context.database = database
     local.context.models = database.models
   }

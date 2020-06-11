@@ -8,7 +8,7 @@ module.exports = (name, sources) => {
   const baseViewPath = name !== '/' ? `${name}/` : ''
 
   let resources = []
-  sources.forEach(r => {
+  sources.forEach((r) => {
     if (Array.isArray(r)) {
       for (let resource of r) {
         resources.push(resource)

@@ -13,15 +13,15 @@ module.exports = function state(schema, options) {
     },
   })
 
-  schema.methods.draft = function() {
+  schema.methods.draft = function () {
     return this.state === this.schema.path('state').enumValues[0]
   }
 
-  schema.methods.published = function() {
+  schema.methods.published = function () {
     return this.state === this.schema.path('state').enumValues[1]
   }
 
-  schema.methods.trashed = function() {
+  schema.methods.trashed = function () {
     return this.state === this.schema.path('state').enumValues[2]
   }
 

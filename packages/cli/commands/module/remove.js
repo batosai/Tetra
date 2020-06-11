@@ -12,11 +12,13 @@ module.exports = class Remove extends Command {
   }
 
   syntax() {
-    console.log(this.kleur.green(`tetra <options> ${this.name} [module1 module2]`))
+    console.log(
+      this.kleur.green(`tetra <options> ${this.name} [module1 module2]`),
+    )
   }
 
   execute(args) {
-    args.map(async module => {
+    args.map(async (module) => {
       try {
         await pkgrm(module)
 

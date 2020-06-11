@@ -16,15 +16,15 @@ const schema = new Schema(
 
 schema.plugin(f)
 
-schema.methods.version = function(name) {
+schema.methods.version = function (name) {
   return this.filedata[name]
 }
 
-schema.methods.file = function(name = defaultName) {
+schema.methods.file = function (name = defaultName) {
   return this.version(name)
 }
 
-schema.methods.filePath = function(name = defaultName) {
+schema.methods.filePath = function (name = defaultName) {
   const basePath = global.config.path.uploads
   if (this.filedata[name] === undefined) {
     return `${basePath}${this.filedata[defaultName].filename}`
@@ -32,7 +32,7 @@ schema.methods.filePath = function(name = defaultName) {
   return `${basePath}${this.filedata[name].filename}`
 }
 
-schema.methods.fileUrl = function(name = defaultName, system = false) {
+schema.methods.fileUrl = function (name = defaultName, system = false) {
   const baseUrl = system
     ? global.config.system.path.uploads
     : global.config.url.uploads
@@ -42,11 +42,11 @@ schema.methods.fileUrl = function(name = defaultName, system = false) {
   return `${baseUrl}${this.filedata[name].filename}`
 }
 
-schema.methods.imagePath = function(name = defaultName) {
+schema.methods.imagePath = function (name = defaultName) {
   return this.filePath(name)
 }
 
-schema.methods.isImage = function() {
+schema.methods.isImage = function () {
   return File.isImage(this.mimetype)
 }
 

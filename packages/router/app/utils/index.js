@@ -1,4 +1,4 @@
-module.exports.capitalize = s => s.charAt(0).toUpperCase() + s.slice(1)
+module.exports.capitalize = (s) => s.charAt(0).toUpperCase() + s.slice(1)
 
 module.exports.parseParameters = (path, opts) => {
   let p = path
@@ -25,7 +25,7 @@ module.exports.parseParameters = (path, opts) => {
   return p
 }
 
-module.exports.defaultView = path => {
+module.exports.defaultView = (path) => {
   if (path[0] === '/') {
     return path.substr(1)
   }

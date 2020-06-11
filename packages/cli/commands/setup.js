@@ -23,7 +23,7 @@ module.exports = class Setup extends Command {
       host: '127.0.0.1',
       port: 27017,
       username: '',
-      password:'',
+      password: '',
       name: 'tetra',
     }
 
@@ -34,9 +34,9 @@ module.exports = class Setup extends Command {
         message: 'Environnement:',
         choices: [
           { title: 'Production', value: 'production' },
-          { title: 'Development', value: 'development' }
+          { title: 'Development', value: 'development' },
         ],
-        initial: this.default.env === 'development' ? 1 : 0
+        initial: this.default.env === 'development' ? 1 : 0,
       },
       {
         type: 'text',
@@ -71,21 +71,19 @@ module.exports = class Setup extends Command {
     return super.configure()
   }
 
-  async execute(args, options={}) {
-
+  async execute(args, options = {}) {
     if (Object.keys(options).length) {
       options.env = options.e ? options.e : null
     }
 
     const filename = '.env'
-    fs.access(path.join('./', filename), fs.constants.F_OK, async err => {
+    fs.access(path.join('./', filename), fs.constants.F_OK, async (err) => {
       if (err) {
         let responses = {}
         if (!Object.keys(options).length) {
           console.log(this.kleur.green('Configuring environnement'))
           responses = await this.prompts(this.questions)
-        }
-        else {
+        } else {
           responses = { ...this.default, ...options }
         }
 
@@ -93,15 +91,14 @@ module.exports = class Setup extends Command {
         this.generator('./', {
           ...responses,
           env: 'test',
-          filename: '.env.test'
+          filename: '.env.test',
         })
-      } else (
+      } else
         console.error(this.kleur.red('Environnement is already configured'))
-      )
     })
   }
 
-  generator(app, opt={}) {
+  generator(app, opt = {}) {
     const buf = crypto.randomBytes(64)
     const env = opt.env || 'development'
     const filename = opt.filename || '.env'
@@ -115,7 +112,7 @@ DATABASE_HOST=${opt.host || '127.0.0.1'}
 DATABASE_PORT=${opt.port || '27017'}
 DATABASE_USER=${opt.username || ''}
 DATABASE_PASSWORD=${opt.password || ''}
-DATABASE_NAME=${ opt.env === 'test' ? 'tetra_test' : opt.name }
+DATABASE_NAME=${opt.env === 'test' ? 'tetra_test' : opt.name}
 
 SESSION_TYPE=database
 SESSION_SECRET=${buf.toString('hex')}

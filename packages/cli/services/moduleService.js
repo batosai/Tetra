@@ -14,7 +14,7 @@ module.exports = class ModulesService {
 
     const promise = m.save()
     promise.then(() => database.mongoose.connection.close(true))
-    promise.catch(err => database.mongoose.connection.close(true))
+    promise.catch((err) => database.mongoose.connection.close(true))
 
     return promise
   }
@@ -39,7 +39,7 @@ module.exports = class ModulesService {
     const promise = m.delete()
 
     promise.then(() => database.mongoose.connection.close(true))
-    promise.catch(err => database.mongoose.connection.close(true))
+    promise.catch((err) => database.mongoose.connection.close(true))
 
     return promise
   }

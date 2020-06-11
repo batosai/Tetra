@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 
 module.exports.connectMongo = require('connect-mongo')
 
-module.exports.connection = function() {
+module.exports.connection = function () {
   mongoose.set('useUnifiedTopology', true)
   mongoose.Promise = global.Promise
   mongoose

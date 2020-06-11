@@ -4,24 +4,21 @@ const express = require('@tetrajs/core').express
 
 const app = {}
 
-app.configure = function(config, fn) {
+app.configure = function (config, fn) {
   const router = express.Router()
   router.use(middleware(config.routes))
 
   const controllers = config.controllers
 
-  router.all('*', async function(req, res, next) {
+  router.all('*', async function (req, res, next) {
     // Change method HTTP by parameters _method
-    if (req.body._method)
-      req.method = req.body._method
+    if (req.body._method) req.method = req.body._method
     next()
   })
 
   for (let name in config.routes) {
-    config.routes[name].forEach(route => {
-
+    config.routes[name].forEach((route) => {
       if (controllers[`${route.name}Controller`] !== undefined) {
-
         const controller = new controllers[`${route.name}Controller`]()
 
         if (controller.wildcard !== undefined)
@@ -31,20 +28,19 @@ app.configure = function(config, fn) {
         router[route.method](
           route.route,
           controller.middlewaresToArray(route.action),
-          controller[route.action]
+          controller[route.action],
         )
       }
-
     })
   }
 
   // catch 404 and forward to error handler
-  router.use(async function(req, res, next) {
+  router.use(async function (req, res, next) {
     next(createError(404))
   })
 
   // error handler
-  router.use(async function(err, req, res, next) {
+  router.use(async function (err, req, res, next) {
     console.log(err)
     res.locals.message = err.message
     res.locals.error = req.app.get('env') === 'development' ? err : {}

@@ -19,13 +19,12 @@ module.exports = class Command {
   }
 
   async execute(args, options) {
-    this.commands.map(async cmd => {
+    this.commands.map(async (cmd) => {
       if (cmd.name === args[0] || cmd.alias === args[0]) {
         if (options.h || options.help) {
           cmd.render()
-        }
-        else {
-          cmd.execute(args.slice(1) ,options)
+        } else {
+          cmd.execute(args.slice(1), options)
         }
       }
     })
@@ -41,10 +40,9 @@ module.exports = class Command {
     }
   }
 
-
-  formatted(name, description, initial='') {
+  formatted(name, description, initial = '') {
     let maxLength = 0
-    this.commands.map(cmd => {
+    this.commands.map((cmd) => {
       maxLength = maxLength > cmd.name.length ? maxLength : cmd.name.length
     })
 
@@ -54,11 +52,11 @@ module.exports = class Command {
     }
     return this.kleur.dim(
       `  ${this.kleur.cyan(name)}` +
-      this.kleur.italic(
-        ` ${separator} ${description}`) +
-      this.kleur.italic(
-        this.kleur.yellow(initial ? `(default: ${initial})` : '')
-    ))
+        this.kleur.italic(` ${separator} ${description}`) +
+        this.kleur.italic(
+          this.kleur.yellow(initial ? `(default: ${initial})` : ''),
+        ),
+    )
   }
 
   render() {
@@ -76,7 +74,7 @@ module.exports = class Command {
     if (this.options.length) {
       console.log()
       console.log('Options:')
-      this.options.map(opt => {
+      this.options.map((opt) => {
         console.log(this.formatted(opt.name, opt.description, opt.default))
       })
     }
@@ -84,18 +82,18 @@ module.exports = class Command {
     if (this.commands.length) {
       console.log()
       console.log('Commands:')
-      this.commands.map(cmd => {
+      this.commands.map((cmd) => {
         console.log(this.formatted(cmd.name, cmd.description))
       })
     }
     console.log()
   }
 
-  addOption(name, description, initial=null) {
+  addOption(name, description, initial = null) {
     this.options.push({
       name,
       description,
-      default:initial
+      default: initial,
     })
   }
 

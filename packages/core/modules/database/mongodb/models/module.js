@@ -3,7 +3,12 @@ const Schema = mongoose.Schema
 
 const schema = new Schema(
   {
-    name: { type: String, unique: true, trim: true, required: [true, 'Invalid name'] },
+    name: {
+      type: String,
+      unique: true,
+      trim: true,
+      required: [true, 'Invalid name'],
+    },
     version: { type: String, default: null },
     enabled: { type: Boolean, default: true },
   },

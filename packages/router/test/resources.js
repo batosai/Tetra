@@ -7,7 +7,7 @@ const index = {
   method: 'get',
   route: 'pages',
   action: 'index',
-  defaultView: 'pages/index'
+  defaultView: 'pages/index',
 }
 
 const show = {
@@ -15,7 +15,7 @@ const show = {
   method: 'get',
   route: 'pages/:id',
   action: 'show',
-  defaultView: 'pages/show'
+  defaultView: 'pages/show',
 }
 
 const newPage = {
@@ -23,7 +23,7 @@ const newPage = {
   method: 'get',
   route: 'pages/new',
   action: 'new',
-  defaultView: 'pages/new'
+  defaultView: 'pages/new',
 }
 
 const create = {
@@ -31,7 +31,7 @@ const create = {
   method: 'post',
   route: 'pages',
   action: 'create',
-  defaultView: null
+  defaultView: null,
 }
 
 const edit = {
@@ -39,7 +39,7 @@ const edit = {
   method: 'get',
   route: 'pages/:id/edit',
   action: 'edit',
-  defaultView: 'pages/edit'
+  defaultView: 'pages/edit',
 }
 
 const update = {
@@ -47,7 +47,7 @@ const update = {
   method: 'put',
   route: 'pages/:id',
   action: 'update',
-  defaultView: null
+  defaultView: null,
 }
 
 const remove = {
@@ -55,7 +55,7 @@ const remove = {
   method: 'delete',
   route: 'pages/:id',
   action: 'delete',
-  defaultView: null
+  defaultView: null,
 }
 
 const data = { index, show, new: newPage, create, edit, update, delete: remove }
@@ -82,9 +82,8 @@ const options = [
   { except: 'index' },
 ]
 
-describe('Rooter - Ressources', function() {
-
-  options.map(opt => {
+describe('Rooter - Ressources', function () {
+  options.map((opt) => {
     describe(`#generate resources - option ${JSON.stringify(opt)}`, () => {
       it('should return -1 when the value is not equal', () => {
         let d = []
@@ -92,18 +91,16 @@ describe('Rooter - Ressources', function() {
           if (!Array.isArray(opt.only)) {
             opt.only = [opt.only]
           }
-          d = opt.only.map(o => data[o])
-        }
-        else if (opt.except) {
+          d = opt.only.map((o) => data[o])
+        } else if (opt.except) {
           if (!Array.isArray(opt.except)) {
             opt.except = [opt.except]
           }
 
-          actions = crud.filter( i => (opt.except.indexOf(i) === -1) )
-          d = actions.map(o => data[o])
-        }
-        else {
-          d = [ index, show, newPage, create, edit, update, remove ]
+          actions = crud.filter((i) => opt.except.indexOf(i) === -1)
+          d = actions.map((o) => data[o])
+        } else {
+          d = [index, show, newPage, create, edit, update, remove]
         }
         expect(resources('pages', opt)).to.deep.equal(d)
       })
@@ -116,19 +113,16 @@ describe('Rooter - Ressources', function() {
         post('duplicate', { name: 'duplicate', action: 'duplicate' }),
       ])
 
-      expect(r).to.deep.equal(
-        [
-          {
-            name: 'duplicate',
-            method: 'post',
-            route: 'pages/duplicate',
-            action: 'duplicate',
-            defaultView: null
-          },
-          index
-        ]
-      )
+      expect(r).to.deep.equal([
+        {
+          name: 'duplicate',
+          method: 'post',
+          route: 'pages/duplicate',
+          action: 'duplicate',
+          defaultView: null,
+        },
+        index,
+      ])
     })
   })
-
 })

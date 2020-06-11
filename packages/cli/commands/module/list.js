@@ -10,16 +10,12 @@ module.exports = class List extends Command {
   }
 
   async execute() {
-    const table = this.table({ head: ["Modules", "Version", "Enabled"] })
+    const table = this.table({ head: ['Modules', 'Version', 'Enabled'] })
     const modules = await ModuleService.fetchModules()
-    modules.map(module => {
-      table.push([
-        module.name,
-        module.version,
-        module.enabled,
-      ])
+    modules.map((module) => {
+      table.push([module.name, module.version, module.enabled])
     })
 
-    console.log(table.toString());
+    console.log(table.toString())
   }
 }

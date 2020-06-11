@@ -4,7 +4,7 @@ const spawn = require('cross-spawn')
 const shouldUseYarn = require('./shouldUseYarn')
 
 function pkg(
-  type='install',
+  type = 'install',
   root,
   dependencies = null,
   { useYarn, isOnline },
@@ -57,21 +57,11 @@ function pkg(
 }
 
 function install(root, dependencies = null, options) {
-  return pkg(
-    'install',
-    root,
-    dependencies,
-    options
-  )
+  return pkg('install', root, dependencies, options)
 }
 
 function uninstall(root, dependencies = null, options) {
-  return pkg(
-    'uninstall',
-    root,
-    dependencies,
-    options
-  )
+  return pkg('uninstall', root, dependencies, options)
 }
 
 async function pkgi(pkg) {

@@ -1,5 +1,5 @@
 // const path = require('path')
-const flash = require('connect-flash');
+const flash = require('connect-flash')
 
 // const express = require('@tetrajs/core').express
 // const { helpers, uiPath } = require('@tetra/core').ui

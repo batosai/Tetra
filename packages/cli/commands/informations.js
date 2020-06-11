@@ -21,8 +21,14 @@ module.exports = class Informations extends Command {
         {
           System: ['OS', 'CPU'],
           Binaries: ['Node', 'npm', 'Yarn'],
-          Browsers: ['Chrome', 'Edge', 'Internet Explorer', 'Firefox', 'Safari'],
-          Databases: ['MongoDB']
+          Browsers: [
+            'Chrome',
+            'Edge',
+            'Internet Explorer',
+            'Firefox',
+            'Safari',
+          ],
+          Databases: ['MongoDB'],
           // npmPackages: packageJson.dependencies,
         },
         {

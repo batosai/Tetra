@@ -11,7 +11,9 @@ app.on('mount', function (parent) {
   // const directory = path.join(parent.get('appPath'), 'var/i18n')
 
   const pkg = require(`${parent.get('appPath')}/package.json`)
-  const pkgTetra = Object.keys(pkg.dependencies).filter(module => module !== '@tetrajs/app' && module.includes('@tetrajs/'))
+  const pkgTetra = Object.keys(pkg.dependencies).filter(
+    (module) => module !== '@tetrajs/app' && module.includes('@tetrajs/'),
+  )
 
   let staticCatalog = {
     fr: {},
@@ -25,7 +27,7 @@ app.on('mount', function (parent) {
 
       staticCatalog.fr = { ...staticCatalog.fr, ...fr }
       staticCatalog.en = { ...staticCatalog.en, ...en }
-    } catch(e) {}
+    } catch (e) {}
   }
 
   i18n.configure({
@@ -38,7 +40,7 @@ app.on('mount', function (parent) {
     queryParameter: 'lang',
     cookie: 'language',
     register: app,
-    staticCatalog
+    staticCatalog,
   })
 
   app.use(i18n.init)

@@ -8,10 +8,10 @@ const generatePrefix = (name, path) => {
   return path
 }
 
-module.exports = namespaces => {
+module.exports = (namespaces) => {
   return (req, res, next) => {
     for (let name in namespaces) {
-      namespaces[name].forEach(route => {
+      namespaces[name].forEach((route) => {
         let prefix = ''
         prefix = generatePrefix(
           name,
@@ -20,10 +20,10 @@ module.exports = namespaces => {
 
         const r = name !== 'root' ? `/${name}${route.route}` : route.route
 
-        req[`${prefix}Path`] = res.locals[`${prefix}Path`] = opts =>
+        req[`${prefix}Path`] = res.locals[`${prefix}Path`] = (opts) =>
           parseParameters(r, opts)
 
-        req[`${prefix}Url`] = res.locals[`${prefix}Url`] = opts =>
+        req[`${prefix}Url`] = res.locals[`${prefix}Url`] = (opts) =>
           `${req.protocol}://${req.headers.host}${parseParameters(r, opts)}`
 
         req[`${prefix}View`] = route.defaultView

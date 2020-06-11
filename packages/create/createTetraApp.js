@@ -16,7 +16,6 @@ const steps = new Steps(2)
 steps.startRecording()
 let oldStep = null
 
-
 if (!argv._.length) {
   console.log(colors.green('npm init @tetrajs [project-name]'))
   console.log()
@@ -38,15 +37,16 @@ async function main() {
   }
 
   oldStep = steps.advance('Create project').start()
-  await spawn(
-    'cp',
-    ['-r', path.join(__dirname, 'templates', 'default'), projectName],
-  )
+  await spawn('cp', [
+    '-r',
+    path.join(__dirname, 'templates', 'default'),
+    projectName,
+  ])
   await packageGenerator(projectName)
   oldStep.success('Create project', '✓')
 
   oldStep = steps.advance('Installing dependencies').start()
-    await install(projectName, ['@tetrajs/app', '@tetrajs/auth-ui'], { useYarn })
+  await install(projectName, ['@tetrajs/app', '@tetrajs/auth-ui'], { useYarn })
   oldStep.success('Dependencies installed', '✓')
 
   process.chdir(projectName)
@@ -61,7 +61,7 @@ async function main() {
   const nanoSecs = steps.stopRecording()
   console.log('')
   console.log(`  ${colors.green('success')} Success`)
-  console.log(`  ✨  Done in ${Math.round(nanoSecs / (1e9))}s.`)
+  console.log(`  ✨  Done in ${Math.round(nanoSecs / 1e9)}s.`)
 
   console.log()
   console.log('To get started, cd into the new directory:')
@@ -75,7 +75,6 @@ async function main() {
   console.log()
 }
 main()
-
 
 // if (!argv['skip-admin']) {
 //   pkgi('@tetrajs/admin')

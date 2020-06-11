@@ -63,7 +63,7 @@ module.exports = class Uploader {
       }
 
       await Promise.all(
-        versions.map(async version => {
+        versions.map(async (version) => {
           const filename = uuidv1()
           const dest = `${req.file.destination}${filename}`
           const data = await sharp(req.file.path)

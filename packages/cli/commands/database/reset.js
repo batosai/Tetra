@@ -8,6 +8,5 @@ module.exports = class Reset extends Command {
     return super.configure()
   }
 
-  async execute() {
-  }
+  async execute() {}
 }

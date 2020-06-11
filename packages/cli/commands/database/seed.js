@@ -8,6 +8,5 @@ module.exports = class Seed extends Command {
     return super.configure()
   }
 
-  async execute() {
-  }
+  async execute() {}
 }

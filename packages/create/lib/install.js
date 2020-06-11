@@ -35,7 +35,8 @@ module.exports = function install(
         dependencies && '--save',
         dependencies && '--save-exact',
         '--no-progress',
-        '--loglevel', 'error',
+        '--loglevel',
+        'error',
       ].concat(dependencies || [])
       //.concat(['&>', '/dev/null'])
     }

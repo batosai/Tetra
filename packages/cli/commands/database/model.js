@@ -8,6 +8,5 @@ module.exports = class Model extends Command {
     return super.configure()
   }
 
-  async execute() {
-  }
+  async execute() {}
 }

@@ -38,7 +38,7 @@ module.exports = class BaseController {
   middlewaresToArray(method) {
     let m = []
 
-    const add = middleware => {
+    const add = (middleware) => {
       if (middleware.action !== undefined) {
         m.push(middleware.action)
       }
@@ -48,7 +48,7 @@ module.exports = class BaseController {
       }
     }
 
-    this.middlewares.forEach(middleware => {
+    this.middlewares.forEach((middleware) => {
       if (middleware.except) {
         if (Array.isArray(middleware.except)) {
           if (!middleware.except.includes(method)) add(middleware)

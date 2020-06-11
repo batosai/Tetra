@@ -10,7 +10,7 @@ module.exports = (route, opt = {}, getCrud = []) => {
 
   if (opt.except) {
     if (!Array.isArray(opt.except)) opt.except = [opt.except]
-    actions = crud.filter(i => opt.except.indexOf(i) === -1)
+    actions = crud.filter((i) => opt.except.indexOf(i) === -1)
   } else if (opt.only) {
     if (!Array.isArray(opt.only)) opt.only = [opt.only]
     actions = opt.only

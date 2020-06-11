@@ -8,15 +8,16 @@ module.exports = function (dirname) {
 
   app.set('name', pkg.name)
 
-  app.set('views', [
-    path.join(dirname, 'views')
-  ])
+  app.set('views', [path.join(dirname, 'views')])
   app.set('view engine', 'pug')
 
-  app.use('/', router.configure({
-    routes: require(`${dirname}/config/routes`),
-    controllers: require(`${dirname}/controllers`)
-  }))
+  app.use(
+    '/',
+    router.configure({
+      routes: require(`${dirname}/config/routes`),
+      controllers: require(`${dirname}/controllers`),
+    }),
+  )
 
   return app
 }

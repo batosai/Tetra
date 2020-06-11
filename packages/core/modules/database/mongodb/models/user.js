@@ -10,7 +10,7 @@ const schema = new Schema({
   password: { type: String, required: true },
 })
 
-schema.post('save', function(error, doc, next) {
+schema.post('save', function (error, doc, next) {
   if (error.name === 'MongoError' && error.code === 11000) {
     next(new Error('Username must be unique'))
   } else {
@@ -18,7 +18,7 @@ schema.post('save', function(error, doc, next) {
   }
 })
 
-schema.pre('save', function(next) {
+schema.pre('save', function (next) {
   const user = this
 
   if (!user.isModified('password')) return next()
@@ -33,7 +33,7 @@ schema.pre('save', function(next) {
   })
 })
 
-schema.methods.comparePassword = function(candidatePassword, callback) {
+schema.methods.comparePassword = function (candidatePassword, callback) {
   bcrypt.compare(candidatePassword, this.password, (err, isMatch) => {
     if (err) return callback(err)
     callback(null, isMatch)

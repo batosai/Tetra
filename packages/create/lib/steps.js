@@ -11,17 +11,17 @@ const colors = require('colors')
  * @class SpinnerWithoutSpinner
  */
 class SpinnerWithoutSpinner extends Spinner {
-  constructor (text) {
+  constructor(text) {
     super({
       text,
       onTick: function (message) {
         this.clearLine(this.stream)
         this.stream.write(message.trim())
-      }
+      },
     })
   }
 
-  setSpinnerString () {
+  setSpinnerString() {
     super.setSpinnerString(' ')
   }
 }
@@ -42,13 +42,15 @@ class SpinnerWithoutSpinner extends Spinner {
  * @param {String} [helpLabel]
  */
 class Step {
-  constructor (position, total, initalText, useSpinner, emojiName, helpLabel) {
+  constructor(position, total, initalText, useSpinner, emojiName, helpLabel) {
     this.position = position
     this.total = total
     this.initalText = initalText
     this.emojiName = emojiName
     this.helpLabel = helpLabel
-    this.spinner = useSpinner ? new Spinner(this._makeMessage()) : new SpinnerWithoutSpinner(this._makeMessage())
+    this.spinner = useSpinner
+      ? new Spinner(this._makeMessage())
+      : new SpinnerWithoutSpinner(this._makeMessage())
     this.setSpinner(18)
   }
 
@@ -62,7 +64,7 @@ class Step {
    *
    * @private
    */
-  _makeMessage () {
+  _makeMessage() {
     const step = colors.dim(`[${this.position}/${this.total}]`)
     const emoji = this.emojiName || ' '
     const message = ` ${this.initalText}`
@@ -83,7 +85,7 @@ class Step {
    *
    * @private
    */
-  _print (message) {
+  _print(message) {
     if (this.spinner.isSpinning()) {
       this.spinner.setSpinnerTitle(this._makeMessage())
     } else if (this.spinner instanceof SpinnerWithoutSpinner) {
@@ -105,7 +107,7 @@ class Step {
    *
    * @chainable
    */
-  setSpinner (value) {
+  setSpinner(value) {
     this.spinner.setSpinnerString(value)
     return this
   }
@@ -118,7 +120,7 @@ class Step {
    *
    * @chainable
    */
-  start () {
+  start() {
     this.spinner.start()
     return this
   }
@@ -132,7 +134,7 @@ class Step {
    *
    * @chainable
    */
-  update (message) {
+  update(message) {
     this.initalText = message
     this._print(this._makeMessage())
     return this
@@ -145,7 +147,7 @@ class Step {
    *
    * @return {void}
    */
-  stop () {
+  stop() {
     this.spinner.stop(true)
     this._print(this._makeMessage())
   }
@@ -160,7 +162,7 @@ class Step {
    *
    * @return {void}
    */
-  success (message, emojiName) {
+  success(message, emojiName) {
     /**
      * Update text if new text if passed
      */
@@ -187,7 +189,7 @@ class Step {
    *
    * @return {void}
    */
-  error (message, emojiName) {
+  error(message, emojiName) {
     /**
      * Update text if new text if passed
      */
@@ -214,7 +216,7 @@ class Step {
  * @param {Number} total
  */
 class StepsJar {
-  constructor (total, disableSpinner) {
+  constructor(total, disableSpinner) {
     if (!total || isNaN(Number(total))) {
       throw new Error('Define total number of steps as an integer')
     }
@@ -232,7 +234,7 @@ class StepsJar {
      */
     this.tracker = {
       start: null,
-      stop: null
+      stop: null,
     }
 
     /**
@@ -248,7 +250,7 @@ class StepsJar {
    *
    * @chainable
    */
-  startRecording () {
+  startRecording() {
     this.tracker.start = process.hrtime()
     return this
   }
@@ -260,7 +262,7 @@ class StepsJar {
    *
    * @return {Number}   Time in nanoseconds
    */
-  stopRecording () {
+  stopRecording() {
     if (!this.tracker.start) {
       throw new Error('Make sure to call startRecording before endTracking')
     }
@@ -281,7 +283,7 @@ class StepsJar {
    *
    * @return {Step}
    */
-  advance (message, emojiName, helpLabel) {
+  advance(message, emojiName, helpLabel) {
     this.currentStep++
     if (this.globalSpinner && !this.globalSpinner.isSpinning()) {
       console.log('')
@@ -289,7 +291,14 @@ class StepsJar {
       this.globalSpinner.start()
     }
 
-    return new Step(this.currentStep, this.total, message, !this.disableSpinner, emojiName, helpLabel)
+    return new Step(
+      this.currentStep,
+      this.total,
+      message,
+      !this.disableSpinner,
+      emojiName,
+      helpLabel,
+    )
   }
 }
 
