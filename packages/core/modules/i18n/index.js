@@ -7,13 +7,9 @@ const app = express()
 const info = path.parse(__dirname)
 app.set('name', info.name)
 
-app.on('mount', function (parent) {
-  // const directory = path.join(parent.get('appPath'), 'var/i18n')
-
-  const pkg = require(`${parent.get('appPath')}/package.json`)
-  const pkgTetra = Object.keys(pkg.dependencies).filter(
-    (module) => module !== '@tetrajs/app' && module.includes('@tetrajs/'),
-  )
+app.on('mount', async function (parent) {
+  const { services } = require('../../')
+  const pkgTetra = await services.ModulesService.get()
 
   let staticCatalog = {
     fr: {},
@@ -33,7 +29,6 @@ app.on('mount', function (parent) {
   i18n.configure({
     locales: ['fr', 'en'],
     defaultLocale: 'en',
-    // directory,
     objectNotation: true,
     updateFiles: false,
     syncFiles: false,

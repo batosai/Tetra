@@ -11,6 +11,10 @@ module.exports = (name) => {
       start: 'tetra start',
       clear: 'tetra cache:clear',
     },
+    tetra: {
+      name,
+      namespace: '/',
+    },
   }
   return new Promise((resolve) => {
     setTimeout(() => {

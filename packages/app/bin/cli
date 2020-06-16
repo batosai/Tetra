@@ -2,7 +2,7 @@
 
 const args = process.argv.slice(2)
 
-if (args[0] === 'serve' || args[0] === 's') {
+if (args[args.length - 1] === 'serve' || args[args.length - 1] === 's') {
   const { dotenv } = require('@tetrajs/core')
   dotenv.config()
 
@@ -25,7 +25,9 @@ function serveDev() {
     script: path.join(__dirname, './serve'),
     ext: 'js json pug css scss less styl',
     ignore: ['public/*', 'var/*'],
-    stdout: true
+    stdout: true,
+    scriptPosition: 1,
+    args
   })
 
   nodemon.on('start', function () {

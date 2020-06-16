@@ -6,7 +6,14 @@ const logger = require('morgan')
 const compression = require('compression')
 const helmet = require('helmet')
 // const favicon = require('serve-favicon')
-const { express, database, session, auth, i18n } = require('@tetrajs/core')
+const {
+  express,
+  database,
+  session,
+  auth,
+  i18n,
+  services,
+} = require('@tetrajs/core')
 const { webpack } = require('@tetrajs/webpack')
 
 const appPath = process.cwd()
@@ -48,14 +55,16 @@ app.use(helmet())
 app.use(auth.passport.initialize())
 app.use(auth.passport.session())
 
-// Load tetra modules
-app.use(i18n)
+// Load modules
+;(async () => {
+  const mds = await services.ModulesService.get()
 
-// Load modules installed
-const modules = require(`${appPath}`)
-for (const key in modules) {
-  app.use(key, modules[key])
-}
+  app.use(i18n)
+
+  for (const key in mds) {
+    app.use(key, require(mds[key]))
+  }
+})()
 
 // Link modules installed
 const pkg = require(`${appPath}/package.json`)
