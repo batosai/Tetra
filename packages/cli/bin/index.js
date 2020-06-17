@@ -21,30 +21,36 @@ let cmds = [
 ]
 
 // Load commands modules installed
-const apppkg = require(`${process.cwd()}/package.json`)
+const { services } = require('@tetrajs/core')
 
-for (let i in apppkg.dependencies) {
-  try {
-    const commands = require(`${apppkg.dependencies[i]}/commands`)
-    for (let key in commands) {
-      if (commands.hasOwnProperty(key)) {
-        cmds.push(commands[key])
+
+;(async () => {
+  const mds = await services.ModulesService.get()
+
+  for (const key in mds) {
+    try {
+      const commands = require(`${mds[key]}/app/commands`)
+      for (let key in commands) {
+        if (commands.hasOwnProperty(key)) {
+          cmds.push(commands[key])
+        }
       }
-    }
-  } catch (e) {}
-}
+    } catch (e) {}
+  }
 
-//
-program.configure()
-cmds.map((klass) => {
-  const cmd = new klass()
-  program.addCommand(cmd.configure())
-})
+  //
+  program.configure()
+  cmds.map((klass) => {
+    const cmd = new klass()
+    program.addCommand(cmd.configure())
+  })
 
-if (!argv._.length) {
-  program.render()
-} else {
-  const modules = argv._
-  delete argv._
-  program.execute(modules, argv)
-}
+  if (!argv._.length) {
+    program.render()
+  } else {
+    const modules = argv._
+    delete argv._
+    program.execute(modules, argv)
+  }
+
+})()
