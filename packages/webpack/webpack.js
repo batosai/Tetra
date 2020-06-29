@@ -19,6 +19,7 @@ module.exports.run = function (configs) {
         chunks: true,
         colors: false,
       }),
+      err => {}
     )
   })
 }
