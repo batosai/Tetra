@@ -1,15 +1,19 @@
 const { cache } = require('../')
 
 module.exports = class ModulesService {
+  static get cacheName() {
+    return 'modules'
+  }
+
   static async get() {
-    if (await cache.exist('modules')) {
-      return await cache.get('modules', JSON.parse)
+    if (await cache.exist(ModulesService.cacheName)) {
+      return await cache.get(ModulesService.cacheName, JSON.parse)
     } else {
-      return ModulesService.create()
+      return ModulesService.caching()
     }
   }
 
-  static async create() {
+  static async caching() {
     const appPath = process.cwd()
     const pkg = require(`${appPath}/package.json`)
 
@@ -24,8 +28,8 @@ module.exports = class ModulesService {
     }
 
     const tetra = require(`${appPath}/package.json`).tetra
-    modules[tetra.namespace] = `${appPath}/app`
-    cache.set('modules', JSON.stringify(modules))
+    modules[tetra.namespace] = appPath
+    cache.set(ModulesService.cacheName, JSON.stringify(modules))
 
     return modules
   }
