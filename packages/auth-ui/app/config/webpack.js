@@ -1,5 +1,8 @@
 const path = require('path')
+const { generator } = require('@tetrajs/webpack')
 
-module.exports = require('@tetrajs/core/ui/config/webpack')(
-  path.resolve(__dirname, '../../dist'),
-)
+const entry = path.join(__dirname, '../../app/assets/javascripts/index.js')
+
+generator.addEntry('auth-ui', entry)
+
+module.exports = generator.getWebpackConfig()

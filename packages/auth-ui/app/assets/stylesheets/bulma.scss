@@ -2,7 +2,7 @@
 
 /* Customization */
 
-@import "../../../node_modules/bulma/sass/utilities/initial-variables";
+@import "~bulma/sass/utilities/initial-variables";
 
 $body-background-color: $white-bis;
 $footer-background-color: $white-ter;
@@ -24,4 +24,4 @@ $primary: $cyan !default
   padding-bottom: 10px;
 }
 
-@import "../../../node_modules/bulma/bulma";
+@import "~bulma/bulma";
