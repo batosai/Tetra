@@ -14,7 +14,7 @@ const {
   i18n,
   services,
 } = require('@tetrajs/core')
-const { ModulesService } = services
+const { ModulesService, MiddlewaresService } = services
 const { webpack, WebpacksService } = require('@tetrajs/webpack')
 
 const appPath = process.cwd()
@@ -49,7 +49,7 @@ app.use(
   }),
 )
 
-app.use(express.static(path.join(__dirname, 'public')))
+app.use(express.static(path.join(appPath, 'public')))
 app.use(compression())
 app.use(helmet())
 
@@ -59,11 +59,16 @@ app.use(auth.passport.session())
 // Load modules
 ;(async () => {
   const mds = await ModulesService.get()
+  const mws = await MiddlewaresService.get()
 
   app.use(i18n)
 
-  for (const key in mds) {
-    app.use(key, require(mds[key]))
+  for (const key in mws) {
+    app.use(require(mws[key]))
+  }
+
+  for (const k in mds) {
+    app.use(k, require(mds[k]))
   }
 })()
 
