@@ -1,8 +1,12 @@
 const path = require('path')
-const { generator } = require('@tetrajs/webpack')
+const { Generator } = require('@tetrajs/webpack')
 
 const entry = path.join(__dirname, '../../app/assets/javascripts/index.js')
 
-generator.addEntry('app', entry)
+const generator = new Generator()
+generator.addEntry(
+  path.basename(path.join(__dirname, '../../')),
+  entry
+)
 
 module.exports = generator.getWebpackConfig()

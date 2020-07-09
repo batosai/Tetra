@@ -1,23 +1,37 @@
 const path = require('path')
-const express = require('@tetrajs/core').express
+const { express, services } = require('@tetrajs/core')
 const router = require('@tetrajs/router').router
+
+const { webpack } = require('@tetrajs/webpack')
+const { MiddlewaresService } = services
 
 module.exports = function (dirname) {
   const app = express()
-  const pkg = require(`${dirname}/../package.json`)
+  const name = path.basename(path.join(dirname, '../'))
 
-  app.set('name', pkg.name)
+  app.set('name', name)
 
   app.set('views', [path.join(dirname, 'views')])
   app.set('view engine', 'pug')
 
-  app.use(
-    '/',
-    router.configure({
-      routes: require(`${dirname}/config/routes`),
-      controllers: require(`${dirname}/controllers`),
-    }),
-  )
+  // Load modules and Middlewares
+  ;(async () => {
+    const mws = await MiddlewaresService.get()
+
+    for (const key in mws) {
+      app.use(require(mws[key]))
+    }
+
+    app.use(
+      '/',
+      router.configure({
+        routes: require(`${dirname}/config/routes`),
+        controllers: require(`${dirname}/controllers`),
+      }),
+    )
+  })()
+
+  webpack.run(require(path.join(dirname, 'config/webpack')))
 
   return app
 }

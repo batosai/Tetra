@@ -1,18 +1,14 @@
-module.exports = function(req, res, next) {
+const { WebpacksService } = require('../services')
+
+module.exports = async (req, res, next) => {
   const base = 'build'
+  const entrypoints = await WebpacksService.get()
 
-  const app = {}
-
-  try {
-    app.manifest = require(`${process.cwd()}/public/${base}/manifest.json`)
-    console.log('TODO multiple passage')
-  } catch (ex) {
-    app.manifest = []
-  }
+  const name = req.app.get('name')
 
   res.locals.assets = function(file) {
-    if (app.manifest[file] !== undefined) {
-      return `/${base}/${app.manifest[file]}`
+    if (entrypoints[name][file] !== undefined) {
+      return `/${base}/${name}/${entrypoints[name][file]}`
     }
     return `/${file}`
   }

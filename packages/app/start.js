@@ -15,7 +15,7 @@ const {
   services,
 } = require('@tetrajs/core')
 const { ModulesService, MiddlewaresService } = services
-const { webpack, WebpacksService } = require('@tetrajs/webpack')
+// const { webpack, WebpacksService } = require('@tetrajs/webpack')
 
 const appPath = process.cwd()
 
@@ -56,7 +56,7 @@ app.use(helmet())
 app.use(auth.passport.initialize())
 app.use(auth.passport.session())
 
-// Load modules
+// Load modules and Middlewares
 ;(async () => {
   const mds = await ModulesService.get()
   const mws = await MiddlewaresService.get()
@@ -80,14 +80,15 @@ const pkgTetra = Object.keys(pkg.dependencies).filter(
 spawn('npx', ['tetra', 'link', ...pkgTetra])
 
 // run webpack
-;(async () => {
-  const files = await WebpacksService.get()
-  const configs = []
+// ;(async () => {
+//   const files = await WebpacksService.get()
+//   const configs = []
 
-  for (const file of files) {
-    configs.push(require(file))
-  }
-  webpack.run(configs)
-})()
+//   for (const file of files) {
+//     configs.push(require(file))
+//   }
+
+//   webpack.run(configs)
+// })()
 
 module.exports = app
