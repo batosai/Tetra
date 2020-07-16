@@ -25,7 +25,7 @@ module.exports = class MiddlewaresService {
     let middlewares = []
 
     for (const key in modules) {
-      const results = await globSync(`${modules[key]}/middlewares/**/*.js`, {ignore: 'index.js'})
+      const results = await globSync(`${modules[key]}/middlewares/**/*.js`, {ignore: '/**/index.js'})
       middlewares = [...middlewares, ...results]
     }
     cache.set(MiddlewaresService.cacheName, JSON.stringify(middlewares))

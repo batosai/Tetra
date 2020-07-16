@@ -10,6 +10,7 @@ const {
   express,
   database,
   session,
+  sessionFileStore,
   auth,
   i18n,
   services,
@@ -19,7 +20,6 @@ const { ModulesService, MiddlewaresService } = services
 
 const appPath = process.cwd()
 
-const MongoStore = database.mongodb.connectMongo(session)
 const app = express()
 app.set('appPath', appPath)
 
@@ -35,9 +35,16 @@ app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser())
 
 let store
-if (process.env.DATABASE_TYPE === database.MONGO_DB) {
+if (process.env.DATABASE_TYPE === database.MONGO_DB && process.env.SESSION_TYPE === 'database') {
+  const MongoStore = database.mongodb.connectMongo(session)
   database.mongodb.connection()
   store = new MongoStore({ mongooseConnection: database.mongoose.connection })
+}
+else {
+  const FileStore = sessionFileStore(session)
+  store = new FileStore({
+    path: path.join(appPath, 'var/sessions')
+  })
 }
 
 app.use(

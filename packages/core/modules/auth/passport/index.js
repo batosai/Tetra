@@ -1,7 +1,7 @@
 const passport = require('passport')
 const localStrategy = require('passport-local').Strategy
 
-// const { User } = require('@tetra/core').models
+const { User } = require('../../database').models
 
 passport.use(
   new localStrategy(
@@ -10,29 +10,23 @@ passport.use(
       passwordField: 'password',
       passReqToCallback: true,
     },
-    (req, username, password, done) => {
-      // User.findOne({ username }, (err, user) => {
-      //   if (err) throw err
+    async (req, username, password, done) => {
+      const user = await User.findOne({ username })
 
-      //   if (!user) {
-      //     return done(null, false, {
-      //       message: 'Missing username or password.',
-      //     })
-      //   }
+      if (!user) {
+        return done(null, false, {
+          message: 'Missing username or password.',
+        })
+      }
 
-      //   user.comparePassword(password, (err, isMatch) => {
-      //     if (err) throw err
-      //     if (isMatch) {
-      //       return done(null, user)
-      //     }
-      //     return done(null, false, {
-      //       message: 'Missing username or password.',
-      //     })
-      //   })
-      // })
-
-      return done(null, false, {
-        message: 'Missing username or password.',
+      user.comparePassword(password, (err, isMatch) => {
+        if (err) throw err
+        if (isMatch) {
+          return done(null, user)
+        }
+        return done(null, false, {
+          message: 'Missing username or password.',
+        })
       })
     },
   ),

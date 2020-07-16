@@ -7,10 +7,13 @@ module.exports = async (req, res, next) => {
   const name = req.app.get('name')
 
   res.locals.assets = function(file) {
-    if (entrypoints[name][file] !== undefined) {
+    if (
+      typeof entrypoints[name] !== 'undefined' &&
+      typeof entrypoints[name][file] !== 'undefined'
+    ) {
       return `/${base}/${name}/${entrypoints[name][file]}`
     }
-    return `/${file}`
+    return null
   }
 
   next()

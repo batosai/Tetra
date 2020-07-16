@@ -29,7 +29,7 @@ module.exports = class SignInController extends BaseController {
     } else {
       return res.render(req.usersIndexSignInView, {
         title: 'Login',
-        // messages: req.flash('error'),
+        messages: req.flash('error'),
       })
     }
   }

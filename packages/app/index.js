@@ -5,33 +5,47 @@ const router = require('@tetrajs/router').router
 const { webpack } = require('@tetrajs/webpack')
 const { MiddlewaresService } = services
 
-module.exports = function (dirname) {
-  const app = express()
-  const name = path.basename(path.join(dirname, '../'))
+module.exports = class App {
+  constructor(dirname) {
+    this.app = express()
+    this.dirname = dirname
+    this.name = path.basename(path.join(this.dirname, '../'))
 
-  app.set('name', name)
+    this.app.set('name', this.name)
 
-  app.set('views', [path.join(dirname, 'views')])
-  app.set('view engine', 'pug')
+    this.app.set('views', [path.join(this.dirname, 'views')])
+    this.app.set('view engine', 'pug')
 
-  // Load modules and Middlewares
-  ;(async () => {
-    const mws = await MiddlewaresService.get()
+    this.execute()
+  }
 
-    for (const key in mws) {
-      app.use(require(mws[key]))
-    }
+  execute() {
+    webpack.run(require(path.join(this.dirname, 'config/webpack')))
+  }
 
-    app.use(
-      '/',
-      router.configure({
-        routes: require(`${dirname}/config/routes`),
-        controllers: require(`${dirname}/controllers`),
-      }),
-    )
-  })()
+  use(middleware) {
+    this.app.use(middleware)
+  }
 
-  webpack.run(require(path.join(dirname, 'config/webpack')))
+  export() {
+    ;(async () => {
+      // Load Middlewares
+      const mws = await MiddlewaresService.get()
 
-  return app
+      for (const key in mws) {
+        this.app.use(require(mws[key]))
+      }
+
+      // Load Controllers
+      this.app.use(
+        '/',
+        router.configure({
+          routes: require(`${this.dirname}/config/routes`),
+          controllers: require(`${this.dirname}/controllers`),
+        }),
+      )
+    })()
+
+    return this.app
+  }
 }

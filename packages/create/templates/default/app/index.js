@@ -1,4 +1,3 @@
-const tetra = require('@tetrajs/app')
-const app = tetra(__dirname)
-
-module.exports = app
+const TetraApp = require('@tetrajs/app')
+const app = new TetraApp(__dirname)
+module.exports = app.export()

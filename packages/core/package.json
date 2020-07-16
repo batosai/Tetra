@@ -1,6 +1,6 @@
 {
   "name": "@tetrajs/core",
-  "version": "0.0.20",
+  "version": "0.0.22",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -32,6 +32,7 @@
     "passport-local": "^1.0.0",
     "pug": "^2.0.4",
     "rimraf": "^3.0.2",
+    "session-file-store": "^1.4.0",
     "sharp": "^0.25.3",
     "slugify": "^1.4.0",
     "uuid": "^8.1.0"
