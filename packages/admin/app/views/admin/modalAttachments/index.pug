@@ -1,0 +1,21 @@
+block content
+  include /components/form.pug
+  include /components/pagination.pug
+  include /components/modal.pug
+  include ../shared/helpers/visual.pug
+
+  +modal()(id="addFormat", class="is-active")
+    +modalHeader(__('admin.modals.attachment.title'))
+    +modalContent()
+      .columns.is-fullheight
+        .column.is-one-quarter-widescreen.has-background-light.hide
+          div(data-target="imagepicker.informations")
+
+        .column(style="overflow-y: auto;")
+          .columns.is-multiline
+            each attachment, index in paginate.docs
+              .column.is-6-tablet.is-4-desktop.is-3-widescreen(data-target="imagepicker.image", data-action="click->imagepicker#select", data-url=adminInformationModalAttachmentsPath({ id: attachment.id, type: query.type, page: paginate.page }))
+                figure.image.border.is-2by1
+                  +visual(attachment, { alt: mimeTypes(attachment.mimetype) })
+    +modalFooter()
+      +pagination(paginate, query)

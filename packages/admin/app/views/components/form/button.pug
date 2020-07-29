@@ -1,0 +1,10 @@
+mixin button(label, isEmbed=true)
+  if isEmbed
+    .field
+      p.control
+        button.button.is-rounded&attributes(attributes)= label
+  else
+    button.button.is-rounded&attributes(attributes)= label
+    
+mixin __button(label, isEmbed=true)
+  +button(__(label), isEmbed)&attributes(attributes)

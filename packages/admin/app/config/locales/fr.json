@@ -1,0 +1,132 @@
+{
+  "Missing credentials": "Références manquantes",
+  "draft": "Brouillon",
+  "trashed": "Corbeille",
+  "published": "Publié",
+  "Invalid File": "Fichier invalide",
+  "admin": {
+    "dashboard": {
+      "title": "Tableau de bord"
+    },
+    "settings": {
+      "title": "Préférences Système",
+      "general": "Général",
+      "smtp": "SMTP",
+      "media": "Media"
+    },
+    "shared": {
+      "language": "Language",
+      "defaultLanguage": "Language par défaut",
+      "lang": {
+        "french": "Français",
+        "english": "Anglais"
+      },
+      "save": "Enregistrer",
+      "previous": "Page précédent",
+      "next": "Page suivante",
+      "confirm": {
+        "delete": "Confirmer la suppression ?",
+        "draft": "Mettre à la corbeille ?"
+      },
+      "dropzone": {
+        "dictDefaultMessage": "Déposer des fichiers ici pour télécharger",
+        "dictFallbackMessage": "Votre navigateur ne supporte pas les téléchargements de fichiers par glisser-déposer.",
+        "dictFallbackText": "Veuillez utiliser le formulaire de secours ci-dessous pour télécharger vos fichiers comme auparavant.",
+        "dictFileTooBig": "Le fichier est trop volumineux ({{filesize}}Mo). Taille maximale du fichier: {{maxFilesize}}Mo.",
+        "dictInvalidFileType": "Vous ne pouvez pas télécharger de fichiers de ce type.",
+        "dictResponseError": "Le serveur à répondu un code {{statusCode}}.",
+        "dictCancelUpload": "Annuler le téléchargement",
+        "dictUploadCanceled": "Téléchargement annulé.",
+        "dictCancelUploadConfirmation": "Êtes-vous sûr de vouloir annuler ce téléchargement ?",
+        "dictRemoveFile": "Effacer le fichier",
+        "dictMaxFilesExceeded": "Vous ne pouvez plus télécharger de fichiers."
+      }
+    },
+    "site": {
+      "title": "Titre",
+      "slogan": "Slogan",
+      "url": "Url",
+      "host": "Host",
+      "port": "Port",
+      "tls": "TLS",
+      "username": "Nom d'utilisateur",
+      "password": "Mot de passe",
+      "media": {
+        "thumbnail": "Thumbnail",
+        "medium": "Medium",
+        "large": "Large"
+      }
+    },
+    "pages": {
+      "title": "Pages",
+      "filter": {
+        "title": "Filtre",
+        "all": "Tous",
+        "submit": "Ok",
+        "search": "Recherche"
+      },
+      "table": {
+        "all": "Tous",
+        "title": "Titre",
+        "status": "Status",
+        "date": "Date",
+        "actions": "Actions",
+        "add": "Ajouter",
+        "delete": "Supprimer"
+      },
+      "buttons": {
+        "trash": "Voir la corbeille",
+        "emptyTrash": "Vider la corbeille"
+      }
+    },
+    "page": {
+      "pages": "Pages",
+      "new": "Nouvelle page",
+      "fields": {
+        "title": "Titre",
+        "slug": "Slug",
+        "image": "Choisir une image",
+        "content": "Contenu de la page",
+        "template": "Sélèctionner votre template",
+        "tags": "Ajouter un tag",
+        "order": "Ordre",
+        "published": "Publié au",
+        "unpublished": "Dépublié au"
+      },
+      "actions": {
+        "view": "Voir",
+        "choose": "Choisir une image",
+        "preview": "Prévisualiser",
+        "save": "Enregistrer"
+      }
+    },
+    "attachments": {
+      "title": "Média",
+      "actions": {
+        "refresh": "Rafraîchir la page",
+        "delete": "Supprimer"
+      }
+    },
+    "modals": {
+      "attachment": {
+        "title": "Sélectionner une image",
+        "actions": {
+          "upload": "Ajouter",
+          "view": "Voir",
+          "select": "Sélectionner"
+        },
+        "fields": {
+          "name": "Nom",
+          "size": "Dimension",
+          "weight": "Poids"
+        }
+      },
+      "upload": {
+        "title": "Sélectionner une image",
+        "actions": {
+          "attachment": "Image"
+        }
+      }
+    }
+  }
+}

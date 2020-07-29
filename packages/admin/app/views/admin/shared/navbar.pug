@@ -1,0 +1,37 @@
+include /components/navbar/notification.pug
+
+nav.navbar.is-warning.is-fixed-top
+  .navbar-brand
+    .navbar-item.is-paddingless
+      a.navbar-burger(role="button" aria-label="menu" aria-expanded="false" data-target="sideMenu")
+        span(aria-hidden="true")
+        span(aria-hidden="true")
+        span(aria-hidden="true")
+    a.navbar-item.is-size-4(href="/")
+      span.icon.is-medium
+        i.fa.fa-anchor.has-text-primary.is-size-6(data-fa-transform="rotate-45")
+      | Tetra
+  #navMenu.navbar-menu
+    .navbar-start
+      //- include megamenu.pug
+
+    .navbar-end
+      .navbar-item.is-hoverable
+        span.badge.is-badge-success.is-badge-small(data-badge="10")
+          span.icon
+            i.fa.fa-lg.fa-bell
+        .navbar-dropdown.is-boxed.is-right(style="width: 250px")
+          +notification('You can insert any type of content within the dropdown menu.')
+          +notification('You can insert any type of content within the dropdown menu.')
+          a.dropdown-item(href='#')
+            | View all
+      .navbar-item.is-hoverable
+        span.icon
+          i.fa.fa-lg.fa-user
+        .navbar-dropdown.is-boxed.is-right
+          //- a.navbar-item(href="/documentation/overview/start/")
+          //-   | My account
+          //- hr.navbar-divider
+          a.navbar-item(href="/users/sign_out")
+            | Logout
+      .navbar-item

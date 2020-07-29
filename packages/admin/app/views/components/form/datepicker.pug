@@ -1,0 +1,9 @@
+mixin datepicker(label, required=false)
+  .field
+    .control
+      - var l = label + (required ? ' *' : '');
+      label(for=attributes.id)= l
+      input.input(type="date")&attributes(attributes)
+
+mixin __datepicker(label, required=false)
+  +datepicker(__(label), required)&attributes(attributes)

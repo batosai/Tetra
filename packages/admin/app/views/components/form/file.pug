@@ -1,0 +1,13 @@
+mixin file(fileName, label='Choose a image', required=false)
+  .file.has-name.is-right.is-fullwidth
+    - var l = label + (required ? ' *' : '');
+    label.file-label
+      input.file-input(type='file')&attributes(attributes)
+      span.file-cta
+        span.file-icon
+          i.fas.fa-upload
+        span.file-label= l
+      span.file-name= fileName
+
+mixin __file(fileName, label='Choose a image', required=false)
+  +file(fileName, __(label), required)&attributes(attributes)

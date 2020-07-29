@@ -1,0 +1,14 @@
+.container-wysiwyg {
+  padding: 50px 0 0 0;
+}
+
+.ql-toolbar {
+  border-radius: $input-radius $input-radius 0 0;
+  border-color: $input-border-color !important;
+}
+
+.ql-container {
+  border-radius: 0 0 $input-radius $input-radius;
+  border-color: $input-border-color !important;
+  background: $input-background-color;
+}

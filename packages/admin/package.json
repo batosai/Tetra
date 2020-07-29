@@ -1,0 +1,35 @@
+{
+  "name": "@tetra/admin",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tetrajs/tetra",
+    "directory": "packages/admin"
+  },
+  "engines": {
+    "node": ">=8.16.0"
+  },
+  "dependencies": {
+    "@tetrajs/app": "~0.0.1",
+    "@tetrajs/core": "~0.0.1",
+    "@tetrajs/router": "~0.0.1",
+    "@tetrajs/webpack": "~0.0.1",
+    "bulma": "^0.9.0",
+    "bulma-calendar": "^6.0.9",
+    "bulma-extensions": "^6.2.7",
+    "dropzone": "^5.7.2",
+    "papaparse": "^5.2.0",
+    "pretty-bytes": "^5.3.0",
+    "quill": "^2.0.0-dev.3",
+    "stimulus": "^1.1.1"
+  },
+  "tetra": {
+    "name": "admin",
+    "namespace": "/admin"
+  },
+  "license": "MIT"
+}

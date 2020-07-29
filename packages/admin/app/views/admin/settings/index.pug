@@ -1,0 +1,97 @@
+extends ../layout
+
+block content
+  include /components/breadcrumb.pug
+  include /components/card.pug
+  include /components/form.pug
+  include /components/modal.pug
+  include /components/message.pug
+
+  +breadcrumb
+      li.is-active
+        a(href="#" aria-current="page")= __('admin.settings.title')
+        
+  if Object.keys(errors).length !== 0
+    +message()(class='is-danger')
+      each error in errors
+        .error #{__(error.message)}
+        
+  +form()(action=adminUpdateSettingsPath(site.id) method="PUT")
+    +__card('admin.shared.language')
+      +cardContent
+        +__select('admin.shared.defaultLanguage', errors.language, !REQUIRED)(name="site[language]")
+          option(value="fr" selected=site.language === 'fr' ? true : false)= __('admin.shared.lang.french')
+          option(value="en" selected=site.language === 'en' ? true : false)= __('admin.shared.lang.english')
+      +cardFooter
+        +__button('admin.shared.save', !EMBED)(class="is-fullwidth is-primary")
+  
+  hr
+  
+  +form()(action=adminUpdateSettingsPath(site.id) method="PUT")
+    +__card('admin.settings.general')
+      +cardContent
+        +__text('admin.site.title', errors.title, !REQUIRED)(id="title" name="site[title]" value=site.title)
+        +__text('admin.site.slogan')(id="slogan" name="site[slogan]" value=site.slogan)
+        +__text('admin.site.url', errors.url, !REQUIRED)(id="url" name="site[url]" value=site.url)
+      +cardFooter
+        +__button('admin.shared.save', !EMBED)(class="is-fullwidth is-primary")
+
+  hr
+
+  +form()(action=adminUpdateSettingsPath(site.id) method="PUT")
+    +__card('admin.settings.smtp')
+      +cardContent
+        +__text('admin.site.host')(id="host" name="site[smtp][host]" value=site.smtp.host)
+        +__text('admin.site.port')(id="port" name="site[smtp][port]" value=site.smtp.port)
+        +__checkbox('admin.site.tls', 'left')(checked="true" id="tls" name="site[smtp][tls]" value=site.smtp.tls)
+        +__text('admin.site.username')(id="username" name="site[smtp][username]" value=site.smtp.username)
+        +__text('admin.site.password')(id="password" name="site[smtp][password]" value=site.smtp.password)
+      +cardFooter
+        +__button('admin.shared.save', !EMBED)(class="is-fullwidth is-primary")
+              
+  hr
+  
+  +form()(action=adminUpdateSettingsPath(site.id) method="PUT")
+    +__card('admin.settings.media')
+      +cardContent
+        .field.is-horizontal
+          .field-label
+            label(for="thumbnailWidth")= __('admin.site.media.thumbnail')
+          .field-body
+            .columns
+              .column
+                input#thumbnailWidth.input(type="number" name="site[media][thumbnail][width]" placeholder="width" value=site.media.thumbnail.width)
+              .column
+                input#thumbnailHeight.input(type="number" name="site[media][thumbnail][height]" placeholder="height" value=site.media.thumbnail.height)
+        .field.is-horizontal
+          .field-label
+            label(for="mediumWidth")= __('admin.site.media.medium')
+          .field-body
+            .columns
+              .column
+                input#mediumWidth.input(type="number" name="site[media][medium][width]" placeholder="width" value=site.media.medium.width)
+              .column
+                input#mediumHeight.input(type="number" name="site[media][medium][height]" placeholder="height" value=site.media.medium.height)
+        .field.is-horizontal
+          .field-label
+            label(for="largeWidth")= __('admin.site.media.large')
+          .field-body
+            .columns
+              .column
+                input#largeWidth.input(type="number" name="site[media][large][width]" placeholder="width" value=site.media.large.width)
+              .column
+                input#largeHeight.input(type="number" name="site[media][large][height]" placeholder="height" value=site.media.large.height)
+        //- .field.is-horizontal
+        //-   .field-label
+        //-   .field-body
+        //-     +button('Add format', !EMBED)(data-modal="addFormat" type="button" class="js-has-modal is-primary")
+      +cardFooter
+        +__button('admin.shared.save', !EMBED)(class="is-fullwidth is-primary")
+
+  //- +modal('Modal title')(id='addFormat')
+  //-   +form
+  //-     +modalContent()
+  //-       +text('Name')(id="mediaFormatName" name="media.format.name")
+  //-     +modalFooter()
+  //-       +button('Save changes', !EMBED)(class="is-primary")
+  //-       +button('Cancel', !EMBED)(class="js-modal-close")

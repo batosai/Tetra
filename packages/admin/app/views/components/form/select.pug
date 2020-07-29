@@ -1,0 +1,22 @@
+mixin select(label, error=null, required=false)
+  .field.is-horizontal
+    if label
+      .field-label.is-normal
+        - var l = label + (required ? ' *' : '');
+        label(for=attributes.id)= l
+      .field-body
+        p.control
+          .select.is-fullwidth
+            select&attributes(attributes)
+              block
+    else
+      p.control
+        .select.is-fullwidth
+          select&attributes(attributes)
+            block
+  if error
+    +error(error, label)
+
+mixin __select(label, error=null, required=false)
+  +select(__(label), error, required)&attributes(attributes)
+    block

@@ -1,0 +1,20 @@
+block content
+  include ../shared/helpers/visual.pug
+  include /components/form.pug
+  include /components/card.pug
+
+  a.button.is-fullwidth.is-primary(href=adminUploadModalAttachmentsPath(query), data-action="modal#open")= __('admin.modals.attachment.actions.upload')
+
+  +card.m-t-10
+    +carImage.is-2by1
+      +visual(attachment, { format: 'original', alt: mimeTypes(attachment.mimetype) })
+    +cardContent
+      +__text('admin.modals.attachment.fields.name')(value=attachment.name readonly)
+      if attachment.isImage()
+        +__text('admin.modals.attachment.fields.size')(value=`${attachment.file().width}x${attachment.file().height}` readonly)
+      +__text('admin.modals.attachment.fields.weight')(value=prettyBytes(attachment.file().size) readonly)
+
+    +cardFooter
+      //- a.card-footer-item(href="#", disabled)= 'Modify'
+      a.card-footer-item(href=adminShowAttachmentsPath(attachment.id) target="_blank")= __('admin.modals.attachment.actions.view')
+      a.card-footer-item(href="#", data-action="click->imagepicker#choose click->modal#close", data-id=attachment.id)= __('admin.modals.attachment.actions.select')

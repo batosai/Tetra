@@ -1,0 +1,8 @@
+mixin state(value)
+  case value
+    when 'draft'
+      span.tag.is-warning= __(value)
+    when 'published'
+      span.tag.is-success= __(value)
+    when 'trashed'
+      span.tag.is-danger= __(value)

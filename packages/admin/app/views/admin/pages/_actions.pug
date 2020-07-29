@@ -1,0 +1,23 @@
+mixin actions(page)
+  .buttons.is-centered
+    .field.has-addons
+      p.control
+        a.button.is-rounded.is-link(href=adminEditPagesPath(page.id))
+          span.icon
+            i.fas.fa-edit
+      p.control
+        a.button.is-rounded.is-success(href=`/${page.slug}` target="_blank")
+          span.icon
+            i.fas.fa-eye
+
+      if states[2] !== page.state || states[2] === filter.state
+        if page.trashed()
+          p.control
+            a.button.is-rounded.is-danger(href=adminDeletePagesPath(page.id) data-confirm=__('admin.shared.confirm.delete') data-method="DELETE")
+              span.icon
+                i.fas.fa-trash
+        else
+          p.control
+            a.button.is-rounded.is-danger(href=adminTrashPagesPath(page.id) data-confirm=__('admin.shared.confirm.draft') data-method="PUT")
+              span.icon
+                i.fas.fa-trash

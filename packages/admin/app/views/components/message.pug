@@ -1,0 +1,11 @@
+mixin message(title)
+  article.message&attributes(attributes)
+    if title
+      .message-header
+        p= title
+    .message-body
+      block
+
+mixin __message(title)
+  +message(__(title))
+    block

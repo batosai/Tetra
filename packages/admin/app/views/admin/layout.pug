@@ -1,0 +1,34 @@
+doctype html
+html(lang="en")
+  head
+    block head
+    meta(charset="utf-8")
+    title= title
+    meta(name="viewport" content="width=device-width, initial-scale=1, user-scalable=no")
+    meta(name="csrf-token" content=csrfToken)
+    //- unless env() === 'development'
+    link(rel="stylesheet" href=assets("app.css"))
+    link(rel="stylesheet" href=assets("vendors.css"))
+  body.has-navbar-fixed-top(data-controller="modal imagepicker")
+
+    include shared/navbar.pug
+
+    .columns.is-gapless.is-marginless.is-fullheight
+      .column.is-one-fifth.is-fullheight.is-hidden-mobile.has-background-dark
+        include shared/menu.pug
+      .column
+        section.section
+          block content
+
+    include shared/footer.pug
+
+    div(data-target="modal.container")
+
+    //- Scripts
+    script(src=assets("app.js"))
+
+    //- unless env() === 'development'
+    script(src=assets("vendors.js"))
+
+    script(defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js")
+    block script

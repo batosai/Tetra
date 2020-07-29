@@ -1,0 +1,6 @@
+mixin radio(...items)
+  .field
+    p.control
+      each r in items
+        input.is-checkradio(id=r.id type="radio" checked=r.checked, value=r.value)&attributes(attributes)
+        label(for=r.id)= r.label

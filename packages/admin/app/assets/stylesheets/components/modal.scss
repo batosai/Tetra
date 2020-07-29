@@ -1,0 +1,25 @@
+.modal-card {
+  &-head {
+    min-height: 77px;
+  }
+  &-body {
+    min-height: calc(100vh - 182px);
+
+    .column.selected figure {
+      border-color: $primary;
+    }
+  }
+
+  &-foot {
+    padding: 10px 20px;
+    min-height: 65px;
+    nav {
+      margin: 0;
+      width: 100%;
+    }
+  }
+
+  .dropzone {
+    line-height: calc(100vh - 368px);
+  }
+}

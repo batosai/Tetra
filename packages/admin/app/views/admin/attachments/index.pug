@@ -1,0 +1,60 @@
+extends ../layout
+
+block content
+  include /components/breadcrumb.pug
+  include /components/form.pug
+  include /components/pagination.pug
+  include /components/message.pug
+  include ../shared/helpers/visual.pug
+
+  +breadcrumb
+      li.is-active
+        a(href="#" aria-current="attachments")= __('admin.attachments.title')
+
+  if Object.keys(errors).length !== 0
+    +message()(class="is-danger")
+      each error in errors
+        .error #{__(error.message)}
+
+  - var attributes = {}
+  - attributes.action = adminCreateAttachmentsPath();
+  - attributes.id = 't-uploader';
+  - attributes.method = 'post';
+  - attributes.enctype = 'multipart/form-data';
+  - attributes.class = 'dropzone';
+  - attributes['data-dictDefaultMessage'] = __('admin.shared.dropzone.dictDefaultMessage');
+  - attributes['data-dictFallbackMessage'] = __('admin.shared.dropzone.dictFallbackMessage');
+  - attributes['data-dictFallbackText'] = __('admin.shared.dropzone.dictFallbackText');
+  - attributes['data-dictFallbackText'] = __('admin.shared.dropzone.dictFallbackText');
+  - attributes['data-dictFileTooBig'] = __('admin.shared.dropzone.dictFileTooBig');
+  - attributes['data-dictInvalidFileType'] = __('admin.shared.dropzone.dictInvalidFileType');
+  - attributes['data-dictResponseError'] = __('admin.shared.dropzone.dictResponseError');
+  - attributes['data-dictCancelUpload'] = __('admin.shared.dropzone.dictCancelUpload');
+  - attributes['data-dictUploadCanceled'] = __('admin.shared.dropzone.dictUploadCanceled');
+  - attributes['data-dictCancelUploadConfirmation'] = __('admin.shared.dropzone.dictCancelUploadConfirmation');
+  - attributes['data-dictRemoveFile'] = __('admin.shared.dropzone.dictRemoveFile');
+  - attributes['data-dictMaxFilesExceeded'] = __('admin.shared.dropzone.dictMaxFilesExceeded');
+
+  +form()&attributes(attributes)
+    .fallback
+      input(type="file", name="file")
+      input(type="submit")
+
+  .buttons.is-centered
+    a.button.is-rounded.is-outlined(onClick="location.reload(true);")= __('admin.attachments.actions.refresh')
+
+  - var action = adminDeleteSelectedAttachmentsPath()
+  - var method = "DELETE"
+
+  +form()(action=action method=method data-confirm=__('admin.shared.confirm.delete'))
+    .columns.is-multiline(data-controller="imagepicker")
+      each attachment, index in paginate.docs
+        .column.is-one-quarter
+          figure.image.border.imagepicker.is-2by1
+            +checkbox()(name="ids[]" id=index value=attachment.id class="is-danger")
+            +visual(attachment, { alt: mimeTypes(attachment.mimetype) })
+    if paginate.docs.length
+      .buttons.is-centered
+        +__button('admin.attachments.actions.delete')(class="is-danger")
+
+  +pagination(paginate)

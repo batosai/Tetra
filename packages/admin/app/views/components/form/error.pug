@@ -1,0 +1,7 @@
+mixin error(error, label=false)
+  if error
+    .field.is-horizontal
+      if label
+        .field-label
+      .field-body
+        p.help.is-danger #{__(error.message)}

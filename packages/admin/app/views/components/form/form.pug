@@ -1,0 +1,15 @@
+mixin form()
+  - var method = 'GET'
+  - var _method = 'GET'
+
+  if attributes.method && attributes.method !== 'GET'
+    - method = 'POST'
+    - _method = attributes.method
+    - attributes.method = method
+
+  form(method=method)&attributes(attributes)
+    if attributes.method
+      input(type="hidden" name="_method" value=_method)
+    if csrfToken
+      input(type="hidden" name="_csrf" value=csrfToken)
+    block

@@ -1,0 +1,71 @@
+extends ../layout
+
+block content
+  include /components/breadcrumb.pug
+  include /components/message.pug
+  include /components/form.pug
+  include /components/pagination.pug
+  include _state.pug
+  include _actions.pug
+
+  +breadcrumb
+      li.is-active
+        a(href="#" aria-current="page")= __('admin.pages.title')
+  
+  +__message('admin.pages.filter.title')
+    form.has-text-right
+      .columns
+        .column.is-4
+          +select()(name="state")
+            option(value="")= __('admin.pages.filter.all')
+            each state, index in states
+              option(value=state selected=filter.state === state)= __(state)
+        .column.is-4.is-offset-4
+          +text()(placeholder=__('admin.pages.filter.search') name="title" value=filter.title ? filter.title : '')
+      .columns
+        .column.is-4.is-offset-4
+          +__button('admin.pages.filter.submit')(class="is-fullwidth")
+        .column.is-4
+
+  .buttons.is-centered
+    a.button.is-rounded.is-success.is-outlined.is-pulled-right(href=adminNewPagesPath())= __('admin.pages.table.add')
+    if filter.state !== states[2]
+      a.button.is-rounded.is-danger.is-outlined.is-pulled-right.m-r-10(href=adminIndexPagesPath() + `?state=${states[2]}`)= __('admin.pages.buttons.trash')
+    else 
+      a.button.is-rounded.is-danger.is-outlined.is-pulled-right.m-r-10(href=adminDeleteSelectedPagesPath() data-confirm=__('admin.shared.confirm.delete') data-method="DELETE")= __('admin.pages.buttons.emptyTrash')
+
+  - var action = filter.state === states[2] ? adminDeleteSelectedPagesPath() : adminSendToTrashPagesPath()
+  - var method = filter.state === states[2] ? "DELETE" : "PUT"
+
+  +form()(action=action method=method data-confirm=__('admin.shared.confirm.delete'))
+
+    .table-container
+      table.table.is-hoverable.is-striped.is-fullwidth
+        thead
+          tr
+            th
+              +checkbox(__('admin.pages.table.all'))(id="all" class="is-danger js-checkbox__select-all")
+            th
+              abbr(title=__('admin.pages.table.title'))= __('admin.pages.table.title')
+            th
+              abbr(title=__('admin.pages.table.status'))= __('admin.pages.table.status')
+            th
+              abbr(title=__('admin.pages.table.date'))= __('admin.pages.table.date')
+            th
+              abbr(title=__('admin.pages.table.actions'))= __('admin.pages.table.actions')
+        tbody
+          each page, index in paginate.docs
+            tr
+              th
+                if states[2] !== page.state || states[2] === filter.state
+                  +checkbox()(id=`item${index}` name="ids[]" value=`${page.id}` class="is-danger js-checkbox")
+              td
+                a(href=adminEditPagesPath(page.id) title=page.title)= page.title
+              td
+                +state(page.state)
+              td= page.publishedAt
+              td
+                +actions(page)
+    +__button('admin.pages.table.delete')(class="is-danger")
+
+  +pagination(paginate, filter)

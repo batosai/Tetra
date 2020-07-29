@@ -1,0 +1,15 @@
+extends ../layout
+
+block content
+  include /components/breadcrumb.pug
+  include /components/form.pug
+  include ../shared/helpers/visual.pug
+
+  +breadcrumb
+    li
+      a(href=adminIndexPagesPath())= __('admin.page.pages')
+    li.is-active
+      a(href="#" aria-current="page")= page.title
+
+  +form()(action=adminUpdatePagesPath(page.id) method="PUT")
+    include _form.pug

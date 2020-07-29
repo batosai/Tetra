@@ -1,0 +1,26 @@
+block content
+  include /components/form.pug
+  include /components/modal.pug
+
+  - var attributes = {}
+  - attributes['data-uploader-container'] = 'dropzone';
+  - attributes['data-uploader-url'] = adminCreateAttachmentsPath();
+  - attributes['data-uploader-dictDefaultMessage'] = __('admin.shared.dropzone.dictDefaultMessage');
+  - attributes['data-uploader-dictFallbackMessage'] = __('admin.shared.dropzone.dictFallbackMessage');
+  - attributes['data-uploader-dictFallbackText'] = __('admin.shared.dropzone.dictFallbackText');
+  - attributes['data-uploader-dictFallbackText'] = __('admin.shared.dropzone.dictFallbackText');
+  - attributes['data-uploader-dictFileTooBig'] = __('admin.shared.dropzone.dictFileTooBig');
+  - attributes['data-uploader-dictInvalidFileType'] = __('admin.shared.dropzone.dictInvalidFileType');
+  - attributes['data-uploader-dictResponseError'] = __('admin.shared.dropzone.dictResponseError');
+  - attributes['data-uploader-dictCancelUpload'] = __('admin.shared.dropzone.dictCancelUpload');
+  - attributes['data-uploader-dictUploadCanceled'] = __('admin.shared.dropzone.dictUploadCanceled');
+  - attributes['data-uploader-dictCancelUploadConfirmation'] = __('admin.shared.dropzone.dictCancelUploadConfirmation');
+  - attributes['data-uploader-dictRemoveFile'] = __('admin.shared.dropzone.dictRemoveFile');
+  - attributes['data-uploader-dictMaxFilesExceeded'] = __('admin.shared.dropzone.dictMaxFilesExceeded');
+
+  +modal()(id="addFormat", class="is-active")
+    +modalHeader(__('admin.modals.upload.title'))
+    +modalContent()
+      a.button.is-fullwidth.is-primary.m-b-10(href=adminIndexModalAttachmentsPath(query), data-action="modal#open")= __('admin.modals.upload.actions.attachment')
+      div.dropzone&attributes(attributes)(data-controller="uploader")
+    +modalFooter()

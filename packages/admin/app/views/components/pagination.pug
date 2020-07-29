@@ -1,0 +1,26 @@
+mixin pagination(paginate, query={})
+  - var page = parseInt(paginate.page)
+  - var pages = parseInt(paginate.pages)
+  - var p = 0
+  - var q = function(q) { return qs(q, query); }
+
+  if pages > 1
+    nav.pagination.is-rounded(role='navigation' aria-label='pagination')
+      if page > 1
+        a(href=`?${q({page: page - 1})}`).pagination-previous= __('admin.shared.previous')
+      if page < pages
+        a(href=`?${q({page: page + 1})}`).pagination-next= __('admin.shared.next')
+      ul.pagination-list
+        while p < pages
+          - p++
+
+          if pages > 6 && p !== 1 && p !== pages && (p < page - 1 || p > page + 1)
+            if p === 2 || p === page + 2
+              li
+                span.pagination-ellipsis &mldr;
+          else if p === page
+            li
+              a(href=`?${q({page: p})}` aria-label=`Page ${p}` aria-current='page').pagination-link.is-current= p
+          else
+            li
+              a(href=`?${q({page: p})}` aria-label=`Goto page ${p}`).pagination-link= p

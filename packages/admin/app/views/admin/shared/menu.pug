@@ -1,0 +1,38 @@
+aside#sideMenu.menu
+  
+  .columns.is-mobile.is-hidden-desktop
+    .column
+      a.button.is-dark.is-fullwidth
+        span.badge.is-badge-success.is-badge-small(data-badge="10")
+          span.icon
+            i.fa.fa-lg.fa-bell
+    .column
+      a.button.is-dark.is-fullwidth
+        span.icon
+          i.fa.fa-lg.fa-user
+
+  p.menu-label
+    | General
+  ul.menu-list
+    li
+      a(href=adminIndexHomePath() class={'is-active': currentUrl === adminIndexHomePath()}) Dashboard
+    li
+      a(href=adminIndexPagesPath() class={'is-active': currentUrl === adminIndexPagesPath()}) Pages
+    li
+      a(href=adminIndexAttachmentsPath() class={'is-active': currentUrl === adminIndexAttachmentsPath()}) Media
+  p.menu-label
+    | Administration
+  ul.menu-list
+    //- li
+    //-   a
+    //-     span.icon
+    //-       i.fa.fa-angle-left(data-fa-transform="rotate-180")
+    //-     | Users
+    //-   ul.menu-sublist
+    //-     li
+    //-       a Add
+    //-     li
+    //-       a All
+    li
+      a(href=adminIndexSettingsPath() class={'is-active': currentUrl === adminIndexSettingsPath()})
+        | Parameters

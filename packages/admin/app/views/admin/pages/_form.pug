@@ -1,0 +1,37 @@
+.columns.is-multiline
+  .column.is-two-thirds-widescreen
+    +text(null, errors.title)(placeholder=__('admin.page.fields.title') name="page[title]" value=page.title)
+    +slug(site.url, false, { label: __('admin.page.actions.view'), href: `/${page.slug}` })(placeholder=__('admin.page.fields.slug') name="page[slug]" value=page.slug)
+    +file('Screen Shot 2017-07-29 at 15.54.25.png')
+    +wysiwyg()(name="page[content]")
+      | #{page.content}
+
+  .column
+    .box.has-background-light
+      +select
+        option= __('admin.page.fields.template')
+        option Default
+      +tags()(placeholder=__('admin.page.fields.tags') name="page[tags]" value=page.tags)
+      +__text('admin.page.fields.order')(id="order" name="page[order]" placeholder="0" value=page.order)
+      +radio(
+        { id: "draft", label: __(page.schema.path('state').enumValues[0]), value: page.schema.path('state').enumValues[0], checked: page.state === page.schema.path('state').enumValues[0]},
+        { id: "publish", label: __(page.schema.path('state').enumValues[1]), value: page.schema.path('state').enumValues[1], checked: page.state === page.schema.path('state').enumValues[1] }
+      )(name="page[state]")
+      +__datepicker('admin.page.fields.published')(id="published_at" placeholder="yyyy-mm-dd" disabled=(page.state === page.schema.path('state').enumValues[0]) name="page[publishedAt]" value=page.publishedAt)
+      //- +__datepicker('admin.page.fields.unpublished')(id="unpublished_at" placeholder="2018-10-27" disabled=(page.state === page.schema.path('state').enumValues[0]))
+
+      hr.has-background-primary
+
+      figure.image.is-2by1(data-target="imagepicker.preview")
+        if page.image
+          +visual(page.image, { alt: mimeTypes(page.image.mimetype) })
+        else
+          +visual('https://via.placeholder.com/240x120/ffdd57/646464?text=TetraJs', { alt: 'VISUAL' })
+      br
+      input(name="page[image]" type="hidden" value=(page.image ? page.image._id : '') data-target="imagepicker.id")
+      +__button('admin.page.actions.choose')(data-action="modal#open", data-url=adminIndexModalAttachmentsPath({ type: 'image' }), type="button", class="is-primary is-fullwidth")
+
+      hr.has-background-primary
+
+      +__button('admin.page.actions.preview')(class="is-fullwidth")
+      +__button('admin.page.actions.save')(class="is-primary is-fullwidth")

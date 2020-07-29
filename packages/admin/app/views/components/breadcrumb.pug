@@ -1,0 +1,11 @@
+mixin breadcrumb()
+  nav.breadcrumb(aria-label="breadcrumbs")
+    ul
+      if block
+        li
+          a(href="/admin")= __('admin.dashboard.title')
+      else
+        li.is-active
+          a(href="/admin")= __('admin.dashboard.title')
+        li
+      block

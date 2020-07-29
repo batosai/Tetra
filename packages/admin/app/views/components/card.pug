@@ -1,0 +1,28 @@
+mixin card(title)
+  .card&attributes(attributes)
+    if title
+      +carHeader(title)
+    block
+
+mixin carHeader(title)
+  .card-header
+    .card-header-title= title
+
+mixin carImage()
+  .card-image
+    figure.image&attributes(attributes)
+      block
+
+mixin cardContent()
+  .card-content&attributes(attributes)
+    .content
+      block
+
+mixin cardFooter()
+  footer.card-footer&attributes(attributes)
+    p.card-footer-item
+      block
+
+mixin __card(title)
+  +card(__(title))
+    block

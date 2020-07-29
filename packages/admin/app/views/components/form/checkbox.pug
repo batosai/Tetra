@@ -1,0 +1,18 @@
+mixin checkbox(label, align='right', error=null)
+  .field.is-horizontal
+    if align === 'left'
+      .field-label
+        label(for=attributes.id)= label
+      .field-body
+        p.control
+          input.is-checkradio(type="checkbox")&attributes(attributes)
+          label.is-marginless(for=attributes.id)
+    else
+      p.control
+        input.is-checkradio(type="checkbox")&attributes(attributes)
+        label.is-marginless(for=attributes.id)= label
+  if error
+    +error(error, label)
+
+mixin __checkbox(label, align='right', error=null)
+  +checkbox(__(label), align, error)&attributes(attributes)

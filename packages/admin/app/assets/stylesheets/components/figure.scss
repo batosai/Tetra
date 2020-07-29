@@ -1,0 +1,28 @@
+figure.imagepicker {
+  .field {
+    position: absolute;
+    top: 0px;
+    z-index: 1;
+    &, p, label {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+  }
+  .is-checkradio[type="checkbox"] {
+    & + label {
+      padding: 0 0 0 2rem;
+      &::before {
+        background: #fff;
+        margin: 10px;
+      }
+      &::after {
+        margin: 10px;
+      }
+    }
+  }
+}
+
+figure.border {
+  border: 1px solid #eee;
+}

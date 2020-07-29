@@ -1,0 +1,50 @@
+@charset "utf-8";
+
+/* Customization */
+
+@import "~bulma/sass/utilities/initial-variables";
+
+$body-background-color: $white-bis;
+$footer-background-color: $white-ter;
+
+$menu-item-color: $white-ter;
+$menu-item-radius: 4px;
+$menu-item-active-color: $black-bis;
+$menu-item-active-background-color: $yellow;
+
+$input-shadow: 0;
+
+$input-disabled-background-color: $grey-lighter;
+$input-disabled-border-color: $grey-lighter;
+
+$table-striped-row-even-background-color: $white-ter;
+$table-row-hover-background-color: $white-ter;
+$table-cell-padding: 1em;
+
+$modal-content-width: calc(100vw - 40px);
+
+$primary: $cyan !default;
+$link: $primary !default;
+
+$family-primary: 'lucioleregular', $family-sans-serif;
+$family-secondary: 'lucioleregular', $family-sans-serif;
+
+/* Bulma extension */
+.control-tags {
+  padding-bottom: 10px;
+}
+
+table {
+  .is-checkradio[type="checkbox"] + label {
+    padding: 0 0 0 32px;
+  }
+}
+
+@import "~/bulma/bulma";
+@import "fonts";
+@import "generic";
+@import "components/wysiwyg";
+@import "components/notification";
+@import "components/uploader";
+@import "components/modal";
+@import "components/figure";

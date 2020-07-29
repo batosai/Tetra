@@ -1,0 +1,15 @@
+include error.pug
+
+mixin text(label, error=null, required=false)
+  .field.is-horizontal
+    if label
+      - var l = label + (required ? ' *' : '');
+      .field-label.is-normal
+        label(for=attributes.id)= l
+    .field-body
+      input.input(class= error ? 'is-danger' : '')&attributes(attributes)
+  if error
+    +error(error, label)
+
+mixin __text(label, error=null, required=false)
+  +text(__(label), error, required)&attributes(attributes)

@@ -1,0 +1,132 @@
+{
+  "Missing credentials": "Missing credentials",
+  "draft": "Draft",
+  "trashed": "Trash",
+  "published": "Published",
+  "Invalid File": "Invalid File",
+  "admin": {
+    "dashboard": {
+      "title": "Dashboard"
+    },
+    "settings": {
+      "general": "General",
+      "smtp": "SMTP",
+      "media": "Media",
+      "title": "Settings"
+    },
+    "shared": {
+      "language": "Language",
+      "defaultLanguage": "Default language",
+      "lang": {
+        "french": "French",
+        "english": "English"
+      },
+      "save": "Save",
+      "previous": "Previous",
+      "next": "Next page",
+      "confirm": {
+        "delete": "Confirm deletion?",
+        "draft": "Confirm trash ?"
+      },
+      "dropzone": {
+        "dictDefaultMessage": "Drop files here to upload",
+        "dictFallbackMessage": "Your browser does not support drag'n'drop file uploads.",
+        "dictFallbackText": "Please use the fallback form below to upload your files like in the olden days.",
+        "dictFileTooBig": "File is too big ({{filesize}}MiB). Max filesize: {{maxFilesize}}MiB.",
+        "dictInvalidFileType": "You can't upload files of this type.",
+        "dictResponseError": "Server responded with {{statusCode}} code.",
+        "dictCancelUpload": "Cancel upload",
+        "dictUploadCanceled": "Upload canceled.",
+        "dictCancelUploadConfirmation": "Are you sure you want to cancel this upload?",
+        "dictRemoveFile": "Remove file",
+        "dictMaxFilesExceeded": "You can not upload any more files."
+      }
+    },
+    "site": {
+      "title": "Title",
+      "slogan": "Slogan",
+      "url": "Url",
+      "host": "Host",
+      "port": "Port",
+      "tls": "site.tls",
+      "username": "Username",
+      "password": "Password",
+      "media": {
+        "thumbnail": "Thumbnail",
+        "medium": "Medium",
+        "large": "Large"
+      }
+    },
+    "pages": {
+      "title": "Pages",
+      "filter": {
+        "title": "Filter",
+        "all": "All",
+        "submit": "Ok",
+        "search": "Search"
+      },
+      "table": {
+        "all": "All",
+        "title": "Title",
+        "status": "Status",
+        "date": "Date",
+        "actions": "Actions",
+        "add": "Add",
+        "delete": "Delete"
+      },
+      "buttons": {
+        "trash": "View trash",
+        "emptyTrash": "Empty trash"
+      }
+    },
+    "page": {
+      "pages": "Pages",
+      "new": "New page",
+      "fields": {
+        "title": "Title",
+        "slug": "Slug",
+        "image": "Choose a image",
+        "content": "Page content",
+        "template": "Select your template",
+        "tags": "Add tag",
+        "order": "Order",
+        "published": "Published at",
+        "unpublished": "Unpublished at"
+      },
+      "actions": {
+        "view": "View",
+        "choose": "Choose your image",
+        "preview": "Preview",
+        "save": "Save"
+      }
+    },
+    "attachments": {
+      "title": "Media",
+      "actions": {
+        "refresh": "Refresh",
+        "delete": "Delete"
+      }
+    },
+    "modals": {
+      "attachment": {
+        "title": "Select your image",
+        "actions": {
+          "upload": "Upload",
+          "view": "View",
+          "select": "Select"
+        },
+        "fields": {
+          "name": "Name",
+          "size": "Size",
+          "weight": "Weight"
+        }
+      },
+      "upload": {
+        "title": "Select your image",
+        "actions": {
+          "attachment": "Picture"
+        }
+      }
+    }
+  }
+}

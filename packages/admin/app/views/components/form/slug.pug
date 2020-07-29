@@ -1,0 +1,12 @@
+mixin slug(label, required=false, button={label:'', href:'#'})
+  - var l = label + (required ? ' *' : '');
+  .field.has-addons
+    p.control.is-hidden-mobile
+      a.button.is-static= l
+    p.control.is-expanded
+      input.input&attributes(attributes)
+    p.control
+      a.button(href=button.href target="_blank")= button.label
+
+mixin __slug(label, required=false, button={label:'', href:'#'})
+  +slug(__(label), required, button)&attributes(attributes)

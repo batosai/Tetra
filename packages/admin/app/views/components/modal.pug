@@ -1,0 +1,23 @@
+mixin modal(title=null)
+  .modal.js-modal&attributes(attributes)
+    .modal-background
+    .modal-card
+      if title
+        +modalHeader(title)
+      block
+  
+mixin modalHeader(title=null, close=true)
+  header.modal-card-head
+    if title
+      p.modal-card-title= title
+    if close
+      button.delete.js-modal-close(aria-label='close')
+    block
+        
+mixin modalContent()
+  section.modal-card-body
+    block
+
+mixin modalFooter()
+  footer.modal-card-foot
+    block
