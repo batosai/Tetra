@@ -27,6 +27,10 @@ module.exports = class App {
     this.app.use(middleware)
   }
 
+  set(name, value) {
+    this.app.set(name, value)
+  }
+
   export() {
     ;(async () => {
       // Load Middlewares
