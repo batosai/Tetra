@@ -6,7 +6,7 @@ const {
   post,
   put,
   remove,
-} = require('@tetra/router')
+} = require('@tetrajs/router')
 
 module.exports = namespace('/admin', [
   root('home'),

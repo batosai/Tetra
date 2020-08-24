@@ -1,10 +1,10 @@
-# @tetra/router
+# @tetrajs/router
 
 Declaration routes.
 It's possible auto-generate CRUD routes.
 
 ```
-const { namespace, root, resources, get, post, put, remove } = require('@tetra/router')
+const { namespace, root, resources, get, post, put, remove } = require('@tetrajs/router')
 ```
 
 ## Namespace

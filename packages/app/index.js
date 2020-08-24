@@ -15,6 +15,7 @@ module.exports = class App {
 
     this.app.set('views', [path.join(this.dirname, 'views')])
     this.app.set('view engine', 'pug')
+    this.app.locals.basedir = path.join(this.dirname, 'views');
 
     this.execute()
   }

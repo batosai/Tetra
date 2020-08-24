@@ -1,4 +1,4 @@
-const { Uploader, File } = require('@tetra/core').uploader
+const { Uploader, File } = require('@tetrajs/core').uploader
 
 module.exports = class ImageUploader extends Uploader {
   constructor() {

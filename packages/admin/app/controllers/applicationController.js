@@ -1,6 +1,6 @@
-const BaseController = require('@tetra/router').baseController
+const BaseController = require('@tetrajs/router').baseController
 const { requireAuthentication } = require('../middlewares')
-const { security } = require('@tetra/core')
+const { security } = require('@tetrajs/core')
 const { SitesService } = require('../services')
 
 module.exports = class ApplicationController extends BaseController {

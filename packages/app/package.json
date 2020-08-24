@@ -1,6 +1,6 @@
 {
   "name": "@tetrajs/app",
-  "version": "0.0.35",
+  "version": "0.0.36",
   "description": "",
   "keywords": [],
   "main": "index.js",
@@ -30,5 +30,6 @@
     "morgan": "^1.10.0",
     "nodemon": "^2.0.4"
   },
+  "deprecated": false,
   "license": "MIT"
 }

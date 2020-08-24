@@ -1,4 +1,4 @@
-const { Site } = require('@tetra/core').models
+const { Site } = require('@tetrajs/core').models
 
 module.exports = class SitesService {
   static async findOne() {

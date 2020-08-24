@@ -1,8 +1,8 @@
-const { Page } = require('@tetra/core').models
+const { Page } = require('@tetrajs/core').models
 
 module.exports = class PagesService {
   static async fetchPages(req, limit = 10) {
-    const filter = req.parameters(['state', 'title'], req.query, false)
+    const filter = req.permitParameters(['state', 'title'], req.query, false)
     const options = {
       page: req.query.page ? req.query.page : 1,
       limit,
@@ -23,7 +23,7 @@ module.exports = class PagesService {
   }
 
   static async createPage(req) {
-    const params = req.parameters(
+    const params = req.permitParameters(
       [
         'title',
         'slug',
@@ -44,7 +44,7 @@ module.exports = class PagesService {
   static async updatePage(req) {
     const page = await PagesService.findById(req.params.id)
 
-    const params = req.parameters(
+    const params = req.permitParameters(
       [
         'title',
         'slug',

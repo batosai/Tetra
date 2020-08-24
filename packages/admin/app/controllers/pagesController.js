@@ -1,10 +1,10 @@
 const ApplicationController = require('./applicationController')
 const { PagesService } = require('../services')
-const { Page } = require('@tetra/core').models
+const { Page } = require('@tetrajs/core').models
 
 module.exports = class PagesController extends ApplicationController {
   async index(req, res, next) {
-    const filter = req.parameters(['state', 'title'], req.query, false)
+    const filter = req.permitParameters(['state', 'title'], req.query, false)
     const paginate = await PagesService.fetchPages(req)
     res.render(req.adminIndexPagesView, {
       title: 'page',

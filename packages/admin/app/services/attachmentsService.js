@@ -1,9 +1,9 @@
-const { Attachment } = require('@tetra/core').models
-const { File } = require('@tetra/core').uploader
+const { Attachment } = require('@tetrajs/core').models
+const { File } = require('@tetrajs/core').uploader
 
 module.exports = class AttachmentsService {
   static async fetchAttachments(req, limit = 20) {
-    const filter = req.parameters(['type'], req.query, false)
+    const filter = req.permitParameters(['type'], req.query, false)
     let query = {}
 
     if (filter.type === 'image') {

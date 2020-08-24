@@ -1,3 +1,4 @@
+const path = require('path')
 const multer = require('multer')
 const sharp = require('sharp')
 const uuidv1 = require('uuid').v1
@@ -8,7 +9,7 @@ const File = require('./file')
 module.exports = class Uploader {
   constructor(name = 'file') {
     this.name = name
-    this.dest = global.config.system.path.tmp
+    this.dest = path.join(process.cwd(), '/public/uploads/tmp/'),
     this.versions = []
 
     this.multer = multer({

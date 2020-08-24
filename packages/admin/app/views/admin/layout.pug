@@ -7,7 +7,7 @@ html(lang="en")
     meta(name="viewport" content="width=device-width, initial-scale=1, user-scalable=no")
     meta(name="csrf-token" content=csrfToken)
     //- unless env() === 'development'
-    link(rel="stylesheet" href=assets("app.css"))
+    link(rel="stylesheet" href=assets("admin.css"))
     link(rel="stylesheet" href=assets("vendors.css"))
   body.has-navbar-fixed-top(data-controller="modal imagepicker")
 
@@ -25,7 +25,7 @@ html(lang="en")
     div(data-target="modal.container")
 
     //- Scripts
-    script(src=assets("app.js"))
+    script(src=assets("admin.js"))
 
     //- unless env() === 'development'
     script(src=assets("vendors.js"))
