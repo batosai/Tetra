@@ -1,6 +1,6 @@
 {
   "name": "@tetrajs/core",
-  "version": "0.0.23",
+  "version": "0.0.24",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -15,7 +15,7 @@
     "node": ">=8.16.0"
   },
   "dependencies": {
-    "bcrypt": "^4.0.1",
+    "bcrypt": "^5.0.0",
     "connect-mongo": "^3.2.0",
     "csurf": "^1.11.0",
     "dotenv": "^8.2.0",
