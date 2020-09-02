@@ -102,3 +102,13 @@ dist
 
 # TernJS port file
 .tern-port
+
+# package lock
+package-lock.json
+yarn.lock
+
+# tetrajs
+var/*
+!var/.gitkeep
+public/*
+!public/.gitkeep
