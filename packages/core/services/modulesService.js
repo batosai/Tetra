@@ -16,9 +16,10 @@ module.exports = class ModulesService {
   static async caching() {
     const appPath = process.cwd()
     const pkg = require(`${appPath}/package.json`)
+    const pkgs = { ...pkg.dependencies, ...pkg.devDependencies }
 
     const modules = {}
-    for (let i in pkg.dependencies) {
+    for (let i in pkgs) {
       try {
         const tetra = require(`${i}/package.json`).tetra
         if (tetra) {
