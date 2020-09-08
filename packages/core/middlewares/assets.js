@@ -1,17 +1,15 @@
-const { WebpacksService } = require('../services')
-
 module.exports = async (req, res, next) => {
   const base = 'build'
-  const entrypoints = await WebpacksService.get()
 
   const name = req.app.get('name')
+  const entrypoint = require(`${process.cwd()}/public/${base}/${name}/manifest.json`)
 
   res.locals.assets = function(file) {
     if (
-      typeof entrypoints[name] !== 'undefined' &&
-      typeof entrypoints[name][file] !== 'undefined'
+      typeof entrypoint !== 'undefined' &&
+      typeof entrypoint[file] !== 'undefined'
     ) {
-      return `/${base}/${name}/${entrypoints[name][file]}`
+      return `/${base}/${name}/${entrypoint[file]}`
     }
     return null
   }

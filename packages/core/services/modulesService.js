@@ -21,15 +21,22 @@ module.exports = class ModulesService {
     const modules = {}
     for (let i in pkgs) {
       try {
-        const tetra = require(`${i}/package.json`).tetra
+        const info = require(`${i}/package.json`)
+        const tetra = info.tetra
         if (tetra) {
-          modules[tetra.namespace] = `${appPath}/node_modules/${i}`
+          modules[info.name] =  {
+            ...tetra,
+            path: `${appPath}/node_modules/${i}`
+          }
         }
       } catch (e) {}
     }
 
-    const tetra = require(`${appPath}/package.json`).tetra
-    modules[tetra.namespace] = appPath
+    const tetra = pkg.tetra
+    modules[pkg.name] = {
+      ...tetra,
+      path: appPath
+    }
     cache.set(ModulesService.cacheName, JSON.stringify(modules))
 
     return modules

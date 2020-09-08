@@ -1,5 +1,5 @@
-module.exports.config = require('./setup')
-module.exports.config = require('./informations')
+module.exports.setup = require('./setup')
+module.exports.informations = require('./informations')
 
 module.exports.install = require('./module/install')
 module.exports.remove = require('./module/remove')

@@ -29,7 +29,7 @@ const { services } = require('@tetrajs/core')
 
   for (const key in mds) {
     try {
-      const commands = require(`${mds[key]}/app/commands`)
+      const commands = require(`${mds[key].path}/app/commands`)
       for (let key in commands) {
         if (commands.hasOwnProperty(key)) {
           cmds.push(commands[key])

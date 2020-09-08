@@ -21,11 +21,11 @@ module.exports = class MiddlewaresService {
 
   static async caching() {
     const modules = await ModulesService.get()
-    modules['core'] = path.join(__dirname, '../')
+    modules['core'] = { path: path.join(__dirname, '../') }
     let middlewares = []
 
     for (const key in modules) {
-      const results = await globSync(`${modules[key]}/middlewares/**/*.js`, {ignore: '/**/index.js'})
+      const results = await globSync(`${modules[key].path}/middlewares/**/*.js`, {ignore: '/**/index.js'})
       middlewares = [...middlewares, ...results]
     }
     cache.set(MiddlewaresService.cacheName, JSON.stringify(middlewares))

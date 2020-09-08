@@ -2,7 +2,6 @@ const path = require('path')
 const { express, services } = require('@tetrajs/core')
 const router = require('@tetrajs/router').router
 
-const { webpack } = require('@tetrajs/webpack')
 const { MiddlewaresService } = services
 
 module.exports = class App {
@@ -20,9 +19,7 @@ module.exports = class App {
     this.execute()
   }
 
-  execute() {
-    webpack.run(require(path.join(this.dirname, 'config/webpack')))
-  }
+  execute() {}
 
   use(middleware) {
     this.app.use(middleware)

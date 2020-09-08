@@ -1,6 +1,6 @@
 {
   "name": "@tetrajs/admin",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -16,9 +16,8 @@
   },
   "dependencies": {
     "@tetrajs/app": "~0.0.1",
-    "@tetrajs/core": "~0.0.1",
+    "@tetrajs/core": "~0.0.26",
     "@tetrajs/router": "~0.0.1",
-    "@tetrajs/webpack": "~0.0.1",
     "bulma": "^0.9.0",
     "bulma-calendar": "^6.0.9",
     "bulma-extensions": "^6.2.7",
@@ -29,6 +28,7 @@
     "stimulus": "^1.1.1"
   },
   "devDependencies": {
+    "@tetrajs/webpack": "~0.0.16",
     "@tetrajs/auth-ui": "~0.0.12"
   },
   "tetra": {
