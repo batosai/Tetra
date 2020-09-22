@@ -26,7 +26,8 @@ module.exports = class ModulesService {
         if (tetra) {
           modules[info.name] =  {
             ...tetra,
-            path: `${appPath}/node_modules/${i}`
+            path: `${appPath}/node_modules/${i}`,
+            packageName: info.name
           }
         }
       } catch (e) {}
@@ -35,7 +36,8 @@ module.exports = class ModulesService {
     const tetra = pkg.tetra
     modules[pkg.name] = {
       ...tetra,
-      path: appPath
+      path: appPath,
+      packageName: pkg.name
     }
     cache.set(ModulesService.cacheName, JSON.stringify(modules))
 

@@ -13,7 +13,10 @@ module.exports.auth = require('./modules/auth')
 module.exports.security = require('./modules/security')
 module.exports.i18n = require('./modules/i18n')
 module.exports.uploader = require('./modules/uploader')
+module.exports.event = require('./modules/event')
 
 module.exports.services = require('./services')
+
+module.exports.utils = require('./lib/utils')
 
 module.exports.models = require('./modules/database/mongodb/models')

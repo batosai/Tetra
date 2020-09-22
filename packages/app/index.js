@@ -1,5 +1,5 @@
 const path = require('path')
-const { express, services } = require('@tetrajs/core')
+const { express, services, event } = require('@tetrajs/core')
 const router = require('@tetrajs/router').router
 
 const { MiddlewaresService } = services
@@ -48,6 +48,7 @@ module.exports = class App {
       )
     })()
 
+    event.emit(`tetra:${this.name}:init`)
     return this.app
   }
 }

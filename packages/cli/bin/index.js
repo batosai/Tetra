@@ -15,6 +15,7 @@ let cmds = [
   require('../commands/module/link'),
   require('../commands/module/unlink'),
   require('../commands/module/list'),
+  require('../commands/module/asset'),
   require('../commands/database/model'),
   require('../commands/database/reset'),
   require('../commands/database/seed'),

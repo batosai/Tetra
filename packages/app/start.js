@@ -14,6 +14,7 @@ const {
   auth,
   i18n,
   services,
+  event,
 } = require('@tetrajs/core')
 const { ModulesService } = services
 
@@ -81,5 +82,7 @@ const pkgTetra = Object.keys(pkg.dependencies).filter(
   (module) => module !== '@tetrajs/app' && module.includes('@tetrajs/'),
 )
 spawn('npx', ['tetra', 'link', ...pkgTetra])
+
+event.emit('tetra:init')
 
 module.exports = app

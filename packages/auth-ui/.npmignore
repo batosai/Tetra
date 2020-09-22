@@ -1,0 +1,7 @@
+var/
+public/uploads/
+public/build/*
+!public/build/auth-ui
+
+.env
+.env.test
