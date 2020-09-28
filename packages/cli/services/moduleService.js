@@ -1,4 +1,7 @@
-const { database, dotenv } = require('@tetrajs/core')
+const path = require('path')
+const { spawn } = require('child_process')
+const { database, dotenv, services, utils } = require('@tetrajs/core')
+const { exist } = utils
 
 module.exports = class ModulesService {
   static async findOrCreate(conditions, options) {
@@ -42,5 +45,26 @@ module.exports = class ModulesService {
     promise.catch((err) => database.mongoose.connection.close(true))
 
     return promise
+  }
+
+  static async assetsInstall(moduleNames=[]) {
+    try {
+      const modules = await services.ModulesService.get()
+
+      for (const k in modules) {
+        const m = modules[k]
+
+        if (moduleNames.length === 0 || moduleNames.indexOf(m.packageName) !== -1) {
+          const src = path.join(m.path, 'public/build', m.name)
+          const dst = path.join(process.cwd(), 'public/build', m.name)
+          const present = await exist(src)
+          const presentDest = await exist(dst)
+
+          if (present && !presentDest) {
+            await spawn('cp', ['-r', src, dst])
+          }
+        }
+      }
+    } catch (error) {}
   }
 }

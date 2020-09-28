@@ -1,4 +1,4 @@
-const { database } = require('@tetrajs/core')
+const { database, event, cache } = require('@tetrajs/core')
 const { Command } = require('../../')
 const { ModuleService } = require('../../services')
 
@@ -19,6 +19,7 @@ module.exports = class Link extends Command {
   execute(args) {
     args.map(async (module) => {
       try {
+        cache.clear('modules')
         const pkg = require(`${module}/package.json`)
 
         await ModuleService.findOrCreate(
@@ -28,6 +29,8 @@ module.exports = class Link extends Command {
             version: pkg.version,
           },
         )
+
+        event.emit(`tetra:cmd:${this.name}`, { name: pkg.name, version: pkg.version })
       } catch (error) {
         database.mongoose.connection.close(true)
       }

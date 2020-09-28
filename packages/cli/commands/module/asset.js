@@ -1,8 +1,6 @@
-const path = require('path')
-const { spawn } = require('child_process')
-const { services, utils } = require('@tetrajs/core')
+const { event } = require('@tetrajs/core')
 const { Command } = require('../../')
-const { exist } = utils
+const { ModuleService } = require('../../services')
 
 module.exports = class Asset extends Command {
   configure() {
@@ -19,23 +17,8 @@ module.exports = class Asset extends Command {
   }
 
   async execute(args=[]) {
-    try {
-      const modules = await services.ModulesService.get()
+    await ModuleService.assetsInstall(args)
 
-      for (const k in modules) {
-        const m = modules[k]
-
-        if (args.length === 0 || args.indexOf(m.packageName) !== -1) {
-          const src = path.join(m.path, 'public/build', m.name)
-          const dst = path.join(process.cwd(), 'public/build', m.name)
-          const present = await exist(src)
-          const presentDest = await exist(dst)
-
-          if (present && !presentDest) {
-            await spawn('cp', ['-r', src, dst])
-          }
-        }
-      }
-    } catch (error) {}
+    event.emit(`tetra:cmd:${this.name}`)
   }
 }

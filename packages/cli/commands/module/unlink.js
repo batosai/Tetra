@@ -1,4 +1,4 @@
-const { database } = require('@tetrajs/core')
+const { database, event, cache } = require('@tetrajs/core')
 const { Command } = require('../../')
 const { ModuleService } = require('../../services')
 
@@ -19,7 +19,10 @@ module.exports = class Unlink extends Command {
   execute(args) {
     args.map(async (module) => {
       try {
+        cache.clear('modules')
         await ModuleService.delete({ name: module })
+
+        event.emit(`tetra:cmd:${this.name}`, module)
       } catch (error) {
         database.mongoose.connection.close(true)
       }

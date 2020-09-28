@@ -46,7 +46,7 @@ async function main() {
   oldStep.success('Create project', '✓')
 
   oldStep = steps.advance('Installing dependencies').start()
-  await install(projectName, ['@tetrajs/app', '@tetrajs/auth-ui'], { useYarn })
+  await install(projectName, ['@tetrajs/app', '@tetrajs/webpack', '@tetrajs/auth-ui', '@tetrajs/admin'], { useYarn })
   oldStep.success('Dependencies installed', '✓')
 
   process.chdir(projectName)
