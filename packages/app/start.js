@@ -16,7 +16,9 @@ const {
   services,
   event,
 } = require('@tetrajs/core')
-const { ModulesService } = services
+const { ModulesService, RoutesService } = services
+
+const middleware = require('@tetrajs/router/app/middleware')
 
 const appPath = process.cwd()
 
@@ -63,9 +65,15 @@ app.use(helmet())
 app.use(auth.passport.initialize())
 app.use(auth.passport.session())
 
-// Load modules and Middlewares
+// Load modules
 ;(async () => {
   const mds = await ModulesService.get()
+
+  // Routers caching
+  const routesCollection = await RoutesService.get()
+  routesCollection.forEach(routes => {
+    app.use(middleware(routes))
+  })
 
   app.use(i18n)
 

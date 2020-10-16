@@ -1,12 +1,12 @@
 const createError = require('http-errors')
-const middleware = require('./app/middleware')
+// const middleware = require('./app/middleware')
 const express = require('@tetrajs/core').express
 
 const app = {}
 
 app.configure = function (config, fn) {
   const router = express.Router()
-  router.use(middleware(config.routes))
+  // router.use(middleware(config.routes))
 
   const controllers = config.controllers
 
