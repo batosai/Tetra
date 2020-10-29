@@ -1,19 +1,12 @@
 const capitalize = require('./utils').capitalize
 const parseParameters = require('./utils').parseParameters
-
-const generatePrefix = (name, path) => {
-  if (name !== 'root') {
-    return `${name}${capitalize(path)}`
-  }
-  return path
-}
+const generatePrefix = require('./utils').generatePrefix
 
 module.exports = (namespaces) => {
   return (req, res, next) => {
     for (let name in namespaces) {
       namespaces[name].forEach((route) => {
-        let prefix = ''
-        prefix = generatePrefix(
+        const prefix = generatePrefix(
           name,
           `${route.action}${capitalize(route.name)}`,
         )

@@ -34,9 +34,9 @@ module.exports = class Command {
     console.log()
     console.log('Usage:')
     if (this.name) {
-      console.log(this.kleur.green(`tetra <options> ${this.name}`))
+      console.log(this.kleur.green(`tetra ${this.name} <options>`))
     } else {
-      console.log(this.kleur.green('tetra <options> [command]'))
+      console.log(this.kleur.green('tetra [command] <options>'))
     }
   }
 

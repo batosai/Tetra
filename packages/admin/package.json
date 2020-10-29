@@ -17,7 +17,7 @@
   "dependencies": {
     "@tetrajs/app": "~0.0.1",
     "@tetrajs/core": "~0.0.26",
-    "@tetrajs/router": "~0.0.1",
+    "@tetrajs/router": "~0.0.3",
     "bulma": "^0.9.0",
     "bulma-calendar": "^6.0.9",
     "bulma-extensions": "^6.2.7",

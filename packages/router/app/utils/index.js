@@ -31,3 +31,10 @@ module.exports.defaultView = (path) => {
   }
   return path
 }
+
+module.exports.generatePrefix = (name, path) => {
+  if (name !== 'root') {
+    return `${name}${module.exports.capitalize(path)}`
+  }
+  return path
+}
