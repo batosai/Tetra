@@ -13,7 +13,7 @@
     "directory": "packages/cli"
   },
   "engines": {
-    "node": ">=8.16.0"
+    "node": ">=10.20.1"
   },
   "dependencies": {
     "@tetrajs/core": "~0.0.1",

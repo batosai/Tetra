@@ -16,7 +16,7 @@
     "directory": "packages/app"
   },
   "engines": {
-    "node": ">=8.16.0"
+    "node": ">=10.20.1"
   },
   "dependencies": {
     "@tetrajs/cli": "~0.0.2",
