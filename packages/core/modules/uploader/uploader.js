@@ -1,21 +1,31 @@
-const path = require('path')
-const multer = require('multer')
+const fs = require('fs').promises
+const formidable = require('formidable')
 const sharp = require('sharp')
 const uuidv1 = require('uuid').v1
-const { promisify } = require('util')
-const sizeOf = promisify(require('image-size'))
+const imageSize = require('image-size')
 const File = require('./file')
+
+const config = {
+	default: 'local',
+	disks: {
+		local: {
+			driver: 'local',
+			config: {
+				root: process.cwd() + '/storage',
+			},
+    },
+  }
+}
+
+const { StorageManager } = require('@slynova/flydrive')
+const storage = new StorageManager(config)
 
 module.exports = class Uploader {
   constructor(name = 'file') {
     this.name = name
-    this.dest = path.join(process.cwd(), '/public/uploads/tmp/'),
     this.versions = []
 
-    this.multer = multer({
-      dest: this.dest,
-      fileFilter: this.validate,
-    })
+    this.form = new formidable.IncomingForm({ hash: true })
   }
 
   validate(req, file, cb) {
@@ -42,13 +52,15 @@ module.exports = class Uploader {
       if (!req.file) {
         return next()
       }
+
+      const buffer = await storage.disk('local').getBuffer(req.file.name)
       let metadata = {}
 
       if (!File.isImage(req.file.mimetype)) {
         versions = []
       } else {
         try {
-          metadata = await sizeOf(req.file.path)
+          metadata = await imageSize(buffer.raw)
         } catch (err) {
           console.error(err)
         }
@@ -57,7 +69,7 @@ module.exports = class Uploader {
       req.files = {
         original: {
           mimetype: req.file.mimetype,
-          filename: req.file.filename,
+          filename: req.file.name,
           size: req.file.size,
           ...metadata,
         },
@@ -66,8 +78,7 @@ module.exports = class Uploader {
       await Promise.all(
         versions.map(async (version) => {
           const filename = uuidv1()
-          const dest = `${req.file.destination}${filename}`
-          const data = await sharp(req.file.path)
+          const bufferVersion = await sharp( buffer.raw )
             .resize({
               width: version.width,
               height: version.height,
@@ -80,18 +91,22 @@ module.exports = class Uploader {
             .toFormat(
               version.format ? version.format : File.format(req.file.mimetype),
             )
-            .toFile(dest)
+            .toBuffer()
+
+            await storage.disk('local').put(filename, bufferVersion)
+            const { size } = await storage.disk('local').getStat(filename)
 
           try {
-            metadata = await sizeOf(dest)
+            const dest = await storage.disk('local').getBuffer(filename)
+            metadata = await imageSize(dest.raw)
           } catch (err) {
             console.error(err)
           }
 
           req.files[version.name] = {
-            mimetype: `image/${data.format}`,
+            mimetype: req.file.mimetype,
             filename,
-            size: data.size,
+            size,
             ...metadata,
           }
         }),
@@ -101,7 +116,31 @@ module.exports = class Uploader {
     }
   }
 
+  single() {
+    return async (req, res, next) => {
+      this.form.parse(req, async(err, fields, files) => {
+        // this.validate(req, file, cb) -> cb va faire les lignes qui suit si ok sinon error
+
+        const f = files[this.name]
+        const name = uuidv1()
+        const buffer = await fs.readFile(f.path)
+        await storage.disk('local').put(name, buffer)
+        const { size, modified } = await storage.disk('local').getStat(name)
+
+        req.file = {
+          name,
+          originalname: f.name,
+          mimetype: f.type,
+          size,
+          modified
+        }
+
+        next()
+      })
+    }
+  }
+
   process(req, res) {
-    return [this.multer.single(this.name), this.generateVersions(this.versions)]
+    return [this.single(), this.generateVersions(this.versions)]
   }
 }

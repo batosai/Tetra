@@ -40,18 +40,16 @@ module.exports = class AttachmentsController extends ApplicationController {
 
   async show(req, res, next) {
     const attachment = await AttachmentsService.findById(req.params.id)
-    const url = attachment.fileUrl('original', true)
+    const { content } = await attachment.getBuffer('original', true)
 
-    fs.readFile(url, function(err, data) {
-      if (err) {
-        res.writeHead(404)
-        return res.end('File not found.')
-      }
+    if (!content) {
+      res.writeHead(404)
+      return res.end('File not found.')
+    }
 
-      res.setHeader('Content-Type', attachment.mimetype)
-      res.writeHead(200)
-      res.end(data)
-    })
+    res.setHeader('Content-Type', attachment.mimetype)
+    res.writeHead(200)
+    res.end(content)
   }
 
   async create(req, res, next) {

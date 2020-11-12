@@ -12,7 +12,7 @@
     "directory": "packages/auth-ui"
   },
   "engines": {
-    "node": ">=8.16.0"
+    "node": ">=10.20.1"
   },
   "dependencies": {
     "@tetrajs/app": "~0.0.1",

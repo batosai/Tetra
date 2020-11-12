@@ -2,7 +2,7 @@ mixin visual(attachment=null, options={ format: 'thumb', alt: '' })
   if typeof attachment === 'string'
     img(src=attachment alt=options.alt loading="lazy" style="width: auto; max-height: 250px; margin: auto;")
   else if (attachment && attachment.isImage())
-    img(src=attachment.filePath(options.format) alt=options.alt loading="lazy" style="width: auto; max-height: 250px; margin: auto;")
+    img(src=adminShowAttachmentsPath(attachment.id) alt=options.alt loading="lazy" style="width: auto; max-height: 250px; margin: auto;")
   else
     .has-background-dark.has-text-white.is-overlay.has-text-centered.is-size-2
       if options.alt
