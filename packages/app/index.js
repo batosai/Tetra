@@ -8,13 +8,13 @@ module.exports = class App {
   constructor(dirname) {
     this.app = express()
     this.dirname = dirname
-    this.name = path.basename(path.join(this.dirname, '../'))
+    this.name = path.basename(this.dirname)
 
     this.app.set('name', this.name)
 
-    this.app.set('views', [path.join(this.dirname, 'views')])
+    this.app.set('views', [path.join(this.dirname, 'resources/views')])
     this.app.set('view engine', 'pug')
-    this.app.locals.basedir = path.join(this.dirname, 'views');
+    this.app.locals.basedir = path.join(this.dirname, 'resources/views');
 
     this.execute()
   }
@@ -43,7 +43,7 @@ module.exports = class App {
         '/',
         router.configure({
           routes: require(`${this.dirname}/config/routes`),
-          controllers: require(`${this.dirname}/controllers`),
+          controllers: require(`${this.dirname}/app/Controllers`),
         }),
       )
     })()

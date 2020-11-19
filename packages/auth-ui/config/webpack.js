@@ -5,7 +5,7 @@ const entry = path.join(__dirname, '../assets/javascripts/index.js')
 
 const generator = new Generator()
 generator.addEntry(
-  path.basename(path.join(__dirname, '../../')),
+  path.basename(path.join(__dirname, '../')),
   entry
 )
 

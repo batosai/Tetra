@@ -18,8 +18,8 @@ app.on('mount', async function (parent) {
 
   for (let i in pkgTetra) {
     try {
-      const fr = require(`${pkgTetra[i].path}/app/config/locales/fr.json`)
-      const en = require(`${pkgTetra[i].path}/app/config/locales/en.json`)
+      const fr = require(`${pkgTetra[i].path}/config/locales/fr.json`)
+      const en = require(`${pkgTetra[i].path}/config/locales/en.json`)
 
       staticCatalog.fr = { ...staticCatalog.fr, ...fr }
       staticCatalog.en = { ...staticCatalog.en, ...en }

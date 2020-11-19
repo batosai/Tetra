@@ -3,5 +3,7 @@ public/uploads/
 public/build/*
 !public/build/admin
 
+storage
+
 .env
 .env.test

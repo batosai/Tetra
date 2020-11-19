@@ -1,5 +1,0 @@
-module.exports.homeController = require('./homeController')
-module.exports.pagesController = require('./pagesController')
-module.exports.attachmentsController = require('./attachmentsController')
-module.exports.modalAttachmentsController = require('./modalAttachmentsController')
-module.exports.settingsController = require('./settingsController')

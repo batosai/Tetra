@@ -1,5 +1,5 @@
 const fs = require('fs')
-const ApplicationController = require('./applicationController')
+const ApplicationController = require('./ApplicationController')
 const { AttachmentsService } = require('../services')
 const { requireAuthentication } = require('../middlewares')
 const { fileUploader } = require('../uploaders')

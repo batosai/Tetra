@@ -21,7 +21,7 @@ module.exports = class RoutesService {
 
     for (const key in modules) {
       try {
-        const routes = require(`${modules[key].path}/app/config/routes.js`)
+        const routes = require(`${modules[key].path}/config/routes.js`)
         routers = [...routers, routes]
       } catch(e) {}
     }

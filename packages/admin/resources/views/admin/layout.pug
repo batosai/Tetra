@@ -1,11 +1,13 @@
 doctype html
 html(lang="en")
   head
-    block head
     meta(charset="utf-8")
     title= title
     meta(name="viewport" content="width=device-width, initial-scale=1, user-scalable=no")
     meta(name="csrf-token" content=csrfToken)
+
+    block head
+
     //- unless env() === 'development'
     link(rel="stylesheet" href=assets("admin.css"))
     link(rel="stylesheet" href=assets("vendors.css"))

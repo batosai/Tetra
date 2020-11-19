@@ -1,4 +1,4 @@
-const ApplicationController = require('./applicationController')
+const ApplicationController = require('./ApplicationController')
 const { PagesService } = require('../services')
 const { Page } = require('@tetrajs/core').models
 

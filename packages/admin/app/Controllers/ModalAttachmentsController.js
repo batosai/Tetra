@@ -1,4 +1,4 @@
-const ApplicationController = require('./applicationController')
+const ApplicationController = require('./ApplicationController')
 const { AttachmentsService } = require('../services')
 
 module.exports = class modalAttachmentsController extends ApplicationController {

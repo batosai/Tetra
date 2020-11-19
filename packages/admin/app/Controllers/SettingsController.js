@@ -1,4 +1,4 @@
-const ApplicationController = require('./applicationController')
+const ApplicationController = require('./ApplicationController')
 const { SitesService } = require('../services')
 
 module.exports = class SettingsController extends ApplicationController {
