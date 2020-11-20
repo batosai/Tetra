@@ -1,7 +1,7 @@
 const path = require('path')
 const { Generator } = require('@tetrajs/webpack')
 
-const entry = path.join(__dirname, '../assets/javascripts/index.js')
+const entry = path.join(__dirname, '../resources/assets/javascripts/index.js')
 
 const generator = new Generator()
 generator.addEntry(

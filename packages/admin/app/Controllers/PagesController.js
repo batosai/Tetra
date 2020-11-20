@@ -1,5 +1,5 @@
 const ApplicationController = require('./ApplicationController')
-const { PagesService } = require('../services')
+const { PagesService } = require('../Services')
 const { Page } = require('@tetrajs/core').models
 
 module.exports = class PagesController extends ApplicationController {

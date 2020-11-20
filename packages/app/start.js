@@ -18,7 +18,7 @@ const {
 } = require('@tetrajs/core')
 const { ModulesService, RoutesService } = services
 
-const middleware = require('@tetrajs/router/app/middleware')
+const middleware = require('@tetrajs/router/lib/middleware')
 
 const appPath = process.cwd()
 

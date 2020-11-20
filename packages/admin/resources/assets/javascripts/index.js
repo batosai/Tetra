@@ -6,7 +6,7 @@ import { Pages } from './views'
 import { Confirm, Navbar, Aside, Modal, Editor, Datepicker } from './components'
 
 import { Application } from 'stimulus'
-import { definitionsFromContext } from '@tetrajs/webpack/contexts/stimulus'
+import { definitionsFromContext } from '@tetrajs/webpack/resources/contexts/stimulus'
 
 const application = Application.start()
 const context = require.context('./controllers', true, /\.js$/)

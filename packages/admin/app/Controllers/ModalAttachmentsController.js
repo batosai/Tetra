@@ -1,5 +1,5 @@
 const ApplicationController = require('./ApplicationController')
-const { AttachmentsService } = require('../services')
+const { AttachmentsService } = require('../Services')
 
 module.exports = class modalAttachmentsController extends ApplicationController {
   async index(req, res, next) {

@@ -1,5 +1,5 @@
 const createError = require('http-errors')
-// const middleware = require('./app/middleware')
+// const middleware = require('./lib/middleware')
 const express = require('@tetrajs/core').express
 
 const app = {}
@@ -58,13 +58,13 @@ app.configure = function (config, fn) {
 
 module.exports.router = app
 
-module.exports.get = require('./app/method').get
-module.exports.post = require('./app/method').post
-module.exports.put = require('./app/method').put
-module.exports.remove = require('./app/method').remove
+module.exports.get = require('./lib/method').get
+module.exports.post = require('./lib/method').post
+module.exports.put = require('./lib/method').put
+module.exports.remove = require('./lib/method').remove
 
-module.exports.resources = require('./app/resources')
-module.exports.root = require('./app/root')
-module.exports.namespace = require('./app/namespace')
+module.exports.resources = require('./lib/resources')
+module.exports.root = require('./lib/root')
+module.exports.namespace = require('./lib/namespace')
 
-module.exports.baseController = require('./app/baseController')
+module.exports.TetraController = require('./app/Controllers/TetraController')

@@ -1,5 +1,5 @@
 const ApplicationController = require('./ApplicationController')
-const { SitesService } = require('../services')
+const { SitesService } = require('../Services')
 
 module.exports = class SettingsController extends ApplicationController {
   async index(req, res, next) {

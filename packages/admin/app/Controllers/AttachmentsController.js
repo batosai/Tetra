@@ -1,14 +1,14 @@
 const fs = require('fs')
 const ApplicationController = require('./ApplicationController')
-const { AttachmentsService } = require('../services')
+const { AttachmentsService } = require('../Services')
 const { requireAuthentication } = require('../middlewares')
-const { fileUploader } = require('../uploaders')
+const { FileUploader } = require('../Uploaders')
 
 module.exports = class AttachmentsController extends ApplicationController {
   constructor(...args) {
     super(...args)
 
-    const upload = new fileUploader('file')
+    const upload = new FileUploader('file')
     // Todo test validator.
 
     this.middlewares = [

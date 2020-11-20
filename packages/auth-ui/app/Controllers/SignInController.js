@@ -1,4 +1,4 @@
-const BaseController = require('@tetrajs/router').baseController
+const TetraController = require('@tetrajs/router').TetraController
 const bodyParser = require('body-parser')
 const { security, auth } = require('@tetrajs/core')
 
@@ -9,7 +9,7 @@ const authenticate = auth.passport.authenticate('local', {
   failureFlash: true,
 })
 
-module.exports = class SignInController extends BaseController {
+module.exports = class SignInController extends TetraController {
   constructor(...args) {
     super(...args)
     // this.middlewares = [
