@@ -1,5 +1,6 @@
 const path = require('path')
 const { express, services, event } = require('@tetrajs/core')
+const { fetchFiles } = require('@tetrajs/core/lib/utils')
 const router = require('@tetrajs/router').router
 
 const { MiddlewaresService } = services
@@ -38,12 +39,21 @@ module.exports = class App {
         this.app.use(require(mws[key]))
       }
 
+      const files = await fetchFiles(`${path.join(this.dirname, 'app/Controllers')}/**/*Controller.js`)
+      let controllers = {}
+      try {
+        for (const file of files) {
+          controllers[path.basename(file, '.js')] = require(file)
+        }
+      } catch (e) {}
+
       // Load Controllers
       this.app.use(
         '/',
         router.configure({
+          path: path.join(this.dirname, '.'),
           routes: require(`${this.dirname}/config/routes`),
-          controllers: require(`${this.dirname}/app/Controllers`),
+          controllers,
         }),
       )
     })()

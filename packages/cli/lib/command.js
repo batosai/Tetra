@@ -1,4 +1,4 @@
-module.exports = class Command {
+class Command {
   constructor() {
     const { prompts, kleur } = require('../')
     this.prompts = prompts
@@ -106,3 +106,5 @@ module.exports = class Command {
     return new Table(obj)
   }
 }
+
+module.exports = Command

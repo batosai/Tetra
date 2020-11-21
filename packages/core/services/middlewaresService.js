@@ -1,12 +1,7 @@
 const { cache } = require('../')
-const path = require('path')
-const { promisify } = require('util')
-const glob = require('glob')
-const ModulesService = require('./modulesService')
+const { fetchFilesInModules } = require('../lib/utils')
 
-const globSync = promisify(glob)
-
-module.exports = class MiddlewaresService {
+class MiddlewaresService {
   static get cacheName() {
     return 'middlewares'
   }
@@ -20,16 +15,11 @@ module.exports = class MiddlewaresService {
   }
 
   static async caching() {
-    const modules = await ModulesService.get()
-    modules['core'] = { path: path.join(__dirname, '../') }
-    let middlewares = []
-
-    for (const key in modules) {
-      const results = await globSync(`${modules[key].path}/middlewares/**/*.js`, {ignore: '/**/index.js'})
-      middlewares = [...middlewares, ...results]
-    }
+    const middlewares = await fetchFilesInModules('middlewares/**/*.js')
     cache.set(MiddlewaresService.cacheName, JSON.stringify(middlewares))
 
     return middlewares
   }
 }
+
+module.exports = MiddlewaresService

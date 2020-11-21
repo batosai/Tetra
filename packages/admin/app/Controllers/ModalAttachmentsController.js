@@ -1,7 +1,7 @@
 const ApplicationController = require('./ApplicationController')
 const { AttachmentsService } = require('../Services')
 
-module.exports = class modalAttachmentsController extends ApplicationController {
+module.exports = class ModalAttachmentsController extends ApplicationController {
   async index(req, res, next) {
     const paginate = await AttachmentsService.fetchAttachments(req)
 

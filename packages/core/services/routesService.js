@@ -2,7 +2,7 @@ const { cache } = require('..')
 const ModulesService = require('./modulesService')
 
 
-module.exports = class RoutesService {
+class RoutesService {
   static get cacheName() {
     return 'routers'
   }
@@ -30,3 +30,5 @@ module.exports = class RoutesService {
     return routers
   }
 }
+
+module.exports = RoutesService

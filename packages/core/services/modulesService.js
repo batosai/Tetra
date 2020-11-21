@@ -1,6 +1,6 @@
 const { cache } = require('../')
 
-module.exports = class ModulesService {
+class ModulesService {
   static get cacheName() {
     return 'modules'
   }
@@ -44,3 +44,5 @@ module.exports = class ModulesService {
     return modules
   }
 }
+
+module.exports = ModulesService
