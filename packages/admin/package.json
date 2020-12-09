@@ -15,9 +15,6 @@
     "node": ">=10.20.1"
   },
   "dependencies": {
-    "@tetrajs/app": "~0.0.1",
-    "@tetrajs/core": "~0.0.1",
-    "@tetrajs/router": "~0.0.1",
     "bulma": "^0.9.0",
     "bulma-calendar": "^6.0.9",
     "bulma-extensions": "^6.2.7",
@@ -28,9 +25,18 @@
     "quill": "^2.0.0-dev.3",
     "stimulus": "^1.1.1"
   },
+  "peerDependencies": {
+    "@tetrajs/app": "~0.0.1",
+    "@tetrajs/auth-ui": "~0.0.1",
+    "@tetrajs/core": "~0.0.1",
+    "@tetrajs/router": "~0.0.1"
+  },
   "devDependencies": {
-    "@tetrajs/webpack": "~0.0.1",
-    "@tetrajs/auth-ui": "~0.0.1"
+    "@tetrajs/app": "~0.0.1",
+    "@tetrajs/auth-ui": "~0.0.1",
+    "@tetrajs/core": "~0.0.1",
+    "@tetrajs/router": "~0.0.1",
+    "@tetrajs/webpack": "~0.0.1"
   },
   "tetra": {
     "name": "admin",
