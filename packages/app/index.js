@@ -1,6 +1,6 @@
 const path = require('path')
 const { express, services, event } = require('@tetrajs/core')
-const { fetchFiles } = require('@tetrajs/core/lib/utils')
+const { fetchFiles, fetchFilesInModules } = require('@tetrajs/core/lib/utils')
 const router = require('@tetrajs/router').router
 
 const { MiddlewaresService } = services
@@ -36,8 +36,25 @@ module.exports = class App {
       const mws = await MiddlewaresService.get()
 
       for (const key in mws) {
-        this.app.use(require(mws[key]))
+        try {
+          const klass = require(mws[key])
+          const o = new klass()
+          if (!o.globalAccess && o.externalModule && o.autoLoad) {
+            this.app.use(o.handle)
+          }
+        } catch (e) {}
       }
+
+      const middlewareFiles = await fetchFiles(`${path.join(this.dirname, 'app/Middlewares')}/**/*.js`)
+      try {
+        for (const f of middlewareFiles) {
+          const klass = require(f)
+          const o = new klass()
+          if (!o.globalAccess && o.autoLoad) {
+            this.app.use(o.handle)
+          }
+        }
+      } catch (e) {}
 
       const files = await fetchFiles(`${path.join(this.dirname, 'app/Controllers')}/**/*Controller.js`)
       let controllers = {}

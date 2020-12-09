@@ -15,7 +15,9 @@ const {
   i18n,
   services,
   event,
+  utils
 } = require('@tetrajs/core')
+const { fetchFilesInModules } = utils
 const { ModulesService, RoutesService } = services
 
 const middleware = require('@tetrajs/router/lib/middleware')
@@ -70,15 +72,27 @@ app.use(auth.passport.session())
   const mds = await ModulesService.get()
 
   // Routers caching
-  const routesCollection = await RoutesService.get()
-  routesCollection.forEach(routes => {
-    app.use(middleware(routes))
-  })
+  // const routesCollection = await RoutesService.get()
+  // routesCollection.forEach(routes => {
+  //   app.use(middleware(routes))
+  // })
+
+  const middlewareFiles = await fetchFilesInModules(`app/Middlewares/**/*.js`)
+
+  for (const f of middlewareFiles) {
+    try {
+      const klass = require(f)
+      const o = new klass()
+      if (o.globalAccess) {
+        app.use(o.handle)
+      }
+    } catch (e) {}
+  }
 
   app.use(i18n)
 
   for (const k in mds) {
-    if (mds[k].namespace) {
+    if (mds[k].namespace && mds[k].autoload) {
       app.use(mds[k].namespace, require(mds[k].path))
     }
   }

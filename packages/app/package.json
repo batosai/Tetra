@@ -1,6 +1,6 @@
 {
   "name": "@tetrajs/app",
-  "version": "0.0.48",
+  "version": "0.0.56",
   "description": "",
   "keywords": [],
   "main": "index.js",
@@ -29,6 +29,10 @@
     "helmet": "^3.22.0",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.4"
+  },
+  "tetra": {
+    "name": "app",
+    "autoload": "false"
   },
   "deprecated": false,
   "license": "MIT"
