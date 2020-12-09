@@ -17,7 +17,12 @@ steps.startRecording()
 let oldStep = null
 
 if (!argv._.length) {
-  console.log(colors.green('npm init @tetrajs [project-name]'))
+  console.log()
+  if (useYarn) {
+    console.log(colors.green('yarn create @tetrajs [project-name]'))
+  } else {
+    console.log(colors.green('npm init @tetrajs [project-name]'))
+  }
   console.log()
   console.log(colors.red('  Project name is require.'))
   process.exit()
@@ -25,6 +30,7 @@ if (!argv._.length) {
 
 const projectName = argv._[0]
 
+console.log()
 console.log(colors.green(`Creating a new Tetra app in ${projectName}.`))
 console.log()
 
@@ -46,17 +52,10 @@ async function main() {
   oldStep.success('Create project', '✓')
 
   oldStep = steps.advance('Installing dependencies').start()
-  await install(projectName, ['@tetrajs/app', '@tetrajs/webpack', '@tetrajs/auth-ui', '@tetrajs/admin'], { useYarn })
+  await install(projectName, ['@tetrajs/app', '@tetrajs/router', '@tetrajs/webpack', '@tetrajs/auth-ui', '@tetrajs/admin'], { useYarn, isOnline: true })
   oldStep.success('Dependencies installed', '✓')
 
   process.chdir(projectName)
-
-  // oldStep = steps.advance('Linking dependencies').start()
-  //   const args = [ 'tetra', 'link']
-  //     .concat(['@tetrajs/auth-ui'])
-
-  //   await spawn(`npx`, args)
-  // oldStep.success('Dependencies linked', '✓')
 
   const nanoSecs = steps.stopRecording()
   console.log('')
@@ -68,14 +67,18 @@ async function main() {
   console.log(`  ${colors.green(`cd ${projectName}`)}`)
   console.log()
   console.log('To configure app:')
-  console.log(`  ${colors.green('npx tetra setup')}`)
+  if (useYarn) {
+    console.log(`  ${colors.green('yarn exec tetra setup')}`)
+  } else {
+    console.log(`  ${colors.green('npx tetra setup')}`)
+  }
   console.log()
   console.log('To start a server:')
-  console.log(`  ${colors.green('npx tetra serve')}`)
+  if (useYarn) {
+    console.log(`  ${colors.green('yarn exec tetra serve')}`)
+  } else {
+    console.log(`  ${colors.green('npx tetra serve')}`)
+  }
   console.log()
 }
 main()
-
-// if (!argv['skip-admin']) {
-//   pkgi('@tetrajs/admin')
-// }

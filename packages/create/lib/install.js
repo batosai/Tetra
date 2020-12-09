@@ -21,11 +21,11 @@ module.exports = function install(
       }
       args.push('--cwd', root)
 
-      if (!isOnline) {
-        console.log(colors.yellow('You appear to be offline.'))
-        console.log(colors.yellow('Falling back to the local Yarn cache.'))
-        console.log()
-      }
+      // if (!isOnline) {
+      //   console.log(colors.yellow('You appear to be offline.'))
+      //   console.log(colors.yellow('Falling back to the local Yarn cache.'))
+      //   console.log()
+      // }
     } else {
       command = 'npm'
       args = [
