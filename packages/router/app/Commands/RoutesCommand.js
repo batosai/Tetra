@@ -4,7 +4,7 @@ const { generatePrefix, capitalize } = require('../../lib/utils')
 
 const { RoutesService } = services
 
-module.exports = class Routes extends Command {
+class Routes extends Command {
   configure() {
     this.name = 'routes'
     this.description = 'Routes app'
@@ -47,3 +47,5 @@ module.exports = class Routes extends Command {
     })
   }
 }
+
+module.exports = Routes

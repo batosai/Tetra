@@ -1,4 +1,4 @@
-module.exports = class BaseController {
+class TetraController {
   constructor(...arg) {
     this.middlewares = []
   }
@@ -71,3 +71,5 @@ module.exports = class BaseController {
     return m.filter((item, pos, self) => self.indexOf(item) == pos) // array unique
   }
 }
+
+module.exports = TetraController
