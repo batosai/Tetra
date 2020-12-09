@@ -1,6 +1,6 @@
 const TetraController = require('@tetrajs/router').TetraController
 
-module.exports = class SignOutController extends TetraController {
+class SignOutController extends TetraController {
   async index(req, res, next) {
     if (req.user) {
       req.logout()
@@ -8,3 +8,5 @@ module.exports = class SignOutController extends TetraController {
     return res.redirect(req.usersIndexSignInPath())
   }
 }
+
+module.exports = SignOutController

@@ -9,7 +9,7 @@ const authenticate = auth.passport.authenticate('local', {
   failureFlash: true,
 })
 
-module.exports = class SignInController extends TetraController {
+class SignInController extends TetraController {
   constructor(...args) {
     super(...args)
     // this.middlewares = [
@@ -34,3 +34,5 @@ module.exports = class SignInController extends TetraController {
     }
   }
 }
+
+module.exports = SignInController
