@@ -3,7 +3,7 @@ const path = require('path')
 const glob = require('glob')
 const { promisify } = require('util')
 
-const ModulesService = require('../services/modulesService')
+const { ModulesService } = require('../services')
 
 const globSync = promisify(glob)
 

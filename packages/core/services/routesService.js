@@ -1,6 +1,5 @@
 const { cache } = require('..')
-const ModulesService = require('./modulesService')
-
+const { ModulesService } = require('./')
 
 class RoutesService {
   static get cacheName() {
@@ -9,7 +8,7 @@ class RoutesService {
 
   static async get() {
     if (await cache.exist(RoutesService.cacheName)) {
-      return await cache.get(RoutesService.cacheName, JSON.parse)
+      return cache.get(RoutesService.cacheName, JSON.parse)
     } else {
       return RoutesService.caching()
     }

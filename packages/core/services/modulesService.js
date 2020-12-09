@@ -7,7 +7,7 @@ class ModulesService {
 
   static async get() {
     if (await cache.exist(ModulesService.cacheName)) {
-      return await cache.get(ModulesService.cacheName, JSON.parse)
+      return cache.get(ModulesService.cacheName, JSON.parse)
     } else {
       return ModulesService.caching()
     }
@@ -25,9 +25,11 @@ class ModulesService {
         const tetra = info.tetra
         if (tetra) {
           modules[info.name] =  {
+            autoload: true,
             ...tetra,
             path: `${appPath}/node_modules/${i}`,
-            packageName: info.name
+            packageName: info.name,
+            version: info.version,
           }
         }
       } catch (e) {}
@@ -35,9 +37,11 @@ class ModulesService {
 
     const tetra = pkg.tetra
     modules[pkg.name] = {
+      autoload: true,
       ...tetra,
       path: appPath,
-      packageName: pkg.name
+      packageName: pkg.name,
+      version: pkg.version,
     }
     cache.set(ModulesService.cacheName, JSON.stringify(modules))
 

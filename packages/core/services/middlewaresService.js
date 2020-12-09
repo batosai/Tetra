@@ -8,14 +8,14 @@ class MiddlewaresService {
 
   static async get() {
     if (await cache.exist(MiddlewaresService.cacheName)) {
-      return await cache.get(MiddlewaresService.cacheName, JSON.parse)
+      return cache.get(MiddlewaresService.cacheName, JSON.parse)
     } else {
       return MiddlewaresService.caching()
     }
   }
 
   static async caching() {
-    const middlewares = await fetchFilesInModules('middlewares/**/*.js')
+    const middlewares = await fetchFilesInModules('app/Middlewares/**/*.js')
     cache.set(MiddlewaresService.cacheName, JSON.stringify(middlewares))
 
     return middlewares

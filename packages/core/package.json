@@ -1,6 +1,6 @@
 {
   "name": "@tetrajs/core",
-  "version": "0.0.38",
+  "version": "0.0.44",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -37,6 +37,10 @@
     "sharp": "^0.25.3",
     "slugify": "^1.4.0",
     "uuid": "^8.1.0"
+  },
+  "tetra": {
+    "name": "core",
+    "autoload": "false"
   },
   "license": "MIT"
 }
