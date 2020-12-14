@@ -20,8 +20,6 @@ const {
 const { fetchFilesInModules } = utils
 const { ModulesService, RoutesService } = services
 
-const middleware = require('@tetrajs/router/lib/middleware')
-
 const appPath = process.cwd()
 
 const app = express()
@@ -70,12 +68,6 @@ app.use(auth.passport.session())
 // Load modules
 ;(async () => {
   const mds = await ModulesService.get()
-
-  // Routers caching
-  // const routesCollection = await RoutesService.get()
-  // routesCollection.forEach(routes => {
-  //   app.use(middleware(routes))
-  // })
 
   const middlewareFiles = await fetchFilesInModules(`app/Middlewares/**/*.js`)
 
