@@ -1,4 +1,4 @@
-const root = require('../app/root')
+const root = require('../lib/root')
 const expect = require('chai').expect
 
 describe('Rooter - Root', function () {

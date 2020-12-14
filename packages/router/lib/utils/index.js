@@ -1,4 +1,4 @@
-module.exports.capitalize = (s) => s.charAt(0).toUpperCase() + s.slice(1)
+const { capitalize } = require('@tetrajs/core').utils
 
 module.exports.parseParameters = (path, opts) => {
   let p = path
@@ -12,7 +12,7 @@ module.exports.parseParameters = (path, opts) => {
       }
     }
 
-    if (rest) {
+    if (Object.keys(rest).length !== 0) {
       p =
         `${p}?` +
         Object.entries(rest)
@@ -34,7 +34,7 @@ module.exports.defaultView = (path) => {
 
 module.exports.generatePrefix = (name, path) => {
   if (name !== 'root') {
-    return `${name}${module.exports.capitalize(path)}`
+    return `${name}${capitalize(path)}`
   }
   return path
 }

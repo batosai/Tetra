@@ -1,6 +1,7 @@
-const { services } = require('@tetrajs/core')
+const { services, utils } = require('@tetrajs/core')
 const { Command } = require('@tetrajs/cli')
-const { generatePrefix, capitalize } = require('../../lib/utils')
+const { generatePrefix } = require('../../lib/utils')
+const { capitalize } = utils
 
 const { RoutesService } = services
 

@@ -1,5 +1,5 @@
 const defaultView = require('./utils').defaultView
-const slugify = require('slugify')
+const { slugify } = require('@tetrajs/core')
 
 module.exports = (name, sources) => {
   const r = {}

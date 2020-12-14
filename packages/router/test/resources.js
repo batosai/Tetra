@@ -1,5 +1,5 @@
-const resources = require('../app/resources')
-const { post } = require('../app/method')
+const resources = require('../lib/resources')
+const { post } = require('../lib/method')
 const expect = require('chai').expect
 
 const index = {

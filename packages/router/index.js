@@ -1,12 +1,10 @@
 const createError = require('http-errors')
-// const middleware = require('./lib/middleware')
 const express = require('@tetrajs/core').express
-const { capitalize } = require('./lib/utils')
+const { capitalize } = require('@tetrajs/core').utils
 
 const app = {
   configure:  function (config, fn) {
     const router = express.Router()
-    // router.use(middleware(config.routes))
 
     router.all('*', async function (req, res, next) {
       // Change method HTTP by parameters _method

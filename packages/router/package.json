@@ -12,8 +12,7 @@
     "@tetrajs/core": "~0.0.1",
     "@tetrajs/cli": "~0.0.1",
     "http-errors": "~1.6.2",
-    "humps": "^2.0.1",
-    "slugify": "^1.3.4"
+    "humps": "^2.0.1"
   },
   "devDependencies": {
     "chai": "^4.2.0",

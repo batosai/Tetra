@@ -1,4 +1,4 @@
-const BaseController = require('../app/baseController')
+const TetraController = require('../app/Controllers/TetraController')
 const expect = require('chai').expect
 
 const fackMiddleware = () => {}
@@ -7,7 +7,7 @@ const fack3Middleware = () => {}
 const fack4Middleware = () => {}
 const fack5Middleware = () => {}
 
-class PageController extends BaseController {
+class PageController extends TetraController {
   constructor() {
     super()
     this.middlewares = [

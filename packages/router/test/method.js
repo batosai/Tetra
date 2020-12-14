@@ -1,4 +1,4 @@
-const { get, post, put, remove } = require('../app/method')
+const { get, post, put, remove } = require('../lib/method')
 const expect = require('chai').expect
 
 describe('Rooter - Method', function () {
