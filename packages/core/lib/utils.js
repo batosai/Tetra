@@ -7,6 +7,8 @@ const { ModulesService } = require('../services')
 
 const globSync = promisify(glob)
 
+module.exports.capitalize = (s) => s.charAt(0).toUpperCase() + s.slice(1)
+
 module.exports.exist = async function (name) {
   return new Promise((resolve) => {
     fs.access(name, fs.constants.F_OK, (err) => {

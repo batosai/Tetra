@@ -1,4 +1,5 @@
 const TetraMiddleware = require('@tetrajs/router').TetraMiddleware
+const { capitalize } = require('@tetrajs/core').utils
 
 class CapitalizeMiddleware extends TetraMiddleware {
   get globalAccess() {
@@ -6,7 +7,7 @@ class CapitalizeMiddleware extends TetraMiddleware {
   }
 
   async handle(req, res, next) {
-    res.locals.capitalize = s => s.charAt(0).toUpperCase() + s.slice(1)
+    res.locals.capitalize = capitalize
 
     await next()
   }
