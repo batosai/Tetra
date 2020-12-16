@@ -2,7 +2,7 @@
 const { parseParameters, generatePrefix } = require('../../lib/utils')
 const { capitalize } = require('@tetrajs/core').utils
 
-class RouteService {
+class ResourcesService {
   static async handle(namespaces, { req, res }) {
     for (let name in namespaces) {
       namespaces[name].forEach((route) => {
@@ -25,4 +25,4 @@ class RouteService {
   }
 }
 
-module.exports = RouteService
+module.exports = ResourcesService

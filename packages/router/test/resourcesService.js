@@ -1,4 +1,4 @@
-const RouteService = require('../app/Services/RouteService')
+const ResourcesService = require('../app/Services/ResourcesService')
 const namespace = require('../lib/namespace')
 const resources = require('../lib/resources')
 const { put } = require('../lib/method')
@@ -17,7 +17,7 @@ const res = {
 
 describe('Rooter - Middleware', function () {
   const ns = namespace('/admin', [resources('pages', { only: 'index' })])
-  RouteService.handle(ns, { req, res })
+  ResourcesService.handle(ns, { req, res })
 
   describe(`#Request - generate 'path' and 'url' for admin access`, () => {
     it('should return -1 when the value is not equal', () => {
@@ -45,7 +45,7 @@ describe('Rooter - Middleware', function () {
       put(':id/trash', { name: 'pages', action: 'trash' }),
     ]),
   ])
-  RouteService.handle(ns2, { req, res })
+  ResourcesService.handle(ns2, { req, res })
 
   describe(`#Request - generate 'path' and 'url' for root access`, () => {
     it('should return -1 when the value is not equal', () => {

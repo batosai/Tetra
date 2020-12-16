@@ -1,5 +1,5 @@
 const TetraMiddleware = require('./TetraMiddleware')
-const RouteService = require('../Services/RouteService')
+const ResourcesService = require('../Services/ResourcesService')
 
 const { services } = require('@tetrajs/core')
 const { RoutesService } = services
@@ -12,7 +12,7 @@ class RouteMiddleware extends TetraMiddleware {
   async handle(req, res, next) {
     const routesCollection = await RoutesService.get()
     routesCollection.forEach(namespaces => {
-      RouteService.handle(namespaces, { req, res })
+      ResourcesService.handle(namespaces, { req, res })
     })
     await next()
   }
