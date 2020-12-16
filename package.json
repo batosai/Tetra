@@ -22,5 +22,17 @@
   "homepage": "https://github.com/tetrajs/tetra#readme",
   "dependencies": {
     "prettier": "^2.0.5"
+  },
+  "devDependencies": {
+    "@tetrajs/app": "~0.0.1",
+    "@tetrajs/auth-ui": "~0.0.1",
+    "@tetrajs/admin": "~0.0.1",
+    "@tetrajs/core": "~0.0.1",
+    "@tetrajs/router": "~0.0.1",
+    "@tetrajs/webpack": "~0.0.1"
+  },
+  "tetra": {
+    "name": "tetra",
+    "namespace": "/"
   }
 }
