@@ -1,4 +1,6 @@
 const TetraMiddleware = require('@tetrajs/router').TetraMiddleware
+const { permitParameters } = require('@tetrajs/core').utils
+
 
 class PermitParametersMiddleware extends TetraMiddleware {
   get globalAccess() {
@@ -6,23 +8,7 @@ class PermitParametersMiddleware extends TetraMiddleware {
   }
 
   async handle(req, res, next) {
-    req.permitParameters = (permit, query, blank = true) => {
-      let params = {}
-
-      for (const key of permit) {
-        if (query[key] !== undefined) {
-          if (blank) {
-            params[key] = query[key]
-          } else {
-            if (query[key] !== '') {
-              params[key] = query[key]
-            }
-          }
-        }
-      }
-
-      return params
-    }
+    req.permitParameters = permitParameters
 
     await next()
   }

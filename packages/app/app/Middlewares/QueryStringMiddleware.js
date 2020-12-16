@@ -1,4 +1,5 @@
 const TetraMiddleware = require('@tetrajs/router').TetraMiddleware
+const { qs } = require('@tetrajs/core').utils
 
 class QueryStringMiddleware extends TetraMiddleware {
   get globalAccess() {
@@ -6,17 +7,7 @@ class QueryStringMiddleware extends TetraMiddleware {
   }
 
   async handle(req, res, next) {
-    res.locals.qs = (...args) => {
-      const ret = []
-
-      for (let arg of args) {
-        for (let data in arg) {
-          ret.push(encodeURIComponent(data) + '=' + encodeURIComponent(arg[data]))
-        }
-      }
-
-      return ret.join('&')
-    }
+    res.locals.qs = qs
 
     await next()
   }
