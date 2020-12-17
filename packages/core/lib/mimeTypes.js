@@ -1,4 +1,4 @@
-module.exports = {
+const types = {
   'audio/aac': {
     extension: '.aac',
     group: 'audio',
@@ -369,4 +369,11 @@ module.exports = {
     group: 'archive',
     name: '7-zip archive',
   },
+}
+
+module.exports = function(mime) {
+  if (types[mime] !== undefined) {
+    return types[mime].group
+  }
+  return 'document'
 }
