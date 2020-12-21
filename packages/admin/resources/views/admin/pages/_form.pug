@@ -24,7 +24,7 @@
 
       figure.image.is-2by1(data-target="imagepicker.preview")
         if page.image
-          +visual(page.image, { alt: mimeTypes(page.image.mimetype) })
+          +visual(page.image, { alt: mimeType(page.image.mimetype) })
         else
           +visual('https://via.placeholder.com/240x120/ffdd57/646464?text=TetraJs', { alt: 'VISUAL' })
       br

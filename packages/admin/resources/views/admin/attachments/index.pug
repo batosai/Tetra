@@ -52,7 +52,7 @@ block content
         .column.is-one-quarter
           figure.image.border.imagepicker.is-2by1
             +checkbox()(name="ids[]" id=index value=attachment.id class="is-danger")
-            +visual(attachment, { alt: mimeTypes(attachment.mimetype) })
+            +visual(attachment, { alt: mimeType(attachment.mimetype) })
     if paginate.docs.length
       .buttons.is-centered
         +__button('admin.attachments.actions.delete')(class="is-danger")

@@ -7,7 +7,7 @@ block content
 
   +card.m-t-10
     +carImage.is-2by1
-      +visual(attachment, { format: 'original', alt: mimeTypes(attachment.mimetype) })
+      +visual(attachment, { format: 'original', alt: mimeType(attachment.mimetype) })
     +cardContent
       +__text('admin.modals.attachment.fields.name')(value=attachment.name readonly)
       if attachment.isImage()
