@@ -3,14 +3,15 @@ const {
   session,
   sessionFileStore,
 } = require('@tetrajs/core')
-
+const Db = require('./db')
+const { config } = require('../')
 
 class Session {
   static connect() {
     let store
-    if (process.env.DATABASE_TYPE === database.MONGO_DB && process.env.SESSION_TYPE === 'database') {
-      const MongoStore = database.mongodb.connectMongo(session)
-      database.mongodb.connection()
+    if (config.session.storeDriver === 'database') {
+      const MongoStore = database.connectMongo(session)
+      Db.connect()
       store = new MongoStore({ mongooseConnection: database.mongoose.connection })
     }
     else {
@@ -21,10 +22,8 @@ class Session {
     }
 
     return session({
-      secret: process.env.SESSION_SECRET,
-      resave: true,
-      saveUninitialized: true,
       store,
+      ...config.session
     })
   }
 }

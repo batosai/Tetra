@@ -20,3 +20,5 @@ module.exports.services = require('./services')
 module.exports.utils = require('./lib/utils')
 
 module.exports.models = require('./modules/database/mongodb/models')
+
+module.exports.Env = require('./lib/env')
