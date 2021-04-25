@@ -107,12 +107,12 @@ class Setup extends Command {
       path.join(app, filename),
       `NODE_ENV=${env}
 
-DATABASE_TYPE=${type}
-DATABASE_HOST=${opt.host || '127.0.0.1'}
-DATABASE_PORT=${opt.port || '27017'}
-DATABASE_USER=${opt.username || ''}
-DATABASE_PASSWORD=${opt.password || ''}
-DATABASE_NAME=${opt.env === 'test' ? 'tetra_test' : opt.name}
+DB_CONNECTION=${type}
+DB_HOST=${opt.host || '127.0.0.1'}
+DB_PORT=${opt.port || '27017'}
+DB_USER=${opt.username || ''}
+DB_PASSWORD=${opt.password || ''}
+DB_NAME=${opt.env === 'test' ? 'tetra_test' : opt.name}
 
 SESSION_TYPE=database
 SESSION_SECRET=${buf.toString('hex')}

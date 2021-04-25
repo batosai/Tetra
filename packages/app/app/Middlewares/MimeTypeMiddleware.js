@@ -1,12 +1,11 @@
-const TetraMiddleware = require('@tetrajs/router').TetraMiddleware
+const { Middleware } = require('@tetrajs/router').decorators
 const { mimeType } = require('@tetrajs/core').utils
 
-class MimeTypeMiddleware extends TetraMiddleware {
-  get globalAccess() {
-    return true
-  }
+@Middleware('mime-type')
+class MimeTypeMiddleware {
+  static global
 
-  async handle(req, res, next) {
+  static async handle(req, res, next) {
     res.locals.mimeType = mimeType
 
     await next()

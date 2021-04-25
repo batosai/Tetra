@@ -1,0 +1,32 @@
+{
+  "name": "@tetrajs/storage",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tetrajs/tetra",
+    "directory": "packages/storage"
+  },
+  "engines": {
+    "node": ">=10.20.1"
+  },
+  "dependencies": {
+    "@tetrajs/app": "~0.0.1",
+    "@tetrajs/core": "~0.0.26",
+    "@tetrajs/router": "~0.0.3",
+    "@slynova/flydrive": "~1.0.3"
+  },
+  "devDependencies": {
+    "@tetrajs/webpack": "~0.0.16",
+    "@tetrajs/auth-ui": "~0.0.12"
+  },
+  "tetra": {
+    "name": "storage",
+    "namespace": "/media"
+  },
+  "license": "MIT"
+}

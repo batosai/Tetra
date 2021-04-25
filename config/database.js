@@ -1,4 +1,4 @@
-const { Env } = require('@tetrajs/core')
+const Env = require('@tetrajs/core/lib/env')
 
 module.exports = {
   /*
@@ -39,7 +39,7 @@ module.exports = {
       port: Env.get('DB_PORT', ''),
       user: Env.get('DB_USER', 'root'),
       password: Env.get('DB_PASSWORD', ''),
-      database: Env.get('DB_DATABASE', 'tetra_development')
+      database: Env.get('DB_NAME', 'tetra_development')
     }
   },
 
@@ -56,7 +56,7 @@ module.exports = {
       port: Env.get('DB_PORT', ''),
       user: Env.get('DB_USER', 'root'),
       password: Env.get('DB_PASSWORD', ''),
-      database: Env.get('DB_DATABASE', 'tetra_development')
+      database: Env.get('DB_NAME', 'tetra_development')
     }
   },
 
@@ -73,7 +73,7 @@ module.exports = {
       port: Env.get('DB_PORT', '27017'),
       user: Env.get('DB_USER', ''),
       password: Env.get('DB_PASSWORD', ''),
-      name: Env.get('DB_DATABASE', 'tetra_development')
+      name: Env.get('DB_NAME', 'tetra_development')
     }
   }
 }

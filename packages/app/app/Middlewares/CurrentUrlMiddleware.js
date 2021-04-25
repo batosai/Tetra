@@ -1,11 +1,10 @@
-const TetraMiddleware = require('@tetrajs/router').TetraMiddleware
+const { Middleware } = require('@tetrajs/router').decorators
 
-class CurrentUrlMiddleware extends TetraMiddleware {
-  get globalAccess() {
-    return true
-  }
+@Middleware('current-url')
+class CurrentUrlMiddleware {
+  static global
 
-  async handle(req, res, next) {
+  static async handle(req, res, next) {
     res.locals.currentUrl = req.url
 
     await next()

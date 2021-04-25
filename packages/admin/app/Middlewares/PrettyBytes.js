@@ -1,8 +1,9 @@
-const TetraMiddleware = require('@tetrajs/router').TetraMiddleware
+const { Middleware } = require('@tetrajs/router').decorators
 const prettyBytes = require('pretty-bytes')
 
-class PrettyBytes extends TetraMiddleware {
-  async handle(req, res, next) {
+@Middleware('pretty-bytes')
+class PrettyBytes {
+  static async handle(req, res, next) {
     res.locals.prettyBytes = prettyBytes
     await next()
   }

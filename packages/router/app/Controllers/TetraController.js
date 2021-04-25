@@ -1,5 +1,5 @@
 class TetraController {
-  constructor(...arg) {
+  constructor() {
     this.middlewares = []
   }
 

@@ -1,5 +1,6 @@
 const TetraController = require('@tetrajs/router').TetraController
 const bodyParser = require('body-parser')
+const { middleware } = require('@tetrajs/app')
 const { security, auth } = require('@tetrajs/core')
 
 const parseForm = bodyParser.urlencoded({ extended: false })
@@ -10,15 +11,15 @@ const authenticate = auth.passport.authenticate('local', {
 })
 
 class SignInController extends TetraController {
-  constructor(...args) {
-    super(...args)
+  constructor() {
+    super()
     // this.middlewares = [
     //   { action: csrfProtection, only: 'index' },
     //   { actions: [csrfProtection], only: ['index'] },
     //   { actions: [csrfProtection], except: ['index'] }
     // ]
     this.middlewares = [
-      { actions: [security.csrf.protection, security.csrf.token] },
+      { actions: [security.csrf.protection, security.csrf.token, middleware('assets')] },
       { actions: [parseForm, authenticate], only: 'create' },
     ]
   }

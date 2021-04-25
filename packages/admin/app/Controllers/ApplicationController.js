@@ -1,22 +1,21 @@
 const TetraController = require('@tetrajs/router').TetraController
-const RequireAuthentication = require('@tetrajs/auth-ui/app/Middlewares/RequireAuthentication')
+const { middleware } = require('@tetrajs/app')
 const { security } = require('@tetrajs/core')
 const { SitesService } = require('../Services')
 
 module.exports = class ApplicationController extends TetraController {
-  constructor(...args) {
-    super(...args)
-
-    const requireAuthentication = new RequireAuthentication()
+  constructor() {
+    super()
 
     this.middlewares = [
       {
         actions: [
-          requireAuthentication.handle,
+          middleware('require-authentication'),
           security.csrf.protection,
           security.csrf.token,
           this.setSite,
           this.setLocale,
+          middleware('assets')
         ],
       },
     ]
@@ -30,6 +29,7 @@ module.exports = class ApplicationController extends TetraController {
   }
 
   async setLocale(req, res, next) {
+
     if (
       req.query['lang'] === undefined &&
       req.cookies['language'] === undefined

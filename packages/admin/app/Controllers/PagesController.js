@@ -26,16 +26,17 @@ module.exports = class PagesController extends ApplicationController {
 
   async create(req, res, next) {
     const page = await PagesService.createPage(req)
-    const promise = page.save()
+    try {
+      await page.save()
 
-    promise.then(() => res.redirect(req.adminIndexPagesPath()))
-    promise.catch(err =>
+      res.redirect(req.adminIndexPagesPath())
+    } catch (err) {
       res.render(req.adminNewPagesView, {
         title: 'page',
         page,
         errors: err.errors,
-      }),
-    )
+      })
+    }
   }
 
   async edit(req, res, next) {
@@ -50,16 +51,18 @@ module.exports = class PagesController extends ApplicationController {
 
   async update(req, res, next) {
     const page = await PagesService.updatePage(req)
-    const promise = page.save()
 
-    promise.then(() => res.redirect(req.adminIndexPagesPath()))
-    promise.catch(err =>
+    try {
+      await page.save()
+
+      res.redirect(req.adminIndexPagesPath())
+    } catch (err) {
       res.render(req.adminEditPagesView, {
         title: 'page',
         page,
         errors: err.errors,
-      }),
-    )
+      })
+    }
   }
 
   async delete(req, res, next) {

@@ -1,25 +1,25 @@
 const fs = require('fs')
 const ApplicationController = require('./ApplicationController')
 const { AttachmentsService } = require('../Services')
-const RequireAuthentication = require('@tetrajs/auth-ui/app/Middlewares/RequireAuthentication')
 const { FileUploader } = require('../Uploaders')
+const { middleware } = require('@tetrajs/app')
 
 module.exports = class AttachmentsController extends ApplicationController {
-  constructor(...args) {
-    super(...args)
+  constructor() {
+    super()
 
-    const requireAuthentication = new RequireAuthentication()
     const upload = new FileUploader('file')
     // Todo test validator.
 
     this.middlewares = [
       {
         actions: [
-          requireAuthentication.handle,
+          middleware('require-authentication'),
           // multipart is not compatible csrf
           // security.csrf.protection,
           // security.csrf.token,
           this.setLocale,
+          middleware('assets')
         ],
       },
       {

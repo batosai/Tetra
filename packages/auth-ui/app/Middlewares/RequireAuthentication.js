@@ -1,11 +1,11 @@
-const TetraMiddleware = require('@tetrajs/router').TetraMiddleware
+const { Middleware } = require('@tetrajs/router').decorators
 
-class RequireAuthentication extends TetraMiddleware {
-  get autoLoad() {
-    return false
-  }
+@Middleware('require-authentication')
+class RequireAuthentication {
+  static global
+  static autoload = false
 
-  async handle(req, res, next) {
+  static async handle(req, res, next) {
     if (req.isAuthenticated()) {
       await next()
     } else {

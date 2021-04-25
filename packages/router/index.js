@@ -68,3 +68,5 @@ module.exports.namespace = require('./lib/namespace')
 
 module.exports.TetraController = require('./app/Controllers/TetraController')
 module.exports.TetraMiddleware = require('./app/Middlewares/TetraMiddleware')
+
+module.exports.decorators = require('./app/Decorators')

@@ -1,17 +1,9 @@
 class TetraMiddleware {
-  get autoLoad() {
-    return true
-  }
 
-  get globalAccess() {
-    return false
-  }
+  // static global // include for all modules
+  static autoload = true // autoload in all modules and current modules
 
-  get externalModule() {
-    return false
-  }
-
-  async handle(req, res, next) {
+  static async handle(req, res, next) {
     await next()
   }
 

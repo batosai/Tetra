@@ -8,23 +8,23 @@ const info = path.parse(__dirname)
 app.set('name', info.name)
 
 app.on('mount', async function (parent) {
-  const { services } = require('../../')
-  const pkgTetra = await services.ModulesService.get()
+  // const { Modules } = require('../../')
+  // const pkgTetra = await Modules.fetch()
 
   let staticCatalog = {
     fr: {},
     en: {},
   }
 
-  for (let i in pkgTetra) {
-    try {
-      const fr = require(`${pkgTetra[i].path}/config/locales/fr.json`)
-      const en = require(`${pkgTetra[i].path}/config/locales/en.json`)
+  // for (let i in pkgTetra) {
+  //   try {
+  //     const fr = require(`${pkgTetra[i].path}/config/locales/fr.json`)
+  //     const en = require(`${pkgTetra[i].path}/config/locales/en.json`)
 
-      staticCatalog.fr = { ...staticCatalog.fr, ...fr }
-      staticCatalog.en = { ...staticCatalog.en, ...en }
-    } catch (e) {}
-  }
+  //     staticCatalog.fr = { ...staticCatalog.fr, ...fr }
+  //     staticCatalog.en = { ...staticCatalog.en, ...en }
+  //   } catch (e) {}
+  // }
 
   i18n.configure({
     locales: ['fr', 'en'],

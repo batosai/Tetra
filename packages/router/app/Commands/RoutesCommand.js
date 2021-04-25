@@ -1,9 +1,7 @@
-const { services, utils } = require('@tetrajs/core')
+const { services, utils, Routes } = require('@tetrajs/core')
 const { Command } = require('@tetrajs/cli')
 const { generatePrefix } = require('../../lib/utils')
 const { capitalize } = utils
-
-const { RoutesService } = services
 
 class Routes extends Command {
   configure() {
@@ -17,7 +15,7 @@ class Routes extends Command {
   }
 
   async execute(args, opts) {
-    const routers = await RoutesService.get()
+    const routers = await Routes.fetch()
     const head = ['URI Pattern', 'Method', 'Middleware']
 
     if (opts.all || opts.a) {

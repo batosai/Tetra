@@ -49,7 +49,7 @@ class ModulesService {
 
   static async assetsInstall(moduleNames=[]) {
     try {
-      const modules = await services.ModulesService.get()
+      const modules = await services.ModulesService.fetch()
 
       for (const k in modules) {
         const m = modules[k]

@@ -1,13 +1,11 @@
-const TetraMiddleware = require('@tetrajs/router').TetraMiddleware
+const { Middleware } = require('@tetrajs/router').decorators
 const { permitParameters } = require('@tetrajs/core').utils
 
+@Middleware('permit-parameters')
+class PermitParametersMiddleware {
+  static global
 
-class PermitParametersMiddleware extends TetraMiddleware {
-  get globalAccess() {
-    return true
-  }
-
-  async handle(req, res, next) {
+  static async handle(req, res, next) {
     req.permitParameters = permitParameters
 
     await next()

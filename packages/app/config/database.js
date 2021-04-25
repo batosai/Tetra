@@ -1,4 +1,4 @@
-const { Env } = require('@tetrajs/core')
+const Env = require('@tetrajs/core/lib/env')
 
 module.exports = {
   /*

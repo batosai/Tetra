@@ -1,16 +1,14 @@
-const TetraMiddleware = require('./TetraMiddleware')
+const { Middleware } = require('../Decorators')
 const ResourcesService = require('../Services/ResourcesService')
 
-const { services } = require('@tetrajs/core')
-const { RoutesService } = services
+const { Routes } = require('@tetrajs/app')
 
-class RouteMiddleware extends TetraMiddleware {
-  get globalAccess() {
-    return true
-  }
+@Middleware('route')
+class RouteMiddleware {
+  static global
 
-  async handle(req, res, next) {
-    const routesCollection = await RoutesService.get()
+  static async handle(req, res, next) {
+    const routesCollection = await Routes.fetch()
     routesCollection.forEach(namespaces => {
       ResourcesService.handle(namespaces, { req, res })
     })

@@ -4,5 +4,5 @@ describe('CORE - Lib', function() {
   require('./lib/permitParameters.spec')
   require('./lib/mimeType.spec')
   require('./lib/exist.spec')
-  require('./lib/fetchFiles.spec')
+  require('./lib/fetchIn.spec')
 })

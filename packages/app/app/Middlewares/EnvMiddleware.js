@@ -1,12 +1,11 @@
-const TetraMiddleware = require('@tetrajs/router').TetraMiddleware
+const { Middleware } = require('@tetrajs/router').decorators
 const { Env } = require('@tetrajs/core')
 
-class EnvMiddleware extends TetraMiddleware {
-  get globalAccess() {
-    return true
-  }
+@Middleware('env')
+class EnvMiddleware {
+  static global
 
-  async handle(req, res, next) {
+  static async handle(req, res, next) {
     res.locals.env = function() {
       return Env.get('NODE_ENV')
     }

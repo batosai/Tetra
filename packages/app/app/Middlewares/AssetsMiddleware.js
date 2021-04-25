@@ -1,11 +1,11 @@
-const TetraMiddleware = require('@tetrajs/router').TetraMiddleware
+const { Middleware } = require('@tetrajs/router').decorators
 
-class AssetsMiddleware extends TetraMiddleware {
-  get externalModule() {
-    return true
-  }
+@Middleware('assets')
+class AssetsMiddleware {
+  static global
+  static autoload = false
 
-  async handle(req, res, next) {
+  static async handle(req, res, next) {
     const base = 'build'
 
     const name = req.app.get('name')

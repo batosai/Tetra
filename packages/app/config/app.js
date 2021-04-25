@@ -1,4 +1,4 @@
-const { Env } = require('@tetrajs/core')
+const Env = require('@tetrajs/core/lib/env')
 
 module.exports = {
   /*
@@ -29,7 +29,10 @@ module.exports = {
     |--------------------------------------------------------------------------
     |
     */
-    locale: 'en'
+    default: 'en',
+
+    queryParameter: 'lang',
+    cookieName: 'language',
   },
 
   logger: {
@@ -46,5 +49,16 @@ module.exports = {
     |
     */
     transport: 'console',
+  },
+
+  path: {
+    base: ['app'],
+    controllers: ['app', 'Controllers'],
+    models: ['app', 'Models'],
+    middlewares: ['app', 'Middlewares'],
+    commands: ['app', 'Commands'],
+    uploaders: ['app', 'Uploaders'],
+    cache: ['var', 'cache'],
+    log: ['var', 'log']
   }
 }

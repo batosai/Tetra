@@ -1,12 +1,11 @@
-const TetraMiddleware = require('@tetrajs/router').TetraMiddleware
+const { Middleware } = require('@tetrajs/router').decorators
 const { qs } = require('@tetrajs/core').utils
 
-class QueryStringMiddleware extends TetraMiddleware {
-  get globalAccess() {
-    return true
-  }
+@Middleware('qs')
+class QueryStringMiddleware {
+  static global
 
-  async handle(req, res, next) {
+  static async handle(req, res, next) {
     res.locals.qs = qs
 
     await next()

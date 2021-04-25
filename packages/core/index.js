@@ -7,17 +7,15 @@ module.exports.bcrypt = require('bcrypt')
 module.exports.slugify = require('slugify')
 module.exports.uuid = require('uuid')
 
-module.exports.cache = require('./modules/cache')
+module.exports.cache = require('./lib/cache')
+module.exports.auth = require('./lib/auth')
 module.exports.database = require('./modules/database')
-module.exports.auth = require('./modules/auth')
 module.exports.security = require('./modules/security')
-module.exports.i18n = require('./modules/i18n')
 module.exports.uploader = require('./modules/uploader')
 module.exports.event = require('./modules/event')
 
-module.exports.services = require('./services')
-
 module.exports.utils = require('./lib/utils')
+module.exports.use = require('./lib/use')
 
 module.exports.models = require('./modules/database/mongodb/models')
 

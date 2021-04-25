@@ -23,11 +23,7 @@
     "@tetrajs/core": "~0.0.1",
     "@tetrajs/router": "~0.0.1",
     "@tetrajs/webpack": "~0.0.1",
-    "compression": "^1.7.4",
-    "cookie-parser": "^1.4.5",
     "debug": "~4.1.1",
-    "helmet": "^3.22.0",
-    "morgan": "^1.10.0",
     "nodemon": "^2.0.4"
   },
   "tetra": {
