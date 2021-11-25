@@ -1,6 +1,6 @@
 {
   "name": "@tetrajs/create",
-  "version": "0.0.94",
+  "version": "0.0.95",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/tetrajs/tetra",
+    "url": "https://github.com/batosai/tetra",
     "directory": "packages/create"
   },
   "engines": {

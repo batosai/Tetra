@@ -12,14 +12,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tetrajs/tetra.git"
+    "url": "git+https://github.com/batosai/tetra.git"
   },
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/tetrajs/tetra/issues"
+    "url": "https://github.com/batosai/tetra/issues"
   },
-  "homepage": "https://github.com/tetrajs/tetra#readme",
+  "homepage": "https://github.com/batosai/tetra#readme",
   "dependencies": {
     "prettier": "^2.0.5"
   },
